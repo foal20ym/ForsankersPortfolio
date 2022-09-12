@@ -1,0 +1,12 @@
+<h1>Projects list!</h1>
+
+{{#if projects.length}}
+    <ul>
+        {{#each projects}}
+            <li>{{id}} {{title}} {{grade}}/10</li>
+        {{/each}}
+    </ul>
+
+    {{else}}
+    <p> There is currently no projects to display. </p>
+{{/if}}
