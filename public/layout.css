@@ -1,15 +1,25 @@
-.text-dark{
+/* NAVIGATION BAR */
+.btn.btn-link {
     padding: 2%;
     font-family: 'Courier New', Courier, monospace;
     font-size: 130%;
+    color: black;
 }
 
-.section-style.section-home{
+.btn.btn-link:hover {
+    text-decoration: underline;
+    color: black;
+    text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+}
+
+/* HOME PAGE MAIN CONTENT */
+.section-style.section-home {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
     display: block;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     font-weight: 400;
     height: 345px;
@@ -20,8 +30,8 @@
     margin-top: 0px;
     width: 394px;
 }
-    
-.standard-container{
+
+.standard-container {
     -webkit-font-smoothing: antialiased;
     align-self: flex-start;
     box-sizing: border-box;
@@ -45,83 +55,85 @@
     width: 394px;
 }
 
-.intro-wrap{
--webkit-font-smoothing: antialiased;
-box-sizing: border-box;
-color: rgb(34, 34, 34);
-display: block;
-font-family:'Courier New', Courier, monospace;
-font-size: 16px;
-font-weight: 400;
-height: 280px;
-letter-spacing: normal;
-line-height: 24px;
-margin-bottom: 64px;
-margin-top: 48px;
-padding-bottom: 0px;
-padding-top: 0px;
-text-align: left;
-width: 394px;
+.intro-wrap {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    color: rgb(34, 34, 34);
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: 400;
+    height: 280px;
+    letter-spacing: normal;
+    line-height: 24px;
+    margin-bottom: 64px;
+    margin-top: 48px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    text-align: left;
+    width: 394px;
 }
 
-.home-h1{ 
--webkit-font-smoothing: antialiased;
-box-sizing: border-box;
-color: rgb(34, 34, 34);
-display: block;
-font-family: "Superior title", "Times New Roman", sans-serif;
-font-size: 40px;
-font-weight: 400;
-height: 96px;
-letter-spacing: normal;
-line-height: 48px;
-margin-block-end: 16px;
-margin-block-start: 0px;
-margin-bottom: 16px;
-margin-inline-end: 0px;
-margin-inline-start: 0px;
-margin-left: 50px;
-margin-right: 0px;
-margin-top: 100px;
-text-align: left;
-width: 700px;
+.home-h1 {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    color: rgb(34, 34, 34);
+    display: block;
+    font-family: "Superior title", "Times New Roman", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    height: 96px;
+    letter-spacing: normal;
+    line-height: 48px;
+    margin-block-end: 16px;
+    margin-block-start: 0px;
+    margin-bottom: 16px;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    margin-left: 50px;
+    margin-right: 0px;
+    margin-top: 100px;
+    text-align: left;
+    width: 700px;
 }
 
-.paragraph-xl{
--webkit-font-smoothing: antialiased;
-box-sizing: border-box;
-color: rgb(34, 34, 34);
-display: block;
-font-family: 'Courier New', Courier, monospace;
-font-size: 16px;
-font-weight: 400;
-height: 168px;
-letter-spacing: -0.23999999463558197px;
-line-height: 24px;
-margin-bottom: 0px;
-margin-top: 16px;
-max-width: 740px;
-margin-left: 50px;
-opacity: 1;
-text-align: left;
-width: 394px
+.paragraph-xl {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    color: rgb(34, 34, 34);
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: 400;
+    height: 168px;
+    letter-spacing: -0.23999999463558197px;
+    line-height: 24px;
+    margin-bottom: 0px;
+    margin-top: 16px;
+    max-width: 740px;
+    margin-left: 50px;
+    opacity: 1;
+    text-align: left;
+    width: 394px
 }
 
-.contact-class{
+/* CONTACT PAGE CONTENT*/
+.contact-class {
     text-align: center;
     margin-top: 20%;
     font-family: 'Courier New', Courier, monospace;
     font-size: 130%;
 }
 
-.about-class{
+/* ABOUT PAGE CONTENT*/
+.about-class {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 12%;
 }
 
-.head2{
+.head2 {
     font-family: "Superior title", "Times New Roman", sans-serif;
     margin-left: auto;
     margin-right: auto;
@@ -129,7 +141,7 @@ width: 394px
     font-size: 40px;
 }
 
-.div2{
+.div2 {
     margin-left: auto;
     margin-right: auto;
     max-width: 600px;
@@ -137,16 +149,7 @@ width: 394px
     font-family: 'Courier New', Courier, monospace;
 }
 
-.div3{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    margin-top: 20px;
-}
-
-.div4{
+.div3 {
     margin-left: auto;
     margin-right: auto;
     max-width: 600px;
@@ -155,8 +158,66 @@ width: 394px
     margin-top: 20px;
 }
 
+.div4 {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+}
+/*PROJECTS LIST*/
+.projects {
+    background-color: transparent;
+}
+.row{
+    height: 20%;
+}
+.section_title{
+    text-align: center;
+    color: black;
+    font-family:monospace;
+    text-decoration:overline;
+    margin-top: 8%;
+}
+.project_list{
+    list-style: none;
+    align-items: center;
+    text-align: center;
+    margin-top: 7%;
+}
+.project{
+    height: 400px;
+}
+.project_wrapper{
+display: block;
+}
+.project_img {
+    width: 300px;
+    height: auto;
+}
+.project_description{
+    width: auto;
+}
+.project_description-title{
+    font-family: "Superior title", "Times New Roman", sans-serif;
+    color:black;
+    font-size: 170%;
+}
+.project_description-sub-title{
+    font-size: 110%;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
 
+}
+.project_description-para{
+    font-family: 'Courier New', Courier, monospace;
+}
 
+/* LAYOUT BACKGROUND 'ANIMATED'*/
 .animatedwrapper {
     overflow: hidden;
     position: absolute;
