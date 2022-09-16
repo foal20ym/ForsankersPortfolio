@@ -1,17 +1,48 @@
-<!--
-<h1></h1>
-
 {{#if projects.length}}
-    <ul>
-        {{#each projects}}
-            <li><a href="/projects/{{id}}">{{title}}</a> {{grade}}/10</li>
-        {{/each}}
-    </ul>
-
-    {{else}}
-    <p> There is currently no projects to display. </p>
+<section id="projects">
+    <div class="row">
+        <h1 class="section_title">
+            Here are some of my projects
+        </h1>
+        <ul class="project_list">
+            {{#each projects}}
+            <li class="project">
+                <div class="project_wrapper">
+                    <img src="/{{image}}" alt="" class="project_img" />
+                    <div class="project_wrapper-bg"></div>
+                    <div class="project_description">
+                        <h3 class="project_description-title">
+                            {{title}}
+                        </h3>
+                        <h4 class="project_description-sub-title">
+                            {{description}}
+                        </h4>
+                        <p class="project_description-para">
+                        </p>
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</section>
+{{else}}
+<p> There is currently no projects to display. </p>
 {{/if}}
--->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <section id="projects">
     <div class="row">
         <h1 class="section_title">
@@ -40,7 +71,7 @@
                     <div class="project_wrapper-bg"></div>
                     <div class="project_description">
                         <h3 class="project_description-title">
-                            Texi service app
+                            Taxi service app
                         </h3>
                         <h4 class="project_description-sub-title">
                             The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.
@@ -70,3 +101,4 @@
         </ul>
     </div>
 </section>
+-->

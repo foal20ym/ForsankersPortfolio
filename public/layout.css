@@ -1,8 +1,8 @@
-/* NAVIGATION BAR */
+/* NAVIGATION BAR font-size 130% från början*/ 
 .btn.btn-link {
     padding: 2%;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 130%;
+    font-size: 140%;
     color: black;
 }
 

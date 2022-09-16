@@ -15,7 +15,7 @@ router.get('/', function(request, response){
 })
 
 // /projects/:id
-router.get("/:id", function(request, response){
+router.get("/projects/:id", function(request, response){
 
     const id = request.params.id
 
