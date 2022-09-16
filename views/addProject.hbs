@@ -1,14 +1,24 @@
-<h1>Add project</h1>
-<form action="" method="POST" enctype="multipart/form-data">
-    <div>
-        Image: <input type="file" name="image">
-    </div>
-    <div>
-        Title: <input type="text" name="title">
-    </div>
-    <div>
-        Description: <input type="text" name="description">
-    </div>
-    <input type="submit" value="Add project">
-</form>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+</head>
+
+<body>
+    <h1>Add Project</h1>
+    <form method="POST" action="/addProject" enctype="multipart/form-data">
+        <div>
+            <input type="file" name="image">
+        </div>
+        <div>
+            Title: <input type="text" name="title">
+        </div>
+        <div>
+            Description: <input type="text" name="description">
+        </div>
+        <input type="submit">
+
+    </form>
+</body>
+
+</html>

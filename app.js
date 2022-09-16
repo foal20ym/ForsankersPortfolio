@@ -1,9 +1,21 @@
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
-const fileUpload = require('express-fileupload')
 const data = require('./data.js')
 const bodyParser = require('body-parser')
+const path = require('path')
 
+const multer = require("multer")
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public")
+    },
+    filename: (req, file, cb) => {
+        console.log(file)
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
+
+const upload = multer({storage: storage})
 
 const projectRouter = require('./routers/project-router')
 
@@ -40,14 +52,15 @@ app.get('/about', function(request, response){
     response.render('about.hbs')
 })
 
-app.get('/addProject', function(request, response){
-    response.render('addProject.hbs')
-})
 
-app.post('/addProject', function(request, response){
-    const image = request.body.image
-    const title = request.body.title
-    const description = request.body.description
+// UPLOAD PROJECT
+app.get("/addProject", (req, res) => {
+    res.render('addProject.hbs')
+})
+app.post("/addProject", upload.single("image"), (req,res) => {
+   /* const image = req.body.image
+    const title = req.body.title
+    const description = req.body.description
 
     const project = {
         image: image,
@@ -58,13 +71,9 @@ app.post('/addProject', function(request, response){
     
     projects.push(project)
 
-    response.redirect("/projects" + project.id )
-
+    res.redirect("/projects" + project.id )  */
+    res.render('projects.hbs')
 })
-
-app.get('/addProject', function(request, response){
-    response.render('addProject.hbs')
-})
-
+// FUNKAR INTE ATT LADDA UPP ETT HELT PROJEKT
 app.listen(3000)
 
