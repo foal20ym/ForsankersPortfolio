@@ -52,11 +52,12 @@ app.get('/about', function(request, response){
     response.render('about.hbs')
 })
 
-// UPLOAD PROJECT
+// renders the Add Project page
 app.get("/addProject", (req, res) => {
     res.render('addProject.hbs')
 })
 
+// posts projects to the Add Projects page.
 app.post("/addProject", upload.single("image"), (req,res) => {
     
     const image = req.body.image
@@ -69,20 +70,10 @@ app.post("/addProject", upload.single("image"), (req,res) => {
         description: description,
         image: image
     })
-    /*
-    const project = {
-        image: image,
-        title: title,
-        description: description,
-        id: projects.length + 1
-    }
-    
-    projects.push(project)
-    */
 
     res.redirect("/projects" )
   //  res.render('projects.hbs')
 })
-// FUNKAR INTE ATT LADDA UPP ETT HELT PROJEKT
+
 app.listen(3000)
 
