@@ -57,6 +57,20 @@ app.get("/addProject", (req, res) => {
     res.render('addProject.hbs')
 })
 
+app.get("/projects/:id", function(request, response){
+
+    const id = request.params.id
+
+    const project = data.projects.find(m => m.id == id)
+
+    const model = {
+        project: project
+    }
+
+    response.render('project.hbs', model)
+
+})
+
 // posts projects to the Add Projects page.
 app.post("/addProject", upload.single("image"), (req,res) => {
     

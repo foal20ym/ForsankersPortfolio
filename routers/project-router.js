@@ -25,8 +25,9 @@ router.get("/projects/:id", function(request, response){
         project: project
     }
 
-    response.render('projects.hbs', model)
+    response.render('project.hbs', model)
 
 })
+
 
 module.exports = router

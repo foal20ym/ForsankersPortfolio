@@ -1,0 +1,9 @@
+{{#if project}}
+<section class="project_page">
+    <p> <img src="/{{project.image}}" alt="" class="project_img" ></p>
+    <p>{{project.title}}</p>
+    <p class="project_page_description">{{project.description}}</p>
+    {{else}}
+    <p>don't exist</p>
+</section>
+{{/if}}
