@@ -52,16 +52,24 @@ app.get('/about', function(request, response){
     response.render('about.hbs')
 })
 
-
 // UPLOAD PROJECT
 app.get("/addProject", (req, res) => {
     res.render('addProject.hbs')
 })
+
 app.post("/addProject", upload.single("image"), (req,res) => {
-   /* const image = req.body.image
+    
+    const image = req.body.image
     const title = req.body.title
     const description = req.body.description
 
+    data.projects.push({
+        id: data.projects.at(-1).id +1,
+        title: title,
+        description: description,
+        image: image
+    })
+    /*
     const project = {
         image: image,
         title: title,
@@ -70,9 +78,10 @@ app.post("/addProject", upload.single("image"), (req,res) => {
     }
     
     projects.push(project)
+    */
 
-    res.redirect("/projects" + project.id )  */
-    res.render('projects.hbs')
+    res.redirect("/projects" )
+  //  res.render('projects.hbs')
 })
 // FUNKAR INTE ATT LADDA UPP ETT HELT PROJEKT
 app.listen(3000)

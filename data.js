@@ -14,4 +14,3 @@ exports.projects = [{
     description: "I got the task of making a news website for a major news outlet. It was very challenging at first but i got assistance by my old teacher PLG.",
     image: "app2unsplash.jpg"
 }]
-

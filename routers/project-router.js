@@ -25,7 +25,7 @@ router.get("/projects/:id", function(request, response){
         project: project
     }
 
-    response.render('project.hbs', model)
+    response.render('projects.hbs', model)
 
 })
 
