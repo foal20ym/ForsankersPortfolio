@@ -1,9 +1,14 @@
 {{#if project}}
 <section class="project_page">
-    <p> <img src="/{{project.image}}" alt="" class="project_img" ></p>
+    <p> <img src="/{{project.image}}" alt="" class="project_img"></p>
     <p>{{project.title}}</p>
     <p class="project_page_description">{{project.description}}</p>
+
+    <form action="/delete-project/{{project.id}}" method="POST">
+        <input type="submit" value="Delete Project">
+    </form>
+
     {{else}}
-    <p>don't exist</p>
+    <p>This project don't exist</p>
 </section>
 {{/if}}

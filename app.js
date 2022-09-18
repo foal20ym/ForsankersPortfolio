@@ -89,5 +89,17 @@ app.post("/addProject", upload.single("image"), (req,res) => {
   //  res.render('projects.hbs')
 })
 
+app.post("/delete-project/:id", function(request, response){
+
+    const id = request.params.id
+
+    const project = data.projects.find(m => m.id == id)
+
+    data.projects.splice(project, 1)
+
+    response.redirect("/projects")
+
+})
+
 app.listen(3000)
 
