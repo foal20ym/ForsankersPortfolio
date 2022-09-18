@@ -3,6 +3,8 @@
     <p> <img src="/{{project.image}}" alt="" class="project_img"></p>
     <p>{{project.title}}</p>
     <p class="project_page_description">{{project.description}}</p>
+    
+    <a href="/update-project/{{project.id}}">Update</a>
 
     <form action="/delete-project/{{project.id}}" method="POST">
         <input type="submit" value="Delete Project">

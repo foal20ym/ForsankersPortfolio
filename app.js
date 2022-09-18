@@ -89,6 +89,37 @@ app.post("/addProject", upload.single("image"), (req,res) => {
   //  res.render('projects.hbs')
 })
 
+app.get("/update-project/:id", function(request, response){
+
+    const id = request.params.id
+
+    const project = data.projects.find(m => m.id == id)
+
+    const model = {
+        project: project
+    }
+
+    response.render('update-project.hbs', model)
+
+})
+
+// Updates the info && takes the user back to the project page
+app.post("/update-project/:id", function(request, response){
+
+    const id = request.params.id
+    const newTitle = request.body.title
+    const newDescription = request.body.description
+
+
+    const project = data.projects.find(m => m.id == id)
+
+    project.title = newTitle
+    project.description = newDescription
+
+    response.redirect('/projects/' + id)
+
+})
+
 app.post("/delete-project/:id", function(request, response){
 
     const id = request.params.id
