@@ -1,8 +1,21 @@
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
-const data = require('./data.js')
 const bodyParser = require('body-parser')
 const path = require('path')
+
+const sqlite3 = require('sqlite3')
+
+const db = new sqlite3.Database("portfolio-database.db")
+
+db.run(`
+    CREATE TABLE IF NOT EXISTS projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        description TEXT,
+        image TEXT
+    )
+`)
+
 
 const multer = require("multer")
 const storage = multer.diskStorage({
@@ -10,14 +23,17 @@ const storage = multer.diskStorage({
         cb(null, "public")
     },
     filename: (req, file, cb) => {
-        console.log(file)
-        cb(null, Date.now() + path.extname(file.originalname))
+        const fileName = Date.now() + path.extname(file.originalname)
+        req.filePath = fileName // create a new key in request object
+        cb(null, fileName)
     }
 })
 
-const upload = multer({storage: storage})
+const upload = multer({ storage: storage })
 
-const projectRouter = require('./routers/project-router')
+//const projectRouter = require('./routers/project-router')
+// app.use(projectRouter)
+//app.use('/projects', projectRouter)
 
 const app = express()
 
@@ -29,8 +45,6 @@ app.engine('hbs', expressHandlebars.engine({
 
 app.use(express.static('public'))
 
-// app.use(projectRouter)
-app.use('/projects', projectRouter)
 
 // using the bodyParser 
 app.use(bodyParser.urlencoded({
@@ -38,18 +52,54 @@ app.use(bodyParser.urlencoded({
 }))
 
 // uses and renders the Home page
-app.get('/', function(request, response){
+app.get('/', function (request, response) {
     response.render('home.hbs')
 })
 
 // uses and renders the Contact page
-app.get('/contact', function(request, response){
+app.get('/contact', function (request, response) {
     response.render('contact.hbs')
 })
 
 // uses and renders the About page
-app.get('/about', function(request, response){
+app.get('/about', function (request, response) {
     response.render('about.hbs')
+})
+
+// renders the projects page
+app.get('/projects', function (request, response) {
+
+    const query = `SELECT * FROM projects`
+
+    db.all(query, function (error, projects) { // this is asyncronius
+
+        const model = {
+            projects
+        }
+
+        response.render('projects.hbs', model)
+    })
+
+})
+
+// renders the specific project the user clicks on
+app.get("/projects/:id", function (request, response) {
+
+    const id = request.params.id
+
+    const query = `SELECT * FROM projects WHERE id = ?`
+    const values = [id]
+
+    db.get(query, values, function (error, project) {
+
+        const model = {
+            project,
+        }
+
+        response.render('project.hbs', model)
+
+    })
+
 })
 
 // renders the Add Project page
@@ -57,78 +107,80 @@ app.get("/addProject", (req, res) => {
     res.render('addProject.hbs')
 })
 
-app.get("/projects/:id", function(request, response){
-
-    const id = request.params.id
-
-    const project = data.projects.find(m => m.id == id)
-
-    const model = {
-        project: project
-    }
-
-    response.render('project.hbs', model)
-
-})
-
 // posts projects to the Add Projects page.
-app.post("/addProject", upload.single("image"), (req,res) => {
-    
-    const image = req.body.image
+app.post("/addProject", upload.single("image"), (req, res) => {
+
+    const image = req.filePath
     const title = req.body.title
     const description = req.body.description
 
-    data.projects.push({
-        id: data.projects.at(-1).id +1,
-        title: title,
-        description: description,
-        image: image
+    const query = `
+    INSERT INTO  projects (title, description, image) VALUES (?, ?, ?)
+    `
+
+    const values = [title, description, image]
+
+    db.run(query, values, function (error) {
+        if (error) console.log
+        res.redirect("/projects")
+
     })
 
-    res.redirect("/projects" )
-  //  res.render('projects.hbs')
 })
 
-app.get("/update-project/:id", function(request, response){
+app.get("/update-project/:id", function (request, response) {
 
     const id = request.params.id
 
-    const project = data.projects.find(m => m.id == id)
+    const query = `SELECT * FROM projects WHERE id = ?`
+    const values = [id]
 
-    const model = {
-        project: project
-    }
+    db.get(query, values, function (error, project) {
 
-    response.render('update-project.hbs', model)
+        const model = {
+            project,
+        }
 
+        response.render('update-project.hbs', model)
+
+    })
 })
 
 // Updates the info && takes the user back to the project page
-app.post("/update-project/:id", function(request, response){
+app.post("/update-project/:id", function (request, response) {
 
+    // UPDATE projects SET (title, description, image) = ("Taxi Service app", "The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.","app2unsplash.jpg") WHERE id = 2
+    
     const id = request.params.id
-    const newTitle = request.body.title
-    const newDescription = request.body.description
+    const title = request.body.title
+    const description = request.body.description
+    // const image = request.filePath
 
+    const query = `
+    UPDATE projects SET (title, description) = (?, ?) WHERE id = ?
+    `
 
-    const project = data.projects.find(m => m.id == id)
+    const values = [title, description ,id]
 
-    project.title = newTitle
-    project.description = newDescription
+    db.run(query, values, function (error) {
+        if (error) console.log
+        response.redirect("/projects")
 
-    response.redirect('/projects/' + id)
+    })
 
 })
 
-app.post("/delete-project/:id", function(request, response){
+app.post("/delete-project/:id", function (request, response) {
 
     const id = request.params.id
 
-    const project = data.projects.find(m => m.id == id)
+    const query = `DELETE FROM projects WHERE id = ?`
+    const values = [id]
 
-    data.projects.splice(project, 1)
-
-    response.redirect("/projects")
+    db.run(query, values, function (error, project) {
+        if (error) console.log
+        response.redirect("/projects")
+    })
 
 })
 
