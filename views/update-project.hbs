@@ -1,3 +1,6 @@
+{{#if dbError}}
+<h1>Can't display the update page. Please try again later.</h1>
+{{else}}
 <h1>Update Project</h1>
 <form method="POST">
     <div>
@@ -6,8 +9,9 @@
     <div>
         <input type="text" name="description" value="{{project.description}}">
     </div>
-<!--    <div>
+    <!--    <div>
         <input type="file" name="image" value="{{project.image}}">
     </div> -->
     <input type="submit" value="Update Project">
 </form>
+{{/if}}

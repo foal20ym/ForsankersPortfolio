@@ -2,8 +2,8 @@ const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const path = require('path')
-
 const sqlite3 = require('sqlite3')
+
 
 const db = new sqlite3.Database("portfolio-database.db")
 
@@ -73,11 +73,23 @@ app.get('/projects', function (request, response) {
 
     db.all(query, function (error, projects) { // this is asyncronius
 
-        const model = {
-            projects
+        if (error) {
+            console.log(error)
+            const model = {
+                projects,
+                dbError: true
+            }
+            response.render('projects.hbs', model)
         }
 
-        response.render('projects.hbs', model)
+        else {
+            const model = {
+                projects, 
+                dbError: false
+            }
+            response.render('projects.hbs', model)
+        }
+
     })
 
 })
@@ -87,42 +99,59 @@ app.get("/projects/:id", function (request, response) {
 
     const id = request.params.id
 
-    const query = `SELECT * FROM projects WHERE id = ?`
+    const query =
+        `SELECT * FROM projects WHERE id = ?`
     const values = [id]
 
     db.get(query, values, function (error, project) {
 
-        const model = {
-            project,
+        if (error) {
+            console.log(error)
+            const model = {
+                project,
+                dbError: true
+            }
+            response.render('project.hbs', model)
         }
 
-        response.render('project.hbs', model)
+        else {
+            const model = {
+                project,
+                dbError: false
+            }
+            response.render('project.hbs', model)
+        }
 
     })
 
 })
 
 // renders the Add Project page
-app.get("/addProject", (req, res) => {
-    res.render('addProject.hbs')
+app.get("/add-project", (req, res) => {
+    res.render('add-project.hbs')
 })
 
 // posts projects to the Add Projects page.
-app.post("/addProject", upload.single("image"), (req, res) => {
+app.post("/add-project", upload.single("image"), (req, res) => {
 
     const image = req.filePath
     const title = req.body.title
     const description = req.body.description
 
-    const query = `
-    INSERT INTO  projects (title, description, image) VALUES (?, ?, ?)
-    `
+    const query =
+        `INSERT INTO  projects (title, description, image) VALUES (?, ?, ?)`
 
     const values = [title, description, image]
 
     db.run(query, values, function (error) {
-        if (error) console.log
-        res.redirect("/projects")
+
+        if (error) {
+            console.log(error)
+        }
+
+        else {
+            res.redirect("/projects")
+        }
 
     })
 
@@ -132,39 +161,58 @@ app.get("/update-project/:id", function (request, response) {
 
     const id = request.params.id
 
-    const query = `SELECT * FROM projects WHERE id = ?`
+    const query =
+        `SELECT * FROM projects WHERE id = ?`
     const values = [id]
 
     db.get(query, values, function (error, project) {
 
-        const model = {
-            project,
+        if (error) {
+            console.log(error)
+
+            const model = {
+                project,
+                dbError: true
+            }
+            response.render('update-project.hbs', model)
+
         }
 
-        response.render('update-project.hbs', model)
+        else {
+            const model = {
+                project,
+                dbError: false
+            }
+            response.render('update-project.hbs', model)
+        }
 
     })
+
 })
 
 // Updates the info && takes the user back to the project page
 app.post("/update-project/:id", function (request, response) {
 
     // UPDATE projects SET (title, description, image) = ("Taxi Service app", "The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.","app2unsplash.jpg") WHERE id = 2
-    
+
     const id = request.params.id
     const title = request.body.title
     const description = request.body.description
-    // const image = request.filePath
 
-    const query = `
-    UPDATE projects SET (title, description) = (?, ?) WHERE id = ?
-    `
+    const query =
+        `UPDATE projects SET (title, description) = (?, ?) WHERE id = ?`
 
-    const values = [title, description ,id]
+    const values = [title, description, id]
 
     db.run(query, values, function (error) {
-        if (error) console.log
-        response.redirect("/projects")
+
+        if (error) {
+            console.log(error)
+        }
+
+        else {
+            response.redirect("/projects")
+        }
 
     })
 
@@ -174,12 +222,20 @@ app.post("/delete-project/:id", function (request, response) {
 
     const id = request.params.id
 
-    const query = `DELETE FROM projects WHERE id = ?`
+    const query =
+        `DELETE FROM projects WHERE id = ?`
     const values = [id]
 
-    db.run(query, values, function (error, project) {
-        if (error) console.log
-        response.redirect("/projects")
+    db.run(query, values, function (error) {
+
+        if (error) {
+            console.log(error)
+        }
+
+        else {
+            response.redirect("/projects")
+        }
+
     })
 
 })

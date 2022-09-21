@@ -1,3 +1,6 @@
+{{#if dbError}}
+<h1>Can't display any projects. Try again later. </h1>
+{{else}}
 {{#if projects.length}}
 <section id="projects">
     <div class="row">
@@ -12,7 +15,7 @@
                     <div class="project_wrapper-bg"></div>
                     <div class="project_description">
                         <h3 class="project_description-title">
-                        <a class="aaa" href="/projects/{{id}}">{{title}}</a>
+                            <a class="aaa" href="/projects/{{id}}">{{title}}</a>
                         </h3>
                         <h4 class="project_description-sub-title">
                             {{description}}
@@ -29,76 +32,4 @@
 {{else}}
 <p> There is currently no projects to display. </p>
 {{/if}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<section id="projects">
-    <div class="row">
-        <h1 class="section_title">
-            Here are some of my projects
-        </h1>
-        <ul class="project_list">
-            <li class="project">
-                <div class="project_wrapper">
-                    <img src="unsplash.phonepic.jpg" alt="" class="project_img" />
-                    <div class="project_wrapper-bg"></div>
-                    <div class="project_description">
-                        <h3 class="project_description-title">
-                            Crypto trading app
-                        </h3>
-                        <h4 class="project_description-sub-title">
-                            The app was made for the company CryptoKing Inc. We used mainly C# as it suited the framework the best. It was a fun project which lasted 8 months.
-                        </h4>
-                        <p class="project_description-para">
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li class="project">
-                <div class="project_wrapper">
-                    <img src="appunsplash.jpg" alt="" class="project_img" />
-                    <div class="project_wrapper-bg"></div>
-                    <div class="project_description">
-                        <h3 class="project_description-title">
-                            Taxi service app
-                        </h3>
-                        <h4 class="project_description-sub-title">
-                            The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.
-                        </h4>
-                        <p class="project_description-para">
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li class="project">
-                <div class="project_wrapper">
-                    <img src="/app2unsplash.jpg" alt="" class="project_img" />
-                    <div class="project_wrapper-bg"></div>
-                    <div class="project_description">
-                        <h3 class="project_description-title">
-                            News website
-                        </h3>
-                        <h4 class="project_description-sub-title">
-                            I got the task of making a news website for a major news outlet. It was very challenging at first but i got assistance by my old teacher PLG.
-                        </h4>
-                        <p class="project_description-para">
-                        </p>
-                    </div>
-                </div>
-            </li>
-    
-        </ul>
-    </div>
-</section>
--->
+{{/if}}
