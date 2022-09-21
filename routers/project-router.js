@@ -28,6 +28,7 @@ router.get("/projects/:id", function(request, response){
     response.render('project.hbs', model)
 
 })
+
 // ANVÄND DESSA I DIN APP.JS FIL OM DU VILL KÖRA ROUTER GREJER
 //const projectRouter = require('./routers/project-router')
 // app.use(projectRouter)
