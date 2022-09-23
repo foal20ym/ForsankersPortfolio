@@ -17,3 +17,9 @@
         </div>
     </div>
 </section>
+
+{{#if session.isLoggedIn}}
+<p>You are logged in</p>
+{{else}}
+<p>You are not logged in</p>
+{{/if}}

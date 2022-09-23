@@ -1,5 +1,15 @@
 <body>
     <h1>Add Project</h1>
+
+    {{#if errorMessages.length}}
+    <p>Couldn't create the projects for unknown reasons</p>
+    <ul>
+        {{#each errorMessages}}
+        <li> {{this}} </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
     <form method="POST" action="/add-project" enctype="multipart/form-data">
         <div>
             <input type="file" name="image">

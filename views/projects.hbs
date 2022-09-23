@@ -1,5 +1,13 @@
-{{#if dbError}}
+<!-- {{#if dbError}}
 <h1>Can't display any projects. Try again later. </h1>
+{{else}} -->
+{{#if errorMessages.length}}
+<p>Couldn't fetch the projects because: </p>
+<ul>
+    {{#each errorMessages}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
 {{else}}
 {{#if projects.length}}
 <section id="projects">
@@ -31,5 +39,6 @@
 </section>
 {{else}}
 <p> There is currently no projects to display. </p>
+{{/if}}
 {{/if}}
 {{/if}}
