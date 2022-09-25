@@ -1,7 +1,13 @@
-{{#if dbError}}
-<h1>Can't display the update page. Please try again later.</h1>
-{{else}}
 <h1>Update Project</h1>
+{{#if errorMessages.length}}
+<p>Couldn't update the project because:</p>
+<ul>
+    {{#each errorMessages}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+{{/if}}
+
 <form method="POST">
     <div>
         <input type="text" name="title" value="{{project.title}}">
@@ -14,4 +20,3 @@
     </div> -->
     <input type="submit" value="Update Project">
 </form>
-{{/if}}

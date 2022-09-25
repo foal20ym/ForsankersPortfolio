@@ -157,6 +157,18 @@
     font-family: 'Courier New', Courier, monospace;
     font-size: 130%;
 }
+.contactPageForm {
+    text-align: center;
+    margin-top: 5%;
+    font-family: "Superior title", "Times New Roman", sans-serif;
+    font-size: 100%;
+}
+
+.contactPageFormTitle {
+    font-size: 140%;
+    font-family: "Superior title", "Times New Roman", sans-serif;
+}
+
 
 /* ABOUT PAGE CONTENT*/
 .about-class {

@@ -1,3 +1,11 @@
+{{#if errorMessages.length}}
+<p>Couln't send the message because:</p>
+<ul>
+    {{#each errorMessages}}
+    <li> {{this}} </li>
+    {{/each}}
+</ul>
+{{/if}}
 <section class="contact-class">
     <div>
         Phone: 070 123 45 67
@@ -8,4 +16,21 @@
     <div>
         Address: skolgatan 39B, 555 43, Jönköping
     </div>
+</section>
+<section class="contactPageForm">
+    <h1 class="contactPageFormTitle"> Contact me with the form down below!</h1>
+
+    <form method="POST">
+        <div>
+            Name: <input type="text" name="name">
+        </div>
+        <div>
+            Email: <input type="Email" name="email">
+        </div>
+        <div>
+            Message: <input type="text" name="message">
+        </div>
+        <input type="submit">
+    </form>
+
 </section>

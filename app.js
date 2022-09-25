@@ -8,8 +8,7 @@ const expressSession = require('express-session')
 const MAX_TITLE_LENGTH = 40
 const MIN_TITLE_LENGTH = 6
 const MAX_DESCRIPTION_LENTGH = 255
-const MIN_DESCRIPTION_LENTGH = 20
-
+const MIN_DESCRIPTION_LENTGH = 6
 const ADMIN_USERNAME = "Alice"
 const ADMIN_PASSOWRD = "abc123"
 
@@ -25,17 +24,26 @@ db.run(`
     )
 `)
 
+db.run(`
+    CREATE TABLE IF NOT EXISTS messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT,
+        message TEXT
+    )
+`)
+
 
 const multer = require("multer")
 const { response } = require('express')
 const { request } = require('http')
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (request, file, cb) => {
         cb(null, "public")
     },
-    filename: (req, file, cb) => {
+    filename: (request, file, cb) => {
         const fileName = Date.now() + path.extname(file.originalname)
-        req.filePath = fileName // create a new key in request object
+        request.filePath = fileName // create a new key in request object
         cb(null, fileName)
     }
 })
@@ -130,39 +138,28 @@ app.get("/projects/:id", function (request, response) {
 
     db.get(query, values, function (error, project) {
 
-        if (error) {
-            console.log(error)
-            const model = {
-                project,
-                dbError: true
-            }
-            response.render('project.hbs', model)
+        const model = {
+            project,
         }
 
-        else {
-            const model = {
-                project,
-                dbError: false
-            }
-            response.render('project.hbs', model)
-        }
-
+        response.render('project.hbs', model)
     })
 
 })
 
 // renders the Add Project page
-app.get("/add-project", (req, res) => {
-    res.render('add-project.hbs')
+app.get("/add-project", function (request, response) {
+
+    response.render('add-project.hbs')
+
 })
 
 // posts projects to the Add Projects page.
-app.post("/add-project", upload.single("image"), (req, res) => {
+app.post("/add-project", upload.single("image"), function (request, response) {
 
-    const image = req.filePath
-    const title = req.body.title
-    const description = req.body.description
-
+    const image = request.filePath
+    const title = request.body.title
+    const description = request.body.description
     const errorMessages = []
 
     if (title == "") {
@@ -209,12 +206,12 @@ app.post("/add-project", upload.single("image"), (req, res) => {
                     image
                 }
 
-                res.render('add-project.hbs', model)
+                response.render('add-project.hbs', model)
             }
 
             else {
 
-                res.redirect("/projects")
+                response.redirect("/projects")
 
             }
 
@@ -229,9 +226,34 @@ app.post("/add-project", upload.single("image"), (req, res) => {
             image
         }
 
-        res.render('/add-projects.hbs', model)
+        response.render('/add-projects.hbs', model)
 
     }
+
+})
+
+app.post('/contact', function (request, response) {
+
+    const name = request.body.name
+    const email = request.body.email
+    const message = request.body.message
+    const errorMessages = []
+
+    const query =
+        `INSERT INTO messages (name, email, message) VALUES (?, ?, ?)
+        `
+
+    const values = [name, email, message]
+
+    db.run(query, values, function (error) {
+
+        if (error) {
+            errorMessages.push("Internal Server Error")
+        }
+        else {
+            response.redirect('/contact')
+        }
+    })
 
 })
 
@@ -260,48 +282,99 @@ app.get("/update-project/:id", function (request, response) {
 app.post("/update-project/:id", function (request, response) {
 
     // UPDATE projects SET (title, description, image) = ("Taxi Service app", "The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.","app2unsplash.jpg") WHERE id = 2
-    
+
     const id = request.params.id
     const title = request.body.title
     const description = request.body.description
+    const errorMessages = []
 
-    const query =
-        `UPDATE projects SET (title, description) = (?, ?) WHERE id = ?`
+    if (!request.session.isLoggedIn) {
+        errorMessages.push("Not logged in.")
+    }
 
-    const values = [title, description, id]
+    if (errorMessages.length == 0) {
 
-    db.run(query, values, function (error) {
+        const query =
+            `UPDATE projects SET (title, description) = (?, ?) WHERE id = ?`
 
-            response.redirect("/projects")
+        const values = [title, description, id]
 
-    })
+        db.run(query, values, function (error) {
+
+            if (error) {
+
+                errorMessages.push("Internal Server Error")
+
+                const model = {
+                    errorMessages,
+                    title,
+                    description
+                }
+
+                response.render('update-project.hbs', model)
+
+            } else {
+
+                response.redirect("/projects")
+
+            }
+
+        })
+
+    } else {
+
+        const model = {
+            errorMessages,
+            title,
+            description
+        }
+
+        response.render('update-project.hbs', model)
+
+    }
 
 })
 
 app.post("/delete-project/:id", function (request, response) {
 
     const id = request.params.id
+    const errorMessages = []
 
-    const query =
-        `DELETE FROM projects WHERE id = ?`
-    const values = [id]
+    if (!request.session.isLoggedIn) {
+        errorMessages.push("Not logged in.")
+    }
 
-    db.run(query, values, function (error) {
+    if (errorMessages == 0) {
 
-        if (error) {
-            console.log(error)
-        }
+        const query =
+            `DELETE FROM projects WHERE id = ?`
+        const values = [id]
 
-        else {
-            response.redirect("/projects")
-        }
+        db.run(query, values, function (error) {
 
-    })
+            if (error) {
+                errorMessages.push("Internal Server Error")
+                response.redirect("/login")
+            }
+
+            else {
+                response.redirect("/projects")
+            }
+
+        })
+
+    }
+
+    else {
+        response.redirect("/login")
+    }
 
 })
 
 app.get("/login", function (reguest, response) {
+
     response.render('login.hbs')
+
 })
 
 app.post("/login", function (request, response) {
@@ -318,7 +391,7 @@ app.post("/login", function (request, response) {
     else {
 
         const model = {
-            failedToLogin: true // false?
+            failedToLogin: true
         }
 
         response.render('login.hbs', model)

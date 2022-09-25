@@ -1,6 +1,3 @@
-{{#if dbError}}
-<h1>Can't display the project. Try again later. </h1>
-{{else}}
 {{#if project}}
 <section class="project_page">
     <p> <img src="/{{project.image}}" alt="" class="project_img"></p>
@@ -16,5 +13,4 @@
     {{else}}
     <p>This project don't exist</p>
 </section>
-{{/if}}
 {{/if}}
