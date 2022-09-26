@@ -33,6 +33,15 @@ db.run(`
     )
 `)
 
+db.run(`
+    CREATE TABLE IF NOT EXISTS comments (
+        cID INTEGER PRIMARY KEY AUTOINCREMENT,
+        comment TEXT,
+        id INTEGER,
+        FOREIGN KEY(id) REFERENCES projects (id)
+    )
+`)
+
 
 const multer = require("multer")
 const { response } = require('express')
@@ -93,6 +102,31 @@ app.get('/', function (request, response) {
 app.get('/contact', function (request, response) {
 
     response.render('contact.hbs')
+
+})
+
+app.post('/contact', function (request, response) {
+
+    const name = request.body.name
+    const email = request.body.email
+    const message = request.body.message
+    const errorMessages = []
+
+    const query =
+        `INSERT INTO messages (name, email, message) VALUES (?, ?, ?)
+        `
+
+    const values = [name, email, message]
+
+    db.run(query, values, function (error) {
+
+        if (error) {
+            errorMessages.push("Internal Server Error")
+        }
+        else {
+            response.redirect('/contact')
+        }
+    })
 
 })
 
@@ -232,30 +266,6 @@ app.post("/add-project", upload.single("image"), function (request, response) {
 
 })
 
-app.post('/contact', function (request, response) {
-
-    const name = request.body.name
-    const email = request.body.email
-    const message = request.body.message
-    const errorMessages = []
-
-    const query =
-        `INSERT INTO messages (name, email, message) VALUES (?, ?, ?)
-        `
-
-    const values = [name, email, message]
-
-    db.run(query, values, function (error) {
-
-        if (error) {
-            errorMessages.push("Internal Server Error")
-        }
-        else {
-            response.redirect('/contact')
-        }
-    })
-
-})
 
 app.get("/update-project/:id", function (request, response) {
 
@@ -335,6 +345,7 @@ app.post("/update-project/:id", function (request, response) {
 
 })
 
+
 app.post("/delete-project/:id", function (request, response) {
 
     const id = request.params.id
@@ -368,6 +379,48 @@ app.post("/delete-project/:id", function (request, response) {
     else {
         response.redirect("/login")
     }
+
+})
+
+app.post("/add-comment/:id", function (request, response) {
+
+    const comment = request.body.comment
+    const id = request.params.id
+    const errorMessages = []
+
+    const query =
+        `INSERT INTO comments (comment,id) VALUES (?,?)`
+
+    const values = [comment, id]
+
+    db.run(query, values, function (error) {
+
+        if (error) {
+
+            console.log(error)
+            errorMessages.push("Internal server error")
+
+            const model = {
+                errorMessages,
+                comment
+            }
+
+            response.render('login.hbs', model)
+        }
+
+        else {
+
+            response.redirect('/projects')
+
+        }
+
+    })
+
+})
+
+app.get("/add-comment/:id", function (request, response) {
+
+    response.render('add-comment.hbs')
 
 })
 

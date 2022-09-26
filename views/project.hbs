@@ -4,12 +4,30 @@
     <p class="project_page_title">{{project.title}}</p>
     <p class="project_page_description">{{project.description}}</p>
 
+    <ul>
+        {{#each comments}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+
     <button> <a class="project_page_update_link" href="/update-project/{{project.id}}">Update</a> </button>
 
     <form action="/delete-project/{{project.id}}" method="POST">
         <input type="submit" value="Delete Project">
     </form>
 
+<form action="/add-comment/{{project.id}}" method="POST">
+    <div class="form-group">
+        <label class="form-label" for="input-example-3">Add any comments or feedback</label>
+        <textarea class="form-input" type="text" name="comment" id="input-example-3" placeholder="Textarea" rows="3"></textarea>
+    </div>
+    <input type="submit">
+</form>
+    <!-- <form action="/add-comment/{{project.id}}" method="POST">
+        <p>Feel free to add any comments or feedback!</p>
+        <input type="text" name="comment">
+        <input type="submit">
+    </form> -->
     {{else}}
     <p>This project don't exist</p>
 </section>
