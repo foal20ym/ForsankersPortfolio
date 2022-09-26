@@ -3,16 +3,17 @@
 {{#if failedToLogin}}
 <p>Wrong credentials!</p>
 {{/if}}
+<section class="login-page-section">
+    <form action="/login" method="POST">
 
-<form action="/login" method="POST">
+        <div>
+            Username: <input type="text" name="username">
+        </div>
 
-    <div>
-        Username: <input type="text" name="username">
-    </div>
+        <div>
+            Password: <input type="password" name="password">
+        </div>
+        <input type="submit" value="Login">
 
-    <div>
-        Password: <input type="password" name="password">
-    </div>
-    <input type="submit" value="Login">
-
-</form>
+    </form>
+</section>

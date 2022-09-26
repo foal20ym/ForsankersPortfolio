@@ -7,16 +7,17 @@
     {{/each}}
 </ul>
 {{/if}}
-
-<form method="POST">
-    <div>
-        <input type="text" name="title" value="{{project.title}}">
-    </div>
-    <div>
-        <input type="text" name="description" value="{{project.description}}">
-    </div>
-    <!--    <div>
+<section class="center-form">
+    <form method="POST">
+        <div>
+            <input type="text" name="title" value="{{project.title}}">
+        </div>
+        <div>
+            <input type="text" name="description" value="{{project.description}}">
+        </div>
+        <!--    <div>
         <input type="file" name="image" value="{{project.image}}">
     </div> -->
-    <input type="submit" value="Update Project">
-</form>
+        <input type="submit" value="Update Project">
+    </form>
+</section>

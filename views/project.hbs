@@ -1,35 +1,36 @@
 {{#if project}}
-<section class="project_page">
-    <p> <img src="/{{project.image}}" alt="" class="project_img"></p>
-    <p class="project_page_title">{{project.title}}</p>
-    <p class="project_page_description">{{project.description}}</p>
+<section class="project-page-section">
+    <p> <img src="/{{project.image}}" alt="" class="project-page-image"></p>
+    <p class="project-page-title">{{project.title}}</p>
+    <p class="project-page-description">{{project.description}}</p>
 
-    <div class="projectPageComments">
-        <h1 class="projectPageCommentsTitle"> Comments and feedback </h1>
+    <div class="project-page-comments">
+        <h1 class="project-page-comments-title"> Comments and feedback </h1>
 
-        <ul class="projectPageCommentsUL">
+
+        <ul class="project-page-comments-ul">
             {{#if isLoggedIn}}
             {{#each comments}}
-            <li class="projectPageCommentsLI"> 
+            <li class="project-page-comments-li"> 
                 <a href="/manage-comment/{{cID}}">{{this.comment}}</a>
             </li>
             {{/each}}
             {{else}}
             {{#each comments}}
-            <li class="projectPageCommentsLI">{{this.comment}}</li>
+            <li class="project-page-comments-li">{{this.comment}}</li>
             {{/each}}
             {{/if}}
         </ul>
     </div>
 
     {{#if isLoggedIn}}
-    <button> <a class="project_page_update_link" href="/update-project/{{project.id}}">Update</a> </button>
+    <button> <a class="project-page-update-link" href="/update-project/{{project.id}}">Update</a> </button>
 
     <form action="/delete-project/{{project.id}}" method="POST">
         <input type="submit" value="Delete Project">
     </form>
     {{/if}}
-    <button> <a class="project_page_update_link" href="/add-comment/{{project.id}}">Add comment</a> </button>
+    <button> <a class="project-page-update-link" href="/add-comment/{{project.id}}">Add comment</a> </button>
 
     {{else}}
     <p>This project don't exist</p>

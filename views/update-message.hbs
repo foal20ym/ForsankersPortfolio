@@ -7,15 +7,17 @@
     {{/each}}
 </ul>
 {{/if}}
-<form method="POST">
-    <div>
-        <input type="text" name="name" value="{{message.name}}">
-    </div>
-    <div>
-        <input type="text" name="email" value="{{message.email}}">
-    </div>
-    <div>
-        <input type="text" name="message" value="{{message.message}}">
-    </div>
-    <input type="submit" value="Update Message">
-</form>
+<section class="center-form">
+    <form method="POST">
+        <div>
+            <input type="text" name="name" value="{{message.name}}">
+        </div>
+        <div>
+            <input type="text" name="email" value="{{message.email}}">
+        </div>
+        <div>
+            <input type="text" name="message" value="{{message.message}}">
+        </div>
+        <input type="submit" value="Update Message">
+    </form>
+</section>

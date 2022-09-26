@@ -1,6 +1,5 @@
 <body>
     <h1>Add Project</h1>
-
     {{#if errorMessages.length}}
     <p>Couldn't create the projects for unknown reasons</p>
     <ul>
@@ -9,18 +8,18 @@
         {{/each}}
     </ul>
     {{/if}}
-
-    <form method="POST" action="/add-project" enctype="multipart/form-data">
-        <div>
-            <input type="file" name="image">
-        </div>
-        <div>
-            Title: <input type="text" name="title">
-        </div>
-        <div>
-            Description: <input type="text" name="description">
-        </div>
-        <input type="submit">
-
-    </form>
+    <section class="add-project-section">
+        <form method="POST" action="/add-project" enctype="multipart/form-data">
+            <div>
+                <input type="file" name="image">
+            </div>
+            <div>
+                Title: <input type="text" name="title">
+            </div>
+            <div>
+                Description: <input type="text" name="description">
+            </div>
+            <input type="submit">
+        </form>
+    </section>
 </body>

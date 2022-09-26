@@ -6,7 +6,7 @@
     {{/each}}
 </ul>
 {{/if}}
-<section class="contact-class">
+<section class="contact-page-section">
     <div>
         Phone: 070 123 45 67
     </div>
@@ -16,10 +16,10 @@
     <div>
         Address: skolgatan 39B, 555 43, Jönköping
     </div>
-    <h1 class="contactPageFormTitle"> Ask questions right here with <a href="/add-message">this</a> form!</h1>
+    <h1 class="contact-page-form-title"> Ask questions right here with <a href="/add-message">this</a> form!</h1>
 
     <div class="contact-page-messages">
-        <h1 class="contact-page-messages-title"> Messages</h1>
+        <h1 class="contact-page-messages-title"> Messages and questions</h1>
 
         <ul class="contact-page-messages-ul">
             {{#if isLoggedIn}}
@@ -27,12 +27,13 @@
             <li class="contact-page-messages-li">
                 <a href="/manage-message/{{id}}">{{this.message}}</a>
                 <p><a href="/manage-message/{{id}}">From: {{this.name}}, {{this.email}}</a></p>
-                
+
             </li>
             {{/each}}
             {{else}}
             {{#each messages}}
-            <li class="contact-page-messages-li">{{this.message}},{{this.namn}}, {{messages.email}}</li>
+            <li class="contact-page-messages-li">{{this.message}}</li>
+            <p>From: {{this.name}}, {{this.email}}</p>
             {{/each}}
             {{/if}}
         </ul>

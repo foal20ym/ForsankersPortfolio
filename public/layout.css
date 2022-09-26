@@ -1,4 +1,4 @@
-/* NAVIGATION BAR font-size 130% från början*/
+/* NAVIGATION BAR | NAVIGATION BAR | NAVIGATION BAR */
 .btn.btn-link {
     padding: 2%;
     font-family: 'Courier New', Courier, monospace;
@@ -13,8 +13,8 @@
     text-decoration-thickness: 3px;
 }
 
-/* HOME PAGE MAIN CONTENT */
-.section-style.section-home {
+/* HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT */
+.home-page-section {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -31,7 +31,7 @@
     width: 394px;
 }
 
-.standard-container {
+.shome-page-standard-container {
     -webkit-font-smoothing: antialiased;
     align-self: flex-start;
     box-sizing: border-box;
@@ -55,7 +55,7 @@
     width: 394px;
 }
 
-.intro-wrap {
+.home-page-intro-wrap {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -74,7 +74,7 @@
     width: 394px;
 }
 
-.home-1 {
+.home-page-rubric-row-one {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -96,7 +96,7 @@
     width: 700px;
 }
 
-.home-2 {
+.home-page-rubric-row-two {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -115,7 +115,7 @@
     width: 700px;
 }
 
-.paragraph-1 {
+.home-page-paragraph-one {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -134,7 +134,7 @@
     width: 394px;
 }
 
-.paragraph-2 {
+.home-page-paragraph-two {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -150,22 +150,15 @@
     width: 394px;
 }
 
-/* CONTACT PAGE CONTENT*/
-.contact-class {
+/* CONTACT PAGE CONTENT CONTACT PAGE CONTENT CONTACT PAGE CONTENT*/
+.contact-page-section {
     text-align: center;
     margin-top: 20%;
     font-family: 'Courier New', Courier, monospace;
     font-size: 130%;
 }
 
-.contactPageForm {
-    text-align: center;
-    margin-top: 5%;
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    font-size: 100%;
-}
-
-.contactPageFormTitle {
+.contact-page-form-title {
     margin-top: 2%;
     font-size: 140%;
     font-family: "Superior title", "Times New Roman", sans-serif;
@@ -187,15 +180,15 @@
 }
 
 
-/* ABOUT PAGE CONTENT*/
-.about-class {
+/* ABOUT PAGE CONTENT ABOUT PAGE CONTENT ABOUT PAGE CONTENT*/
+.about-page-section {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 12%;
 }
 
-.head2 {
+.about-page-head-one {
     font-family: "Superior title", "Times New Roman", sans-serif;
     margin-left: auto;
     margin-right: auto;
@@ -203,7 +196,7 @@
     font-size: 40px;
 }
 
-.div2 {
+.about-page-div-one {
     margin-left: auto;
     margin-right: auto;
     max-width: 600px;
@@ -211,16 +204,7 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-.div3 {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    margin-top: 20px;
-}
-
-.div4 {
+.about-page-div-two {
     margin-left: auto;
     margin-right: auto;
     max-width: 600px;
@@ -229,16 +213,25 @@
     margin-top: 20px;
 }
 
-/*PROJECTS LIST*/
-.projects {
+.about-page-div-three {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+}
+
+/*PROJECTS LIST PROJECTS LIST PROJECTS LIST PROJECTS LIST*/
+.projects-page-section {
     background-color: transparent;
 }
 
-.row {
+.projects-page-row {
     height: 20%;
 }
 
-.section_title {
+.projects-page-title {
     text-align: center;
     color: black;
     font-family: monospace;
@@ -246,37 +239,29 @@
     margin-top: 8%;
 }
 
-.project_list {
+.projects-page-list {
     list-style: none;
     align-items: center;
     text-align: center;
     margin-top: 7%;
 }
 
-.project {
+.projects-page-project {
     height: 400px;
 }
 
-.project_wrapper {
-    display: block;
-}
-
-.project_img {
+.projects-page-project-image {
     width: 300px;
     height: auto;
 }
 
-.project_description {
-    width: auto;
-}
-
-.project_description-title {
+.projects-page-project-title {
     font-family: "Superior title", "Times New Roman", sans-serif;
     color: black;
     font-size: 170%;
 }
 
-.project_description-para {
+.projects-page-project-description {
     font-size: 110%;
     color: black;
     font-family: 'Courier New', Courier, monospace;
@@ -286,15 +271,15 @@
 }
 
 
-/* PROJECT PAGE */
-.project_page {
+/* PROJECT PAGE PROJECT PAGE PROJECT PAGE PROJECT PAGE*/
+.project-page-section {
     display: grid;
     place-items: center;
     align-content: center;
     min-height: 100vh;
 }
 
-.project_page_description {
+.project-page-description {
     font-size: 110%;
     color: black;
     font-family: 'Courier New', Courier, monospace;
@@ -303,29 +288,55 @@
     max-width: 600px;
 }
 
-.project_page_title {
+.project-page-title {
     font-family: "Superior title", "Times New Roman", sans-serif;
     color: black;
     font-size: 170%;
 }
-
-.project_page_update_link {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.project-page-image {
+    width: 300px;
+    height: auto;
 }
 
-.projectPageComments {
+.project-page-comments {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.projectPageCommentsUL {
+.project-page-comments-ul {
     list-style: none;
 }
 
-.projectPageCommentsTitle {
+.project-page-comments-title {
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-decoration: overline;
     color: black;
     font-size: 170%;
+}
+
+.project-page-update-link {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/*ADD COMMENT PAGE PLSSSS FIX */
+.add-comment-section {
+    text-align: center;
+    margin-top: 20%;
+}
+.add-question-section {
+    text-align: center;
+    margin-top: 20%;
+}
+.login-page-section {
+    text-align: center;
+    margin-top: 20%;
+}
+.add-project-section {
+    text-align: center;
+    margin-top: 20%;
+}
+.center-form {
+    text-align: center;
+    margin-top: 20%;
 }
 
 /* LAYOUT BACKGROUND 'ANIMATED'*/
