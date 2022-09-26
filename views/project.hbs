@@ -4,30 +4,39 @@
     <p class="project_page_title">{{project.title}}</p>
     <p class="project_page_description">{{project.description}}</p>
 
-    <ul>
-        {{#each comments}}
-        <li>{{this}}</li>
-        {{/each}}
-    </ul>
+    <div class="projectPageComments">
+        <h1 class="projectPageCommentsTitle"> Comments and feedback </h1>
+        <ul class="projectPageCommentsUL">
+            {{#each comments}}
+            <li class="projectPageCommentsLI">{{this.comment}}</li>
+            {{/each}}
+        </ul>
+        <!--
+        <ul class="projectPageCommentsUL">
+            {{#if isLoggedIn}}
+            {{#each comments}}
+            <li class="projectPageCommentsLI"> 
+                <a href="/manage-comment/{{cID}}">{{this.comment}}</a>
+            </li>
+            {{/each}}
+            {{else}}
+            {{#each comments}}
+            <li class="projectPageCommentsLI">{{this.comment}}</li>
+            {{/each}}
+            {{/if}}
+        </ul>
+        -->
+    </div>
 
+    {{#if isLoggedIn}}
     <button> <a class="project_page_update_link" href="/update-project/{{project.id}}">Update</a> </button>
 
     <form action="/delete-project/{{project.id}}" method="POST">
         <input type="submit" value="Delete Project">
     </form>
+    {{/if}}
+    <button> <a class="project_page_update_link" href="/add-comment/{{project.id}}">Add comment</a> </button>
 
-<form action="/add-comment/{{project.id}}" method="POST">
-    <div class="form-group">
-        <label class="form-label" for="input-example-3">Add any comments or feedback</label>
-        <textarea class="form-input" type="text" name="comment" id="input-example-3" placeholder="Textarea" rows="3"></textarea>
-    </div>
-    <input type="submit">
-</form>
-    <!-- <form action="/add-comment/{{project.id}}" method="POST">
-        <p>Feel free to add any comments or feedback!</p>
-        <input type="text" name="comment">
-        <input type="submit">
-    </form> -->
     {{else}}
     <p>This project don't exist</p>
 </section>

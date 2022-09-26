@@ -46,6 +46,7 @@ db.run(`
 const multer = require("multer")
 const { response } = require('express')
 const { request } = require('http')
+const { nextTick } = require('process')
 const storage = multer.diskStorage({
     destination: (request, file, cb) => {
         cb(null, "public")
@@ -87,6 +88,14 @@ app.use(
     })
 )
 
+app.use( function(request, response, next){
+    const isLoggedIn = request.session.isLoggedIn
+
+    response.locals.isLoggedIn = isLoggedIn
+
+    next()
+})
+
 // uses and renders the Home page
 app.get('/', function (request, response) {
 
@@ -97,6 +106,7 @@ app.get('/', function (request, response) {
     response.render('home.hbs', model)
 
 })
+
 
 // uses and renders the Contact page
 app.get('/contact', function (request, response) {
@@ -165,18 +175,56 @@ app.get('/projects', function (request, response) {
 app.get("/projects/:id", function (request, response) {
 
     const id = request.params.id
+    const errorMessages = []
 
-    const query =
-        `SELECT * FROM projects WHERE id = ?`
-    const values = [id]
+    const projectQuery = `SELECT * FROM projects WHERE id = ?`
+    const projectValues = [id]
 
-    db.get(query, values, function (error, project) {
+    const commentQuery = `SELECT * FROM comments WHERE id = ?` // project ID
+    const commentValues = [id]
 
-        const model = {
-            project,
+
+    db.get(projectQuery, projectValues, function (projectError, project) {
+
+        if (projectError) {
+
+            errorMessages.push("projectError")
+
+            const model = {
+                errorMessages,
+                project,
+                id
+            }
+
+            response.render('project.hbs', model)
+
         }
+        else {
+            db.all(commentQuery, commentValues, function (commentError, comments) {
+                if (commentError) {
 
-        response.render('project.hbs', model)
+                    errorMessages.push("commentError")
+                    const model = {
+                        errorMessages,
+                        comments,
+                        id
+                    }
+
+                    response.render('project.hbs', model)
+                }
+
+                else {
+                    const model = {
+                        errorMessages,
+                        project,
+                        comments,
+                        id
+                    }
+
+                    response.render('project.hbs', model)
+                }
+            })
+        }
     })
 
 })
@@ -382,6 +430,17 @@ app.post("/delete-project/:id", function (request, response) {
 
 })
 
+app.get("/add-comment/:id", function (request, response) {
+
+    const model = {
+        project: {
+            id: request.params.id
+        }
+    }
+    response.render('add-comment.hbs', model)
+
+})
+
 app.post("/add-comment/:id", function (request, response) {
 
     const comment = request.body.comment
@@ -418,11 +477,7 @@ app.post("/add-comment/:id", function (request, response) {
 
 })
 
-app.get("/add-comment/:id", function (request, response) {
 
-    response.render('add-comment.hbs')
-
-})
 
 app.get("/login", function (reguest, response) {
 

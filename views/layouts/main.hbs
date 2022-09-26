@@ -28,7 +28,9 @@
       <!-- centered logo or brand -->
     </section>
     <section class="navbar-section">
+      {{#if isLoggedIn}}
       <a href="/add-project" class="btn btn-link">Add Project</a>
+      {{/if}}
       <a href="/projects" class="btn btn-link">Projects</a>
       <a href="/contact" class="btn btn-link">Contact</a>
       <a href="/about" class="btn btn-link">About</a>

@@ -18,19 +18,12 @@
         <ul class="project_list">
             {{#each projects}}
             <li class="project">
-                <div class="project_wrapper">
-                    <img src="{{image}}" alt="" class="project_img" />
-                    <div class="project_wrapper-bg"></div>
-                    <div class="project_description">
-                        <h3 class="project_description-title">
-                            <a class="aaa" href="/projects/{{id}}">{{title}}</a>
-                        </h3>
-                        <h4 class="project_description-sub-title">
-                            {{description}}
-                        </h4>
-                        <p class="project_description-para">
-                        </p>
-                    </div>
+                <img src="{{image}}" alt="" class="project_img" />
+                <div class="project_description">
+                    <h3 class="project_description-title">
+                        <a href="/projects/{{id}}">{{title}}</a>
+                    </h3>
+                    <p class="project_description-para"> {{description}}</p>
                 </div>
             </li>
             {{/each}}
