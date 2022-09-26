@@ -6,12 +6,7 @@
 
     <div class="projectPageComments">
         <h1 class="projectPageCommentsTitle"> Comments and feedback </h1>
-        <ul class="projectPageCommentsUL">
-            {{#each comments}}
-            <li class="projectPageCommentsLI">{{this.comment}}</li>
-            {{/each}}
-        </ul>
-        <!--
+
         <ul class="projectPageCommentsUL">
             {{#if isLoggedIn}}
             {{#each comments}}
@@ -25,7 +20,6 @@
             {{/each}}
             {{/if}}
         </ul>
-        -->
     </div>
 
     {{#if isLoggedIn}}

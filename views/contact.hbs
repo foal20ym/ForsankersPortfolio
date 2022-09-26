@@ -16,21 +16,25 @@
     <div>
         Address: skolgatan 39B, 555 43, Jönköping
     </div>
-</section>
-<section class="contactPageForm">
-    <h1 class="contactPageFormTitle"> Contact me with the form down below!</h1>
+    <h1 class="contactPageFormTitle"> Ask questions right here with <a href="/add-message">this</a> form!</h1>
 
-    <form method="POST">
-        <div>
-            Name: <input type="text" name="name">
-        </div>
-        <div>
-            Email: <input type="Email" name="email">
-        </div>
-        <div>
-            Message: <input type="text" name="message">
-        </div>
-        <input type="submit">
-    </form>
+    <div class="contact-page-messages">
+        <h1 class="contact-page-messages-title"> Messages</h1>
 
+        <ul class="contact-page-messages-ul">
+            {{#if isLoggedIn}}
+            {{#each messages}}
+            <li class="contact-page-messages-li">
+                <a href="/manage-message/{{id}}">{{this.message}}</a>
+                <p><a href="/manage-message/{{id}}">From: {{this.name}}, {{this.email}}</a></p>
+                
+            </li>
+            {{/each}}
+            {{else}}
+            {{#each messages}}
+            <li class="contact-page-messages-li">{{this.message}},{{this.namn}}, {{messages.email}}</li>
+            {{/each}}
+            {{/if}}
+        </ul>
+    </div>
 </section>

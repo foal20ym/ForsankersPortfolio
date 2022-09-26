@@ -88,7 +88,7 @@ app.use(
     })
 )
 
-app.use( function(request, response, next){
+app.use(function (request, response, next) {
     const isLoggedIn = request.session.isLoggedIn
 
     response.locals.isLoggedIn = isLoggedIn
@@ -111,11 +111,34 @@ app.get('/', function (request, response) {
 // uses and renders the Contact page
 app.get('/contact', function (request, response) {
 
-    response.render('contact.hbs')
+    const query = `SELECT * FROM messages`
+
+    db.all(query, function (error, messages) { // this is asyncronius
+
+        const errorMessages = []
+
+        if (error) {
+            errorMessages.push("Internal server error")
+        }
+
+        const model = {
+            errorMessages,
+            messages
+        }
+
+        response.render('contact.hbs', model)
+
+    })
 
 })
 
-app.post('/contact', function (request, response) {
+app.get("/add-message", function (request, response) {
+
+    response.render('add-message.hbs')
+
+})
+
+app.post('/add-message', function (request, response) {
 
     const name = request.body.name
     const email = request.body.email
@@ -139,6 +162,134 @@ app.post('/contact', function (request, response) {
     })
 
 })
+
+app.get("/manage-message/:id", function (request, response) {
+
+    const model = {
+        message: {
+            id: request.params.id
+        }
+    }
+    console.log(model)
+    const id = request.params.id
+    console.log(id)
+
+    response.render('manage-message.hbs', model)
+})
+
+app.get("/update-message/:id", function (request, response) {
+
+    const id = request.params.id
+
+    const query =
+        `SELECT * FROM messages WHERE id = ?`
+    const values = [id]
+
+    db.get(query, values, function (error, message) {
+
+        const model = {
+            message,
+        }
+
+        response.render('update-message.hbs', model)
+
+    })
+
+})
+
+app.post("/update-message/:id", function (request, response) {
+
+    const id = request.params.id
+    const name = request.body.name
+    const email = request.body.email
+    const message = request.body.message
+    const errorMessages = []
+
+    if (!request.session.isLoggedIn) {
+        errorMessages.push("Not logged in.")
+    }
+
+    if (errorMessages.length == 0) {
+
+        const query =
+            `UPDATE messages SET (name, email, message) = (?,?,?) WHERE id = ?`
+
+        const values = [name, email, message, id]
+
+        db.run(query, values, function (error) {
+
+            if (error) {
+
+                errorMessages.push("Internal Server Error")
+
+                const model = {
+                    errorMessages,
+                    name,
+                    email,
+                    message
+                }
+
+                response.render('update-message.hbs', model)
+
+            } else {
+
+                response.redirect("/contact")
+
+            }
+
+        })
+
+    } else {
+
+        const model = {
+            errorMessages,
+            name,
+            email,
+            message
+        }
+
+        response.render('update-message.hbs', model)
+
+    }
+
+})
+
+app.post("/delete-message/:id", function (request, response) {
+
+    const id = request.params.id
+    const errorMessages = []
+
+    if (!request.session.isLoggedIn) {
+        errorMessages.push("Not logged in.")
+    }
+
+    if (errorMessages == 0) {
+
+        const query =
+            `DELETE FROM messages WHERE id = ?`
+        const values = [id]
+
+        db.run(query, values, function (error) {
+
+            if (error) {
+                errorMessages.push("Internal Server Error")
+                response.redirect("/login")
+            }
+
+            else {
+                response.redirect("/contact")
+            }
+
+        })
+
+    }
+
+    else {
+        response.redirect("/")
+    }
+
+})
+
 
 // uses and renders the About page
 app.get('/about', function (request, response) {
@@ -335,7 +486,7 @@ app.get("/update-project/:id", function (request, response) {
 
 })
 
-// FIXA DENNA SAMMA SOM ADD-PROJECT
+
 // Updates the info && takes the user back to the project page
 app.post("/update-project/:id", function (request, response) {
 
@@ -477,9 +628,128 @@ app.post("/add-comment/:id", function (request, response) {
 
 })
 
+app.get("/manage-comment/:cID", function (request, response) {
 
+    const model = {
+        comment: {
+            cID: request.params.cID
+        }
+    }
+    console.log(model)
+    const cID = request.params.cID
+    console.log(cID)
 
-app.get("/login", function (reguest, response) {
+    response.render('manage-comment.hbs', model)
+})
+
+app.get("/update-comment/:cID", function (request, response) {
+
+    const cID = request.params.cID
+
+    const query =
+        `SELECT * FROM comments WHERE cID = ?`
+    const values = [cID]
+
+    db.get(query, values, function (error, comment) {
+
+        const model = {
+            comment,
+        }
+
+        response.render('update-comment.hbs', model)
+
+    })
+
+})
+
+app.post("/update-comment/:cID", function (request, response) {
+
+    const cID = request.params.cID
+    const comment = request.body.comment
+    const errorMessages = []
+
+    if (!request.session.isLoggedIn) {
+        errorMessages.push("Not logged in.")
+    }
+
+    if (errorMessages.length == 0) {
+
+        const query =
+            `UPDATE comments SET (comment) = (?) WHERE cID = ?`
+
+        const values = [comment, cID]
+
+        db.run(query, values, function (error) {
+
+            if (error) {
+
+                errorMessages.push("Internal Server Error")
+
+                const model = {
+                    errorMessages,
+                    comment
+                }
+
+                response.render('update-comment.hbs', model)
+
+            } else {
+
+                response.redirect("/projects")
+
+            }
+
+        })
+
+    } else {
+
+        const model = {
+            errorMessages,
+            comment
+        }
+
+        response.render('update-comment.hbs', model)
+
+    }
+
+})
+
+app.post("/delete-comment/:cID", function (request, response) {
+
+    const cID = request.params.cID
+    const errorMessages = []
+
+    if (!request.session.isLoggedIn) {
+        errorMessages.push("Not logged in.")
+    }
+
+    if (errorMessages == 0) {
+
+        const query =
+            `DELETE FROM comments WHERE cID = ?`
+        const values = [cID]
+
+        db.run(query, values, function (error) {
+
+            if (error) {
+                errorMessages.push("Internal Server Error")
+                response.redirect("/login")
+            }
+
+            else {
+                response.redirect("/projects")
+            }
+
+        })
+
+    }
+
+    else {
+        response.redirect("/")
+    }
+
+})
+
+app.get("/login", function (request, response) {
 
     response.render('login.hbs')
 
