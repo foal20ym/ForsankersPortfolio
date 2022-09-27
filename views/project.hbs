@@ -10,7 +10,7 @@
             {{#if isLoggedIn}}
             {{#each comments}}
             <li class="project-page-comments-li">
-                <a href="/manage-comment/{{cID}}">{{this.comment}}</a>
+                <a href="/manage-comment/{{commentID}}">{{this.comment}}</a>
             </li>
             {{/each}}
             {{else}}
@@ -22,13 +22,13 @@
     </div>
 
     {{#if isLoggedIn}}
-    <button> <a class="project-page-update-link" href="/update-project/{{project.id}}">Update</a> </button>
-
-    <form action="/delete-project/{{project.id}}" method="POST">
+    <button> <a class="project-page-update-link" href="/update-project/{{project.projectID}}">Update</a> </button>
+    
+    <form action="/delete-project/{{project.projectID}}" method="POST">
         <input type="submit" value="Delete Project">
     </form>
     {{/if}}
-    <button> <a class="project-page-update-link" href="/add-comment/{{project.id}}">Add comment</a> </button>
+    <button> <a class="project-page-update-link" href="/add-comment/{{project.projectID}}">Add comment</a> </button>
 
     {{else}}
     <p>This project don't exist</p>
