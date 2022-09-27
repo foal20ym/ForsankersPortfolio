@@ -17,7 +17,7 @@ const db = new sqlite3.Database("portfolio-database.db")
 
 db.run(`
     CREATE TABLE IF NOT EXISTS projects (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        projectID INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT,
         description TEXT,
         image TEXT
@@ -25,20 +25,22 @@ db.run(`
 `)
 
 db.run(`
-    CREATE TABLE IF NOT EXISTS messages (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+    CREATE TABLE IF NOT EXISTS questions (
+        questionID INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         email TEXT,
-        message TEXT
+        question TEXT,
+        answer TEXT,
+        date TEXT
     )
 `)
 
 db.run(`
     CREATE TABLE IF NOT EXISTS comments (
-        cID INTEGER PRIMARY KEY AUTOINCREMENT,
+        commentID INTEGER PRIMARY KEY AUTOINCREMENT,
         comment TEXT,
-        id INTEGER,
-        FOREIGN KEY(id) REFERENCES projects (id)
+        projectID INTEGER,
+        FOREIGN KEY(projectID) REFERENCES projects (projectID)
     )
 `)
 
@@ -119,9 +121,9 @@ app.get('/', function (request, response) {
 // uses and renders the Contact page
 app.get('/contact', function (request, response) {
 
-    const query = `SELECT * FROM messages`
+    const query = `SELECT * FROM questions`
 
-    db.all(query, function (error, messages) { // this is asyncronius
+    db.all(query, function (error, questions) { // this is asyncronius
 
         const errorMessages = []
 
@@ -133,7 +135,7 @@ app.get('/contact', function (request, response) {
 
         const model = {
             errorMessages,
-            messages
+            questions
         }
 
         response.render('contact.hbs', model)
@@ -142,31 +144,33 @@ app.get('/contact', function (request, response) {
 
 })
 
-app.get("/add-message", function (request, response) {
+app.get("/add-question", function (request, response) {
 
-    response.render('add-message.hbs')
+    response.render('add-question.hbs')
 
 })
 
-app.post('/add-message', function (request, response) {
+app.post('/add-question', function (request, response) {
 
     const name = request.body.name
     const email = request.body.email
-    const message = request.body.message
+    const question = request.body.question
+    const answer = request.body.answer
     const errorMessages = []
 
     const date = new Date()
     date.toISOString().split('T')[0]
 
-    const query = `INSERT INTO messages (name, email, message, date) VALUES (?, ?, ?, ?)`
+    const query = `INSERT INTO questions (name, email, question, answer, date) VALUES (?, ?, ?, ?, ?)`
 
-    const values = [name, email, message, date.toISOString().split('T')[0]]
+    const values = [name, email, question, answer, date.toISOString().split('T')[0]]
 
     db.run(query, values, function (error) {
 
         if (error) {
 
             errorMessages.push("Internal Server Error")
+            response.redirect('/')
 
         }
 
@@ -180,45 +184,46 @@ app.post('/add-message', function (request, response) {
 
 })
 
-app.get("/manage-message/:id", function (request, response) {
+app.get("/manage-question/:questionID", function (request, response) {
 
     const model = {
 
-        message: {
-            id: request.params.id
+        question: {
+            questionID: request.params.questionID
         }
 
     }
 
-    response.render('manage-message.hbs', model)
+    response.render('manage-question.hbs', model)
 
 })
 
-app.get("/update-message/:id", function (request, response) {
+app.get("/answer-question/:questionID", function (request, response) {
 
-    const id = request.params.id
+    const questionID = request.params.questionID
 
-    const query = `SELECT * FROM messages WHERE id = ?`
-    const values = [id]
+    const query = `SELECT * FROM questions WHERE questionID = ?`
+    const values = [questionID]
 
-    db.get(query, values, function (error, message) {
+    db.get(query, values, function (error, question) {
 
         const model = {
-            message,
+            question,
         }
 
-        response.render('update-message.hbs', model)
+        response.render('answer-question.hbs', model)
 
     })
 
 })
 
-app.post("/update-message/:id", function (request, response) {
+app.post("/answer-question/:questionID", function (request, response) {
 
-    const id = request.params.id
+    const questionID = request.params.questionID
     const name = request.body.name
     const email = request.body.email
-    const message = request.body.message
+    const question = request.body.question
+    const answer = request.body.answer
     const errorMessages = []
 
     const date = new Date()
@@ -231,9 +236,9 @@ app.post("/update-message/:id", function (request, response) {
     if (errorMessages.length == 0) {
 
         const query =
-            `UPDATE messages SET (name, email, message, date) = (?,?,?,?) WHERE id = ?`
+            `UPDATE questions SET (answer) = (?) WHERE questionID = ?`
 
-        const values = [name, email, message, date.toISOString().split('T')[0], id]
+        const values = [answer, questionID]
 
         db.run(query, values, function (error) {
 
@@ -245,11 +250,12 @@ app.post("/update-message/:id", function (request, response) {
                     errorMessages,
                     name,
                     email,
-                    message,
+                    question,
+                    answer,
                     date
                 }
 
-                response.render('update-message.hbs', model)
+                response.render('answer-question.hbs', model)
 
             } else {
 
@@ -265,19 +271,104 @@ app.post("/update-message/:id", function (request, response) {
             errorMessages,
             name,
             email,
-            message,
+            question,
+            answer,
             date
         }
 
-        response.render('update-message.hbs', model)
+        response.render('answer-question.hbs', model)
 
     }
 
 })
 
-app.post("/delete-message/:id", function (request, response) {
+app.get("/update-question/:questionID", function (request, response) {
 
-    const id = request.params.id
+    const questionID = request.params.questionID
+
+    const query = `SELECT * FROM questions WHERE questionID = ?`
+    const values = [questionID]
+
+    db.get(query, values, function (error, question) {
+
+        const model = {
+            question,
+        }
+
+        response.render('update-question.hbs', model)
+
+    })
+
+})
+
+app.post("/update-question/:questionID", function (request, response) {
+
+    const questionID = request.params.questionID
+    const name = request.body.name
+    const email = request.body.email
+    const question = request.body.question
+    const answer = request.body.answer
+    const errorMessages = []
+
+    const date = new Date()
+    date.toISOString().split('T')[0]
+
+    if (!request.session.isLoggedIn) {
+        errorMessages.push("Not logged in.")
+    }
+
+    if (errorMessages.length == 0) {
+
+        const query =
+            `UPDATE questions SET (name, email, question, date) = (?,?,?,?) WHERE questionID = ?`
+
+        const values = [name, email, question, date.toISOString().split('T')[0], questionID]
+
+        db.run(query, values, function (error) {
+
+            if (error) {
+
+                errorMessages.push("Internal Server Error")
+
+                const model = {
+                    errorMessages,
+                    name,
+                    email,
+                    question,
+                    answer,
+                    date
+                }
+
+                response.render('update-question.hbs', model)
+
+            } else {
+
+                response.redirect("/contact")
+
+            }
+
+        })
+
+    } else {
+
+        const model = {
+            errorMessages,
+            name,
+            email,
+            question,
+            answer,
+            date
+        }
+
+        response.render('update-question.hbs', model)
+
+    }
+
+})
+
+app.post("/delete-question/:questionID", function (request, response) {
+
+    const questionID = request.params.questionID
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
@@ -287,8 +378,8 @@ app.post("/delete-message/:id", function (request, response) {
     if (errorMessages == 0) {
 
         const query =
-            `DELETE FROM messages WHERE id = ?`
-        const values = [id]
+            `DELETE FROM questions WHERE questionID = ?`
+        const values = [questionID]
 
         db.run(query, values, function (error) {
 
@@ -344,16 +435,16 @@ app.get('/projects', function (request, response) {
 })
 
 // renders the specific project the user clicks on
-app.get("/projects/:id", function (request, response) {
+app.get("/projects/:projectID", function (request, response) {
 
-    const id = request.params.id
+    const projectID = request.params.projectID
     const errorMessages = []
 
-    const projectQuery = `SELECT * FROM projects WHERE id = ?`
-    const projectValues = [id]
+    const projectQuery = `SELECT * FROM projects WHERE projectID = ?`
+    const projectValues = [projectID]
 
-    const commentQuery = `SELECT * FROM comments WHERE id = ?` // project ID
-    const commentValues = [id]
+    const commentQuery = `SELECT * FROM comments WHERE projectID = ?`
+    const commentValues = [projectID]
 
 
     db.get(projectQuery, projectValues, function (projectError, project) {
@@ -365,7 +456,7 @@ app.get("/projects/:id", function (request, response) {
             const model = {
                 errorMessages,
                 project,
-                id
+                projectID
             }
 
             response.render('project.hbs', model)
@@ -379,7 +470,7 @@ app.get("/projects/:id", function (request, response) {
                     const model = {
                         errorMessages,
                         comments,
-                        id
+                        projectID
                     }
 
                     response.render('project.hbs', model)
@@ -390,7 +481,7 @@ app.get("/projects/:id", function (request, response) {
                         errorMessages,
                         project,
                         comments,
-                        id
+                        projectID
                     }
 
                     response.render('project.hbs', model)
@@ -487,13 +578,13 @@ app.post("/add-project", upload.single("image"), function (request, response) {
 })
 
 
-app.get("/update-project/:id", function (request, response) {
+app.get("/update-project/:projectID", function (request, response) {
 
-    const id = request.params.id
+    const projectID = request.params.projectID
 
     const query =
-        `SELECT * FROM projects WHERE id = ?`
-    const values = [id]
+        `SELECT * FROM projects WHERE projectID = ?`
+    const values = [projectID]
 
     db.get(query, values, function (error, project) {
 
@@ -509,11 +600,11 @@ app.get("/update-project/:id", function (request, response) {
 
 
 // Updates the info && takes the user back to the project page
-app.post("/update-project/:id", function (request, response) {
+app.post("/update-project/:projectID", function (request, response) {
 
     // UPDATE projects SET (title, description, image) = ("Taxi Service app", "The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.","app2unsplash.jpg") WHERE id = 2
 
-    const id = request.params.id
+    const projectID = request.params.projectID
     const title = request.body.title
     const description = request.body.description
     const errorMessages = []
@@ -525,9 +616,9 @@ app.post("/update-project/:id", function (request, response) {
     if (errorMessages.length == 0) {
 
         const query =
-            `UPDATE projects SET (title, description) = (?, ?) WHERE id = ?`
+            `UPDATE projects SET (title, description) = (?, ?) WHERE projectID = ?`
 
-        const values = [title, description, id]
+        const values = [title, description, projectID]
 
         db.run(query, values, function (error) {
 
@@ -566,9 +657,9 @@ app.post("/update-project/:id", function (request, response) {
 })
 
 
-app.post("/delete-project/:id", function (request, response) {
+app.post("/delete-project/:projectID", function (request, response) {
 
-    const id = request.params.id
+    const projectID = request.params.projectID
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
@@ -578,8 +669,8 @@ app.post("/delete-project/:id", function (request, response) {
     if (errorMessages == 0) {
 
         const query =
-            `DELETE FROM projects WHERE id = ?`
-        const values = [id]
+            `DELETE FROM projects WHERE projectID = ?`
+        const values = [projectID]
 
         db.run(query, values, function (error) {
 
@@ -602,27 +693,28 @@ app.post("/delete-project/:id", function (request, response) {
 
 })
 
-app.get("/add-comment/:id", function (request, response) {
+app.get("/add-comment/:projectID", function (request, response) {
 
     const model = {
         project: {
-            id: request.params.id
+            projectID: request.params.projectID
         }
     }
     response.render('add-comment.hbs', model)
 
 })
 
-app.post("/add-comment/:id", function (request, response) {
+app.post("/add-comment/:projectID", function (request, response) {
+
 
     const comment = request.body.comment
-    const id = request.params.id
+    const projectID = request.params.projectID
     const errorMessages = []
 
     const query =
-        `INSERT INTO comments (comment,id) VALUES (?,?)`
+        `INSERT INTO comments (comment,projectID) VALUES (?,?)`
 
-    const values = [comment, id]
+    const values = [comment, projectID]
 
     db.run(query, values, function (error) {
 
@@ -649,27 +741,27 @@ app.post("/add-comment/:id", function (request, response) {
 
 })
 
-app.get("/manage-comment/:cID", function (request, response) {
+app.get("/manage-comment/:commentID", function (request, response) {
 
     const model = {
         comment: {
-            cID: request.params.cID
+            commentID: request.params.commentID
         }
     }
     console.log(model)
-    const cID = request.params.cID
-    console.log(cID)
+    const commentID = request.params.commentID
+    console.log(commentID)
 
     response.render('manage-comment.hbs', model)
 })
 
-app.get("/update-comment/:cID", function (request, response) {
+app.get("/update-comment/:commentID", function (request, response) {
 
-    const cID = request.params.cID
+    const commentID = request.params.commentID
 
     const query =
-        `SELECT * FROM comments WHERE cID = ?`
-    const values = [cID]
+        `SELECT * FROM comments WHERE commentID = ?`
+    const values = [commentID]
 
     db.get(query, values, function (error, comment) {
 
@@ -683,9 +775,9 @@ app.get("/update-comment/:cID", function (request, response) {
 
 })
 
-app.post("/update-comment/:cID", function (request, response) {
+app.post("/update-comment/:commentID", function (request, response) {
 
-    const cID = request.params.cID
+    const commentID = request.params.commentID
     const comment = request.body.comment
     const errorMessages = []
 
@@ -696,9 +788,9 @@ app.post("/update-comment/:cID", function (request, response) {
     if (errorMessages.length == 0) {
 
         const query =
-            `UPDATE comments SET (comment) = (?) WHERE cID = ?`
+            `UPDATE comments SET (comment) = (?) WHERE commentID = ?`
 
-        const values = [comment, cID]
+        const values = [comment, commentID]
 
         db.run(query, values, function (error) {
 
@@ -734,9 +826,9 @@ app.post("/update-comment/:cID", function (request, response) {
 
 })
 
-app.post("/delete-comment/:cID", function (request, response) {
+app.post("/delete-comment/:commentID", function (request, response) {
 
-    const cID = request.params.cID
+    const commentID = request.params.commentID
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
@@ -746,8 +838,8 @@ app.post("/delete-comment/:cID", function (request, response) {
     if (errorMessages == 0) {
 
         const query =
-            `DELETE FROM comments WHERE cID = ?`
-        const values = [cID]
+            `DELETE FROM comments WHERE commentID = ?`
+        const values = [commentID]
 
         db.run(query, values, function (error) {
 

@@ -164,22 +164,22 @@
     font-family: "Superior title", "Times New Roman", sans-serif;
 }
 
-.contact-page-messages {
+.contact-page-question {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.contact-page-messages-title {
+.contact-page-questions-title {
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-decoration: underline;
     color: black;
     font-size: 170%;
 }
 
-.contact-page-messages-ul {
+.contact-page-questions-ul {
     list-style: none;
 }
 
-.contact-page-messages-li {
+.contact-page-questions-li {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -360,7 +360,7 @@
 }
 
 /* MANAGE MESSAGES */
-.manage-messages-section {
+.manage-question-section {
     text-align: center;
     margin-top: 20%;
 }
