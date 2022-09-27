@@ -26,14 +26,14 @@
             {{#each messages}}
             <li class="contact-page-messages-li">
                 <a href="/manage-message/{{id}}">{{this.message}}</a>
-                <p><a href="/manage-message/{{id}}">From: {{this.name}}, {{this.email}}</a></p>
+                <p><a href="/manage-message/{{id}}">From: {{this.name}}, {{this.email}}, {{this.date}}</a></p>
 
             </li>
             {{/each}}
             {{else}}
             {{#each messages}}
             <li class="contact-page-messages-li">{{this.message}}</li>
-            <p>From: {{this.name}}, {{this.email}}</p>
+            <p>From: {{this.name}}, {{this.email}}, {{this.date}}</p>
             {{/each}}
             {{/if}}
         </ul>

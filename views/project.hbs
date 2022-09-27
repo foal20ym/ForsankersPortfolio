@@ -6,12 +6,10 @@
 
     <div class="project-page-comments">
         <h1 class="project-page-comments-title"> Comments and feedback </h1>
-
-
         <ul class="project-page-comments-ul">
             {{#if isLoggedIn}}
             {{#each comments}}
-            <li class="project-page-comments-li"> 
+            <li class="project-page-comments-li">
                 <a href="/manage-comment/{{cID}}">{{this.comment}}</a>
             </li>
             {{/each}}

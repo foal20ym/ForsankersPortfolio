@@ -179,6 +179,12 @@
     list-style: none;
 }
 
+.contact-page-messages-li {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* ABOUT PAGE CONTENT ABOUT PAGE CONTENT ABOUT PAGE CONTENT*/
 .about-page-section {
@@ -293,6 +299,7 @@
     color: black;
     font-size: 170%;
 }
+
 .project-page-image {
     width: 300px;
     height: auto;
@@ -317,24 +324,38 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-/*ADD COMMENT PAGE PLSSSS FIX */
+/* ADD COMMENT*/
 .add-comment-section {
     text-align: center;
     margin-top: 20%;
 }
+
+/* ADD QUESTION */
 .add-question-section {
     text-align: center;
     margin-top: 20%;
 }
+
+/* LOGIN PAGE */
 .login-page-section {
     text-align: center;
     margin-top: 20%;
 }
+
+/* ADD PROJECT*/
 .add-project-section {
     text-align: center;
     margin-top: 20%;
 }
-.center-form {
+
+/* MANAGE COMMENTS */
+.manage-comments-section {
+    text-align: center;
+    margin-top: 20%;
+}
+
+/* MANAGE MESSAGES */
+.manage-messages-section {
     text-align: center;
     margin-top: 20%;
 }

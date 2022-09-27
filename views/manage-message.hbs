@@ -1,7 +1,9 @@
 {{#if isLoggedIn}}
+<section class="manage-messages-section">
     <button> <a class="project-page-update-link" href="/update-message/{{message.id}}">Update message</a> </button>
 
     <form action="/delete-message/{{message.id}}" method="POST">
         <input type="submit" value="Delete Message">
     </form>
+</section>
 {{/if}}

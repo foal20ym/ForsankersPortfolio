@@ -69,7 +69,9 @@ const app = express()
 app.use(express.static('public'))
 
 app.engine('hbs', expressHandlebars.engine({
+
     defaultLayout: 'main.hbs',
+
 }))
 
 app.use(express.static('public'))
@@ -77,23 +79,29 @@ app.use(express.static('public'))
 
 // using the bodyParser 
 app.use(bodyParser.urlencoded({
+
     extended: false
+
 }))
 
 app.use(
+
     expressSession({
         saveUninitialized: false,
         resave: false,
         secret: "yhvsbodiuv"
     })
+
 )
 
 app.use(function (request, response, next) {
+
     const isLoggedIn = request.session.isLoggedIn
 
     response.locals.isLoggedIn = isLoggedIn
 
     next()
+    
 })
 
 // uses and renders the Home page
@@ -118,7 +126,9 @@ app.get('/contact', function (request, response) {
         const errorMessages = []
 
         if (error) {
+
             errorMessages.push("Internal server error")
+            
         }
 
         const model = {
@@ -145,20 +155,27 @@ app.post('/add-message', function (request, response) {
     const message = request.body.message
     const errorMessages = []
 
-    const query =
-        `INSERT INTO messages (name, email, message) VALUES (?, ?, ?)
-        `
+    const date = new Date()
+    date.toISOString().split('T')[0]
 
-    const values = [name, email, message]
+    const query = `INSERT INTO messages (name, email, message, date) VALUES (?, ?, ?, ?)`
+
+    const values = [name, email, message, date.toISOString().split('T')[0]]
 
     db.run(query, values, function (error) {
 
         if (error) {
+
             errorMessages.push("Internal Server Error")
+
         }
+
         else {
+
             response.redirect('/contact')
+
         }
+
     })
 
 })
@@ -166,23 +183,22 @@ app.post('/add-message', function (request, response) {
 app.get("/manage-message/:id", function (request, response) {
 
     const model = {
+
         message: {
             id: request.params.id
         }
+
     }
-    console.log(model)
-    const id = request.params.id
-    console.log(id)
 
     response.render('manage-message.hbs', model)
+
 })
 
 app.get("/update-message/:id", function (request, response) {
 
     const id = request.params.id
 
-    const query =
-        `SELECT * FROM messages WHERE id = ?`
+    const query = `SELECT * FROM messages WHERE id = ?`
     const values = [id]
 
     db.get(query, values, function (error, message) {
@@ -205,6 +221,9 @@ app.post("/update-message/:id", function (request, response) {
     const message = request.body.message
     const errorMessages = []
 
+    const date = new Date()
+    date.toISOString().split('T')[0]
+
     if (!request.session.isLoggedIn) {
         errorMessages.push("Not logged in.")
     }
@@ -212,9 +231,9 @@ app.post("/update-message/:id", function (request, response) {
     if (errorMessages.length == 0) {
 
         const query =
-            `UPDATE messages SET (name, email, message) = (?,?,?) WHERE id = ?`
+            `UPDATE messages SET (name, email, message, date) = (?,?,?,?) WHERE id = ?`
 
-        const values = [name, email, message, id]
+        const values = [name, email, message, date.toISOString().split('T')[0], id]
 
         db.run(query, values, function (error) {
 
@@ -226,7 +245,8 @@ app.post("/update-message/:id", function (request, response) {
                     errorMessages,
                     name,
                     email,
-                    message
+                    message,
+                    date
                 }
 
                 response.render('update-message.hbs', model)
@@ -245,7 +265,8 @@ app.post("/update-message/:id", function (request, response) {
             errorMessages,
             name,
             email,
-            message
+            message,
+            date
         }
 
         response.render('update-message.hbs', model)
