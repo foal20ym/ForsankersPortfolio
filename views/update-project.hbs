@@ -1,4 +1,3 @@
-<h1>Update Project</h1>
 {{#if errorMessages.length}}
 <p>Couldn't update the project because:</p>
 <ul>
@@ -7,7 +6,8 @@
     {{/each}}
 </ul>
 {{/if}}
-<section class="center-form">
+<section class="update-project-section">
+    <h1>Update Project</h1>
     <form method="POST">
         <div>
             <input type="text" name="title" value="{{project.title}}">

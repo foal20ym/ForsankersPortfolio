@@ -350,6 +350,11 @@
 /* ADD PROJECT*/
 .add-project-section {
     text-align: center;
+}
+
+.add-project-head-one{
+    font-family: "Superior title", "Times New Roman", sans-serif;
+    text-align: center;
     margin-top: 20%;
 }
 
@@ -363,6 +368,23 @@
 .manage-question-section {
     text-align: center;
     margin-top: 20%;
+}
+
+/*UPDATE PROJECT*/
+.update-project-section {
+    text-align: center;
+    margin-top: 20%;
+}
+
+/*UPDATE COMMENT*/
+.update-comment-section{
+    text-align: center;
+    margin-top: 20%;
+}
+
+/* ERRORMESSAGE LIST */
+.errormessage-list {
+    list-style: none;
 }
 
 /* LAYOUT BACKGROUND 'ANIMATED'*/

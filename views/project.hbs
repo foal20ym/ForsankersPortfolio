@@ -8,17 +8,17 @@
         <h1 class="project-page-comments-title"> Comments and feedback </h1>
         <ul class="project-page-comments-ul">
             {{#if isLoggedIn}}
-            {{#each comments}}
-            <li class="project-page-comments-li">
-                <a href="/manage-comment/{{commentID}}">{{this.comment}}</a>
-            </li>
-            {{/each}}
-            {{else}}
-            {{#each comments}}
-            <li class="project-page-comments-li">{{this.comment}}</li>
-            {{/each}}
+                {{#each comments}}
+                <li class="project-page-comments-li">
+                    <a href="/manage-comment/{{commentID}}">{{this.comment}}</a>
+                </li>
+                {{/each}}
+                {{else}}
+                {{#each comments}}
+                    <li class="project-page-comments-li">{{this.comment}}</li>
+                {{/each}}
             {{/if}}
-        </ul>
+         </ul>
     </div>
 
     {{#if isLoggedIn}}
@@ -28,6 +28,7 @@
         <input type="submit" value="Delete Project">
     </form>
     {{/if}}
+
     <button> <a class="project-page-update-link" href="/add-comment/{{project.projectID}}">Add comment</a> </button>
 
     {{else}}
