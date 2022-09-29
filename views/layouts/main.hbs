@@ -21,8 +21,12 @@
   <header class="navbar">
     <section class="navbar-section">
       <a href="/" class="btn btn-link">Home</a>
+      {{#unless isLoggedIn}}
       <a href="/login" class="btn btn-link"> Login</a>
-
+      {{/unless}}
+      {{#if isLoggedIn}}
+      <a href="/logout" class="btn btn-link"> Logout</a>
+      {{/if}}
     </section>
     <section class="navbar-center">
       <!-- centered logo or brand -->

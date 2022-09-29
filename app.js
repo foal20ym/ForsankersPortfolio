@@ -9,11 +9,11 @@ const MAX_TITLE_LENGTH = 40
 const MIN_TITLE_LENGTH = 6
 const MAX_DESCRIPTION_LENTGH = 255
 const MIN_DESCRIPTION_LENTGH = 6
-const ADMIN_USERNAME = "Alice"
-const ADMIN_PASSOWRD = "abc123"
+const ADMIN_USERNAME = 'Alice'
+const ADMIN_PASSOWRD = 'abc123'
 
 
-const db = new sqlite3.Database("portfolio-database.db")
+const db = new sqlite3.Database('portfolio-database.db')
 
 db.run(`
     CREATE TABLE IF NOT EXISTS projects (
@@ -45,13 +45,13 @@ db.run(`
 `)
 
 
-const multer = require("multer")
+const multer = require('multer')
 const { response } = require('express')
 const { request } = require('http')
 const { nextTick } = require('process')
 const storage = multer.diskStorage({
     destination: (request, file, cb) => {
-        cb(null, "public")
+        cb(null, 'public')
     },
     filename: (request, file, cb) => {
         const fileName = Date.now() + path.extname(file.originalname)
@@ -91,7 +91,7 @@ app.use(
     expressSession({
         saveUninitialized: false,
         resave: false,
-        secret: "yhvsbodiuv"
+        secret: 'yhvsbodiuv'
     })
 
 )
@@ -129,7 +129,7 @@ app.get('/contact', function (request, response) {
 
         if (error) {
 
-            errorMessages.push("Internal server error")
+            errorMessages.push('Internal server error')
             
         }
 
@@ -144,7 +144,7 @@ app.get('/contact', function (request, response) {
 
 })
 
-app.get("/add-question", function (request, response) {
+app.get('/add-question', function (request, response) {
 
     response.render('add-question.hbs')
 
@@ -169,7 +169,7 @@ app.post('/add-question', function (request, response) {
 
         if (error) {
 
-            errorMessages.push("Internal Server Error")
+            errorMessages.push('Internal Server Error')
             response.redirect('/')
 
         }
@@ -184,7 +184,7 @@ app.post('/add-question', function (request, response) {
 
 })
 
-app.get("/manage-question/:questionID", function (request, response) {
+app.get('/manage-question/:questionID', function (request, response) {
 
     const model = {
 
@@ -198,7 +198,7 @@ app.get("/manage-question/:questionID", function (request, response) {
 
 })
 
-app.get("/answer-question/:questionID", function (request, response) {
+app.get('/answer-question/:questionID', function (request, response) {
 
     const questionID = request.params.questionID
 
@@ -217,7 +217,7 @@ app.get("/answer-question/:questionID", function (request, response) {
 
 })
 
-app.post("/answer-question/:questionID", function (request, response) {
+app.post('/answer-question/:questionID', function (request, response) {
 
     const questionID = request.params.questionID
     const name = request.body.name
@@ -230,7 +230,7 @@ app.post("/answer-question/:questionID", function (request, response) {
     date.toISOString().split('T')[0]
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages.length == 0) {
@@ -244,7 +244,7 @@ app.post("/answer-question/:questionID", function (request, response) {
 
             if (error) {
 
-                errorMessages.push("Internal Server Error")
+                errorMessages.push('Internal Server Error')
 
                 const model = {
                     errorMessages,
@@ -259,7 +259,7 @@ app.post("/answer-question/:questionID", function (request, response) {
 
             } else {
 
-                response.redirect("/contact")
+                response.redirect('/contact')
 
             }
 
@@ -282,7 +282,7 @@ app.post("/answer-question/:questionID", function (request, response) {
 
 })
 
-app.get("/update-question/:questionID", function (request, response) {
+app.get('/update-question/:questionID', function (request, response) {
 
     const questionID = request.params.questionID
 
@@ -301,7 +301,7 @@ app.get("/update-question/:questionID", function (request, response) {
 
 })
 
-app.post("/update-question/:questionID", function (request, response) {
+app.post('/update-question/:questionID', function (request, response) {
 
     const questionID = request.params.questionID
     const name = request.body.name
@@ -314,7 +314,7 @@ app.post("/update-question/:questionID", function (request, response) {
     date.toISOString().split('T')[0]
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages.length == 0) {
@@ -328,7 +328,7 @@ app.post("/update-question/:questionID", function (request, response) {
 
             if (error) {
 
-                errorMessages.push("Internal Server Error")
+                errorMessages.push('Internal Server Error')
 
                 const model = {
                     errorMessages,
@@ -343,7 +343,7 @@ app.post("/update-question/:questionID", function (request, response) {
 
             } else {
 
-                response.redirect("/contact")
+                response.redirect('/contact')
 
             }
 
@@ -366,13 +366,13 @@ app.post("/update-question/:questionID", function (request, response) {
 
 })
 
-app.post("/delete-question/:questionID", function (request, response) {
+app.post('/delete-question/:questionID', function (request, response) {
 
     const questionID = request.params.questionID
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages == 0) {
@@ -384,12 +384,12 @@ app.post("/delete-question/:questionID", function (request, response) {
         db.run(query, values, function (error) {
 
             if (error) {
-                errorMessages.push("Internal Server Error")
-                response.redirect("/login")
+                errorMessages.push('Internal Server Error')
+                response.redirect('/login')
             }
 
             else {
-                response.redirect("/contact")
+                response.redirect('/contact')
             }
 
         })
@@ -397,7 +397,7 @@ app.post("/delete-question/:questionID", function (request, response) {
     }
 
     else {
-        response.redirect("/")
+        response.redirect('/')
     }
 
 })
@@ -420,7 +420,7 @@ app.get('/projects', function (request, response) {
         const errorMessages = []
 
         if (error) {
-            errorMessages.push("Internal server error")
+            errorMessages.push('Internal server error')
         }
 
         const model = {
@@ -435,7 +435,7 @@ app.get('/projects', function (request, response) {
 })
 
 // renders the specific project the user clicks on
-app.get("/projects/:projectID", function (request, response) {
+app.get('/projects/:projectID', function (request, response) {
 
     const projectID = request.params.projectID
     const errorMessages = []
@@ -451,7 +451,7 @@ app.get("/projects/:projectID", function (request, response) {
 
         if (projectError) {
 
-            errorMessages.push("projectError")
+            errorMessages.push('projectError')
 
             const model = {
                 errorMessages,
@@ -466,7 +466,7 @@ app.get("/projects/:projectID", function (request, response) {
             db.all(commentQuery, commentValues, function (commentError, comments) {
                 if (commentError) {
 
-                    errorMessages.push("commentError")
+                    errorMessages.push('commentError')
                     const model = {
                         errorMessages,
                         comments,
@@ -493,14 +493,14 @@ app.get("/projects/:projectID", function (request, response) {
 })
 
 // renders the Add Project page
-app.get("/add-project", function (request, response) {
+app.get('/add-project', function (request, response) {
 
     response.render('add-project.hbs')
 
 })
 
 // posts projects to the Add Projects page.
-app.post("/add-project", upload.single("image"), function (request, response) {
+app.post('/add-project', upload.single('image'), function (request, response) {
 
     const image = request.filePath
     const title = request.body.title
@@ -528,7 +528,7 @@ app.post("/add-project", upload.single("image"), function (request, response) {
     }
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages.length == 0) {
@@ -542,7 +542,7 @@ app.post("/add-project", upload.single("image"), function (request, response) {
 
             if (error) {
 
-                errorMessages.push("Internal server error")
+                errorMessages.push('Internal server error')
 
                 const model = {
                     errorMessages,
@@ -556,7 +556,7 @@ app.post("/add-project", upload.single("image"), function (request, response) {
 
             else {
 
-                response.redirect("/projects")
+                response.redirect('/projects')
 
             }
 
@@ -578,7 +578,7 @@ app.post("/add-project", upload.single("image"), function (request, response) {
 })
 
 
-app.get("/update-project/:projectID", function (request, response) {
+app.get('/update-project/:projectID', function (request, response) {
 
     const projectID = request.params.projectID
 
@@ -600,9 +600,9 @@ app.get("/update-project/:projectID", function (request, response) {
 
 
 // Updates the info && takes the user back to the project page
-app.post("/update-project/:projectID", function (request, response) {
+app.post('/update-project/:projectID', function (request, response) {
 
-    // UPDATE projects SET (title, description, image) = ("Taxi Service app", "The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.","app2unsplash.jpg") WHERE id = 2
+    // UPDATE projects SET (title, description, image) = ('Taxi Service app', 'The app was made for the company Lyft. I was very inexperienced as a developer at the time and i did learn a lot of new technologies and skills such as Java and React.','app2unsplash.jpg') WHERE id = 2
 
     const projectID = request.params.projectID
     const title = request.body.title
@@ -610,7 +610,7 @@ app.post("/update-project/:projectID", function (request, response) {
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages.length == 0) {
@@ -624,7 +624,7 @@ app.post("/update-project/:projectID", function (request, response) {
 
             if (error) {
 
-                errorMessages.push("Internal Server Error")
+                errorMessages.push('Internal Server Error')
 
                 const model = {
                     errorMessages,
@@ -636,7 +636,7 @@ app.post("/update-project/:projectID", function (request, response) {
 
             } else {
 
-                response.redirect("/projects")
+                response.redirect('/projects')
 
             }
 
@@ -657,13 +657,13 @@ app.post("/update-project/:projectID", function (request, response) {
 })
 
 
-app.post("/delete-project/:projectID", function (request, response) {
+app.post('/delete-project/:projectID', function (request, response) {
 
     const projectID = request.params.projectID
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages == 0) {
@@ -675,12 +675,12 @@ app.post("/delete-project/:projectID", function (request, response) {
         db.run(query, values, function (error) {
 
             if (error) {
-                errorMessages.push("Internal Server Error")
-                response.redirect("/login")
+                errorMessages.push('Internal Server Error')
+                response.redirect('/login')
             }
 
             else {
-                response.redirect("/projects")
+                response.redirect('/projects')
             }
 
         })
@@ -688,12 +688,12 @@ app.post("/delete-project/:projectID", function (request, response) {
     }
 
     else {
-        response.redirect("/login")
+        response.redirect('/login')
     }
 
 })
 
-app.get("/add-comment/:projectID", function (request, response) {
+app.get('/add-comment/:projectID', function (request, response) {
 
     const model = {
         project: {
@@ -704,7 +704,7 @@ app.get("/add-comment/:projectID", function (request, response) {
 
 })
 
-app.post("/add-comment/:projectID", function (request, response) {
+app.post('/add-comment/:projectID', function (request, response) {
 
 
     const comment = request.body.comment
@@ -721,7 +721,7 @@ app.post("/add-comment/:projectID", function (request, response) {
         if (error) {
 
             console.log(error)
-            errorMessages.push("Internal server error")
+            errorMessages.push('Internal server error')
 
             const model = {
                 errorMessages,
@@ -741,7 +741,7 @@ app.post("/add-comment/:projectID", function (request, response) {
 
 })
 
-app.get("/manage-comment/:commentID", function (request, response) {
+app.get('/manage-comment/:commentID', function (request, response) {
 
     const model = {
         comment: {
@@ -755,7 +755,7 @@ app.get("/manage-comment/:commentID", function (request, response) {
     response.render('manage-comment.hbs', model)
 })
 
-app.get("/update-comment/:commentID", function (request, response) {
+app.get('/update-comment/:commentID', function (request, response) {
 
     const commentID = request.params.commentID
 
@@ -775,14 +775,14 @@ app.get("/update-comment/:commentID", function (request, response) {
 
 })
 
-app.post("/update-comment/:commentID", function (request, response) {
+app.post('/update-comment/:commentID', function (request, response) {
 
     const commentID = request.params.commentID
     const comment = request.body.comment
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages.length == 0) {
@@ -796,7 +796,7 @@ app.post("/update-comment/:commentID", function (request, response) {
 
             if (error) {
 
-                errorMessages.push("Internal Server Error")
+                errorMessages.push('Internal Server Error')
 
                 const model = {
                     errorMessages,
@@ -807,7 +807,7 @@ app.post("/update-comment/:commentID", function (request, response) {
 
             } else {
 
-                response.redirect("/projects")
+                response.redirect('/projects')
 
             }
 
@@ -826,13 +826,13 @@ app.post("/update-comment/:commentID", function (request, response) {
 
 })
 
-app.post("/delete-comment/:commentID", function (request, response) {
+app.post('/delete-comment/:commentID', function (request, response) {
 
     const commentID = request.params.commentID
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
-        errorMessages.push("Not logged in.")
+        errorMessages.push('Not logged in.')
     }
 
     if (errorMessages == 0) {
@@ -844,12 +844,12 @@ app.post("/delete-comment/:commentID", function (request, response) {
         db.run(query, values, function (error) {
 
             if (error) {
-                errorMessages.push("Internal Server Error")
-                response.redirect("/login")
+                errorMessages.push('Internal Server Error')
+                response.redirect('/login')
             }
 
             else {
-                response.redirect("/projects")
+                response.redirect('/projects')
             }
 
         })
@@ -857,18 +857,18 @@ app.post("/delete-comment/:commentID", function (request, response) {
     }
 
     else {
-        response.redirect("/")
+        response.redirect('/')
     }
 
 })
 
-app.get("/login", function (request, response) {
+app.get('/login', function (request, response) {
 
     response.render('login.hbs')
 
 })
 
-app.post("/login", function (request, response) {
+app.post('/login', function (request, response) {
     const username = request.body.username
     const password = request.body.password
 
@@ -888,6 +888,13 @@ app.post("/login", function (request, response) {
         response.render('login.hbs', model)
 
     }
+
+})
+
+app.get('/logout', function (request, response) {
+
+    request.session.isLoggedIn = false
+    response.redirect('/')
 
 })
 
