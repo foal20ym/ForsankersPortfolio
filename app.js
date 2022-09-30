@@ -6,12 +6,19 @@ const sqlite3 = require('sqlite3')
 const expressSession = require('express-session')
 const SQLiteStore = require('connect-sqlite3')(expressSession)
 
+// Encryption 
+const bcrypt = require('bcrypt')
+const saltRounds = 10
+const ADMIN_USERNAME = 'Alice'
+const ADMIN_PASSOWRD = '$2b$10$VasTmOYbHU9agU4.0XwS8uRnxnNqo/R8Z5OZy2UxSsYEUxEQ848Ga'
+// abc123
+// Hasha detta, sen ta bort det som står nu (abc123) och ersätt 
+// det med det hadhade som står i console.log(hash)
+
 const MAX_TITLE_LENGTH = 40
 const MIN_TITLE_LENGTH = 6
 const MAX_DESCRIPTION_LENTGH = 255
 const MIN_DESCRIPTION_LENTGH = 6
-const ADMIN_USERNAME = 'Alice'
-const ADMIN_PASSOWRD = 'abc123'
 
 const db = new sqlite3.Database('portfolio-database.db')
 
@@ -44,6 +51,7 @@ db.run(`
     )
 `)
 
+
 const multer = require('multer')
 const { response } = require('express')
 const { request } = require('http')
@@ -53,7 +61,7 @@ const { Store } = require('express-session')
 
 
 const storage = multer.diskStorage({
-    
+
     destination: (request, file, cb) => {
         cb(null, 'public')
     },
@@ -923,24 +931,39 @@ app.get('/login', function (request, response) {
 
 app.post('/login', function (request, response) {
     const username = request.body.username
-    const password = request.body.password
+    //const password = request.body.password
 
-    if (username == ADMIN_USERNAME && password == ADMIN_PASSOWRD) {
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(ADMIN_PASSOWRD, salt, function (err, hash) {
+            console.log("HASH")
+            console.log("PASSWORD: " + ADMIN_PASSOWRD)
+            console.log("Salt: "+ salt)
+            console.log("Hash: "+ hash)
 
-        request.session.isLoggedIn = true
+            bcrypt.compare(ADMIN_PASSOWRD, hash, function (err, result) {
+                console.log("COMPARE")
+                console.log("PASSWORD: " + ADMIN_PASSOWRD )
+                console.log("Result: "+result)
 
-        response.redirect('/')
+                if (username == ADMIN_USERNAME && (result)) {
 
-    }
-    else {
+                    request.session.isLoggedIn = true
 
-        const model = {
-            failedToLogin: true
-        }
+                    response.redirect('/')
 
-        response.render('login.hbs', model)
+                }
+                else {
 
-    }
+                    const model = {
+                        failedToLogin: true
+                    }
+
+                    response.render('login.hbs', model)
+
+                }
+            })
+        })
+    })
 
 })
 
