@@ -49,6 +49,7 @@ const multer = require('multer')
 const { response } = require('express')
 const { request } = require('http')
 const { nextTick } = require('process')
+const session = require('express-session')
 const storage = multer.diskStorage({
     destination: (request, file, cb) => {
         cb(null, 'public')
@@ -103,7 +104,7 @@ app.use(function (request, response, next) {
     response.locals.isLoggedIn = isLoggedIn
 
     next()
-    
+
 })
 
 // uses and renders the Home page
@@ -130,7 +131,7 @@ app.get('/contact', function (request, response) {
         if (error) {
 
             errorMessages.push('Internal server error')
-            
+
         }
 
         const model = {
@@ -186,34 +187,49 @@ app.post('/add-question', function (request, response) {
 
 app.get('/manage-question/:questionID', function (request, response) {
 
-    const model = {
+    if (request.session.isLoggedIn) {
+        const model = {
 
-        question: {
-            questionID: request.params.questionID
+            question: {
+                questionID: request.params.questionID
+            }
+
         }
+
+        response.render('manage-question.hbs', model)
+
+    } else {
+
+        response.redirect('/login')
 
     }
 
-    response.render('manage-question.hbs', model)
 
 })
 
 app.get('/answer-question/:questionID', function (request, response) {
 
-    const questionID = request.params.questionID
+    if (request.session.isLoggedIn) {
+        const questionID = request.params.questionID
 
-    const query = `SELECT * FROM questions WHERE questionID = ?`
-    const values = [questionID]
+        const query = `SELECT * FROM questions WHERE questionID = ?`
+        const values = [questionID]
 
-    db.get(query, values, function (error, question) {
+        db.get(query, values, function (error, question) {
 
-        const model = {
-            question,
-        }
+            const model = {
+                question,
+            }
 
-        response.render('answer-question.hbs', model)
+            response.render('answer-question.hbs', model)
 
-    })
+        })
+
+    } else {
+
+        response.redirect('/login')
+
+    }
 
 })
 
@@ -284,20 +300,27 @@ app.post('/answer-question/:questionID', function (request, response) {
 
 app.get('/update-question/:questionID', function (request, response) {
 
-    const questionID = request.params.questionID
+    if (request.session.isLoggedIn) {
+        const questionID = request.params.questionID
 
-    const query = `SELECT * FROM questions WHERE questionID = ?`
-    const values = [questionID]
+        const query = `SELECT * FROM questions WHERE questionID = ?`
+        const values = [questionID]
 
-    db.get(query, values, function (error, question) {
+        db.get(query, values, function (error, question) {
 
-        const model = {
-            question,
-        }
+            const model = {
+                question,
+            }
 
-        response.render('update-question.hbs', model)
+            response.render('update-question.hbs', model)
 
-    })
+        })
+
+    } else {
+
+        response.redirect('/login')
+
+    }
 
 })
 
@@ -495,7 +518,15 @@ app.get('/projects/:projectID', function (request, response) {
 // renders the Add Project page
 app.get('/add-project', function (request, response) {
 
-    response.render('add-project.hbs')
+    if (request.session.isLoggedIn) {
+
+        response.render('add-project.hbs')
+
+    } else {
+
+        response.redirect('/login')
+
+    }
 
 })
 
@@ -580,21 +611,28 @@ app.post('/add-project', upload.single('image'), function (request, response) {
 
 app.get('/update-project/:projectID', function (request, response) {
 
-    const projectID = request.params.projectID
+    if (request.session.isLoggedIn) {
+        const projectID = request.params.projectID
 
-    const query =
-        `SELECT * FROM projects WHERE projectID = ?`
-    const values = [projectID]
+        const query =
+            `SELECT * FROM projects WHERE projectID = ?`
+        const values = [projectID]
 
-    db.get(query, values, function (error, project) {
+        db.get(query, values, function (error, project) {
 
-        const model = {
-            project,
-        }
+            const model = {
+                project,
+            }
 
-        response.render('update-project.hbs', model)
+            response.render('update-project.hbs', model)
 
-    })
+        })
+
+    } else {
+
+        response.redirect('/login')
+
+    }
 
 })
 
@@ -720,7 +758,6 @@ app.post('/add-comment/:projectID', function (request, response) {
 
         if (error) {
 
-            console.log(error)
             errorMessages.push('Internal server error')
 
             const model = {
@@ -743,35 +780,47 @@ app.post('/add-comment/:projectID', function (request, response) {
 
 app.get('/manage-comment/:commentID', function (request, response) {
 
-    const model = {
-        comment: {
-            commentID: request.params.commentID
+    if (request.session.isLoggedIn) {
+        const model = {
+            comment: {
+                commentID: request.params.commentID
+            }
         }
-    }
-    console.log(model)
-    const commentID = request.params.commentID
-    console.log(commentID)
 
-    response.render('manage-comment.hbs', model)
+        response.render('manage-comment.hbs', model)
+
+    } else {
+
+        response.redirect('/login')
+
+    }
+
 })
 
 app.get('/update-comment/:commentID', function (request, response) {
 
-    const commentID = request.params.commentID
+    if (request.session.isLoggedIn) {
+        const commentID = request.params.commentID
 
-    const query =
-        `SELECT * FROM comments WHERE commentID = ?`
-    const values = [commentID]
+        const query =
+            `SELECT * FROM comments WHERE commentID = ?`
+        const values = [commentID]
 
-    db.get(query, values, function (error, comment) {
+        db.get(query, values, function (error, comment) {
 
-        const model = {
-            comment,
-        }
+            const model = {
+                comment,
+            }
 
-        response.render('update-comment.hbs', model)
+            response.render('update-comment.hbs', model)
 
-    })
+        })
+
+    } else {
+
+        response.redirect('/login')
+
+    }
 
 })
 
@@ -891,7 +940,7 @@ app.post('/login', function (request, response) {
 
 })
 
-app.get('/logout', function (request, response) {
+app.post('/logout', function (request, response) {
 
     request.session.isLoggedIn = false
     response.redirect('/')

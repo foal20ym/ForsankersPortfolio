@@ -13,6 +13,20 @@
     text-decoration-thickness: 3px;
 }
 
+.logout-button {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+    color: black;
+    text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+}
+
 /* HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT */
 .home-page-section {
     -webkit-font-smoothing: antialiased;
@@ -344,7 +358,7 @@
 
 .login-page-head-one {
     text-align: center;
-    
+
 }
 
 /* ADD PROJECT*/
@@ -352,7 +366,7 @@
     text-align: center;
 }
 
-.add-project-head-one{
+.add-project-head-one {
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-align: center;
     margin-top: 20%;
@@ -377,7 +391,7 @@
 }
 
 /*UPDATE COMMENT*/
-.update-comment-section{
+.update-comment-section {
     text-align: center;
     margin-top: 20%;
 }
@@ -386,6 +400,7 @@
 .errormessage-list {
     list-style: none;
 }
+
 
 /* LAYOUT BACKGROUND 'ANIMATED'*/
 .animatedwrapper {
