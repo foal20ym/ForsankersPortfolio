@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const sqlite3 = require('sqlite3')
 const expressSession = require('express-session')
+const SQLiteStore = require('connect-sqlite3')(expressSession)
 
 const MAX_TITLE_LENGTH = 40
 const MIN_TITLE_LENGTH = 6
@@ -11,7 +12,6 @@ const MAX_DESCRIPTION_LENTGH = 255
 const MIN_DESCRIPTION_LENTGH = 6
 const ADMIN_USERNAME = 'Alice'
 const ADMIN_PASSOWRD = 'abc123'
-
 
 const db = new sqlite3.Database('portfolio-database.db')
 
@@ -44,13 +44,16 @@ db.run(`
     )
 `)
 
-
 const multer = require('multer')
 const { response } = require('express')
 const { request } = require('http')
 const { nextTick } = require('process')
 const session = require('express-session')
+const { Store } = require('express-session')
+
+
 const storage = multer.diskStorage({
+    
     destination: (request, file, cb) => {
         cb(null, 'public')
     },
@@ -92,7 +95,8 @@ app.use(
     expressSession({
         saveUninitialized: false,
         resave: false,
-        secret: 'yhvsbodiuv'
+        secret: 'yhvsbodiuv',
+        store: new SQLiteStore()
     })
 
 )
