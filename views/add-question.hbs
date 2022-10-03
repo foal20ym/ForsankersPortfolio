@@ -1,3 +1,11 @@
+{{#if errorMessages.length}}
+<p>Couldn't add question bacause: </p>
+<ul>
+    {{#each errorMessages}}
+    <li> {{this}} </li>
+    {{/each}}
+</ul>
+{{/if}}
 <section class="add-question-section">
 <h1>Add question</h1>
     <form method="POST" action="/add-question">
