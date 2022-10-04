@@ -351,10 +351,4 @@ router.post('/delete-project/:projectID', function (request, response) {
 
 })
 
-/*
-// ANVÄND DESSA I DIN APP.JS FIL OM DU VILL KÖRA ROUTER GREJER
-//const projectRouter = require('./routers/project-router')
-// app.use(projectRouter)
-//app.use('/projects', projectRouter) */
-
 module.exports = router

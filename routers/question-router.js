@@ -7,6 +7,7 @@ const MIN_QUESTION_LENGTH = 5
 const MAX_ANSWER_LENGTH = 255
 const MIN_ANSWER_LENGTH = 5
 
+
 // uses and renders the Contact page
 router.get('/contact', function (request, response) {
 
@@ -211,6 +212,7 @@ router.post('/answer-question/:questionID', function (request, response) {
         })
 
     } else {
+        
         if (request.session.isLoggedIn) {
             const questionID = request.params.questionID
 
@@ -272,8 +274,6 @@ router.post('/update-question/:questionID', function (request, response) {
     const question = request.body.question
     const answer = request.body.answer
     const errorMessages = []
-    const date = new Date()
-    date.toISOString().split('T')[0]
 
     if (!request.session.isLoggedIn) {
         errorMessages.push('Not logged in.')
@@ -306,9 +306,9 @@ router.post('/update-question/:questionID', function (request, response) {
     if (errorMessages.length == 0) {
 
         const query =
-            `UPDATE questions SET (name, email, question, date) = (?,?,?,?) WHERE questionID = ?`
+            `UPDATE questions SET (name, email, question) = (?,?,?) WHERE questionID = ?`
 
-        const values = [name, email, question, date.toISOString().split('T')[0], questionID]
+        const values = [name, email, question, questionID]
 
         db.run(query, values, function (error) {
 
