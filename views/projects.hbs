@@ -1,11 +1,4 @@
-{{#if errorMessages.length}}
-<p>Couldn't fetch the projects because: </p>
-<ul>
-    {{#each errorMessages}}
-    <li>{{this}}</li>
-    {{/each}}
-</ul>
-{{else}}
+{{> errors }}
 {{#if projects.length}}
 <section class="projects-page-section">
     <div class="projects-page-row">
@@ -27,5 +20,4 @@
 </section>
 {{else}}
 <p> There is currently no projects to display. </p>
-{{/if}}
 {{/if}}

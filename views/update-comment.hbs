@@ -1,11 +1,4 @@
-{{#if errorMessages.length}}
-<p>Couldn't update the comment because:</p>
-<ul>
-    {{#each errorMessages}}
-    <li>{{this}}</li>
-    {{/each}}
-</ul>
-{{/if}}
+{{> errors }}
 <section class="update-comment-section">
     <h1>Update Comment</h1>
     <form method="POST">

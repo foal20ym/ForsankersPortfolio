@@ -1,11 +1,4 @@
-{{#if errorMessages.length}}
-<p>Couln't add the question because:</p>
-<ul>
-    {{#each errorMessages}}
-    <li> {{this}} </li>
-    {{/each}}
-</ul>
-{{/if}}
+{{> errors }}
 <section class="contact-page-section">
     <div>
         Phone: 070 123 45 67

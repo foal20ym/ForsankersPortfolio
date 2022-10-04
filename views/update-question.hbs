@@ -1,12 +1,5 @@
-{{#if errorMessages.length}}
-<p>Couldn't update the question because:</p>
-<ul class="errormessage-list">
-    {{#each errorMessages}}
-    <li>{{this}}</li>
-    {{/each}}
-</ul>
-{{/if}}
-<section class="center-form">
+{{> errors }}
+<section class="update-question-section">
     <h1>Update Question</h1>
     <form method="POST">
         <div>

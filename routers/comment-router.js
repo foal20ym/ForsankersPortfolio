@@ -13,18 +13,18 @@ router.get('/add-comment/:projectID', function (request, response) {
             projectID: request.params.projectID
         }
     }
+
     response.render('add-comment.hbs', model)
 
 })
 
 router.post('/add-comment/:projectID', function (request, response) {
 
-
     const comment = request.body.comment
     const projectID = request.params.projectID
     const errorMessages = []
 
-    if (comment == "") {
+    if (comment.length == 0) {
         errorMessages.push("Comment can't be empty")
     }
     else if (comment.length < MIN_COMMENT_LENGTH) {
@@ -67,7 +67,10 @@ router.post('/add-comment/:projectID', function (request, response) {
 
         const model = {
             errorMessages,
-            comment
+            comment,
+            project: {
+                projectID: request.params.projectID
+            }
         }
 
         response.render('add-comment.hbs', model)
@@ -131,6 +134,15 @@ router.post('/update-comment/:commentID', function (request, response) {
     if (!request.session.isLoggedIn) {
         errorMessages.push('Not logged in.')
     }
+    if (comment.length == 0) {
+        errorMessages.push("Comment can't be empty")
+    }
+    else if (comment.length < MIN_COMMENT_LENGTH) {
+        errorMessages.push("Comment can't be less than " + MIN_COMMENT_LENGTH + " characters long.")
+    }
+    else if (MAX_COMMENT_LENGTH < comment.length) {
+        errorMessages.push("Comment can't be more than " + MAX_COMMENT_LENGTH + " characters long.")
+    }
 
     if (errorMessages.length == 0) {
 
@@ -162,12 +174,29 @@ router.post('/update-comment/:commentID', function (request, response) {
 
     } else {
 
-        const model = {
-            errorMessages,
-            comment
-        }
+        if (request.session.isLoggedIn) {
+            const commentID = request.params.commentID
 
-        response.render('update-comment.hbs', model)
+            const query =
+                `SELECT * FROM comments WHERE commentID = ?`
+            const values = [commentID]
+
+            db.get(query, values, function (error, comment) {
+
+                const model = {
+                    errorMessages,
+                    comment,
+                }
+
+                response.render('update-comment.hbs', model)
+
+            })
+
+        } else {
+
+            response.redirect('/login')
+
+        }
 
     }
 

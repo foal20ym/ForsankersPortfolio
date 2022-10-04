@@ -1,13 +1,6 @@
-{{#if errorMessages.length}}
-<p>Couldn't create the projects for unknown reasons</p>
-<ul>
-    {{#each errorMessages}}
-    <li> {{this}} </li>
-    {{/each}}
-</ul>
-{{/if}}
+{{> errors }}
 <section class="add-project-section">
-    <h1 class="add-project-head-one">Add Project</h1>
+    <h1 class="standard-rubric">Add Project</h1>
     <form method="POST" action="/add-project" enctype="multipart/form-data">
         <div>
             <input type="file" name="image">

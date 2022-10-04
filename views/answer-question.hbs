@@ -1,13 +1,6 @@
-{{#if errorMessages.length}}
-<p>Couldn't answer the question because:</p>
-<ul>
-    {{#each errorMessages}}
-    <li>{{this}}</li>
-    {{/each}}
-</ul>
-{{/if}}
-<section class="center-form">
-    <h1>Answer question</h1>
+{{> errors }}
+<section class="answer-question-section">
+    <h1 class="standard-rubric">Answer question</h1>
     <form method="POST">
         <div>
             {{question.question}}

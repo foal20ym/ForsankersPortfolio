@@ -1,11 +1,4 @@
-{{#if errorMessages.length}}
-<p>Couldn't add comment bacause: </p>
-<ul>
-    {{#each errorMessages}}
-    <li> {{this}} </li>
-    {{/each}}
-</ul>
-{{/if}}
+{{> errors }}
 <section class="add-comment-section">
 <form action="/add-comment/{{project.projectID}}" method="POST">
     <div class="form-group">

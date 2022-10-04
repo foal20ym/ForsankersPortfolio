@@ -3,6 +3,10 @@ const router = express.Router()
 const path = require('path')
 const sqlite3 = require('sqlite3')
 const db = new sqlite3.Database('portfolio-database.db')
+const MAX_DESCRIPTION_LENGTH = 255
+const MIN_DESCRIPTION_LENGTH = 10
+const MAX_TITLE_LENGTH = 30
+const MIN_TITLE_LENGTH = 4
 
 const multer = require('multer')
 const storage = multer.diskStorage({
@@ -122,7 +126,7 @@ router.post('/add-project', upload.single('image'), function (request, response)
     const description = request.body.description
     const errorMessages = []
 
-    if (title == "") {
+    if (title.length == 0) {
         errorMessages.push("Title can't be null")
     }
     else if (MAX_TITLE_LENGTH < title.length) {
@@ -132,14 +136,14 @@ router.post('/add-project', upload.single('image'), function (request, response)
         errorMessages.push("Title can't be less than " + MIN_TITLE_LENGTH + " characters long.")
     }
 
-    if (description == "") {
+    if (description.length == 0) {
         errorMessages.push("Description can't be null")
     }
-    else if (MAX_DESCRIPTION_LENTGH < description.length) {
-        errorMessages.push("Description can't be more than " + MAX_DESCRIPTION_LENTGH + " characters long.")
+    else if (MAX_DESCRIPTION_LENGTH < description.length) {
+        errorMessages.push("Description can't be more than " + MAX_DESCRIPTION_LENGTH + " characters long.")
     }
-    else if (description.length < MIN_DESCRIPTION_LENTGH) {
-        errorMessages.push("Description can't be less than " + MIN_DESCRIPTION_LENTGH + " characters long.")
+    else if (description.length < MIN_DESCRIPTION_LENGTH) {
+        errorMessages.push("Description can't be less than " + MIN_DESCRIPTION_LENGTH + " characters long.")
     }
 
     if (!request.session.isLoggedIn) {
@@ -186,7 +190,7 @@ router.post('/add-project', upload.single('image'), function (request, response)
             image
         }
 
-        response.render('add-projects.hbs', model)
+        response.render('add-project.hbs', model)
 
     }
 
@@ -220,8 +224,6 @@ router.get('/update-project/:projectID', function (request, response) {
 
 })
 
-
-// Updates the info && takes the user back to the project page
 router.post('/update-project/:projectID', function (request, response) {
 
     const projectID = request.params.projectID
@@ -231,6 +233,26 @@ router.post('/update-project/:projectID', function (request, response) {
 
     if (!request.session.isLoggedIn) {
         errorMessages.push('Not logged in.')
+    }
+
+    if (title.length == 0) {
+        errorMessages.push("Title can't be null")
+    }
+    else if (MAX_TITLE_LENGTH < title.length) {
+        errorMessages.push("Title can't be more than " + MAX_TITLE_LENGTH + " characters long.")
+    }
+    else if (title.length < MIN_TITLE_LENGTH) {
+        errorMessages.push("Title can't be less than " + MIN_TITLE_LENGTH + " characters long.")
+    }
+
+    if (description.length == 0) {
+        errorMessages.push("Description can't be null")
+    }
+    else if (MAX_DESCRIPTION_LENGTH < description.length) {
+        errorMessages.push("Description can't be more than " + MAX_DESCRIPTION_LENGTH + " characters long.")
+    }
+    else if (description.length < MIN_DESCRIPTION_LENGTH) {
+        errorMessages.push("Description can't be less than " + MIN_DESCRIPTION_LENGTH + " characters long.")
     }
 
     if (errorMessages.length == 0) {
@@ -264,18 +286,34 @@ router.post('/update-project/:projectID', function (request, response) {
 
     } else {
 
-        const model = {
-            errorMessages,
-            title,
-            description
-        }
+        if (request.session.isLoggedIn) {
+            const projectID = request.params.projectID
 
-        response.render('update-project.hbs', model)
+            const query =
+                `SELECT * FROM projects WHERE projectID = ?`
+            const values = [projectID]
+
+            db.get(query, values, function (error, project) {
+
+                const model = {
+                    errorMessages,
+                    project
+                }
+
+                response.render('update-project.hbs', model)
+
+            })
+
+        } else {
+
+            response.redirect('/login')
+
+        }
 
     }
 
 })
-
+// KOLLA HÄR O GÖR LIKADANT PÅ ALLT ANNAT
 
 router.post('/delete-project/:projectID', function (request, response) {
 

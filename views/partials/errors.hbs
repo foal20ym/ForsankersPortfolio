@@ -1,0 +1,10 @@
+<section class="error-messages-section">
+    {{#if errorMessages.length}}
+    <h1 class="error-message-title">Errors: </h1>
+    <ul>
+        {{#each errorMessages}}
+        <li> {{this}} </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</section>

@@ -37,8 +37,6 @@ db.run(`
     )
 `)
 
-
-
 const storage = multer.diskStorage({
 
     destination: (request, file, cb) => {
@@ -53,21 +51,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-
 const app = express()
 
 app.use(express.static('public'))
 
 app.engine('hbs', expressHandlebars.engine({
-
-    defaultLayout: 'main.hbs',
+    extname: 'hbs',
+    defaultLayout: 'main',
+    partialsDir: __dirname + '/views/partials'
 
 }))
 
 app.use(express.static('public'))
 
-
-// using the bodyParser 
 app.use(bodyParser.urlencoded({
 
     extended: false

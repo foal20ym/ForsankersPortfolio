@@ -341,13 +341,12 @@
 /* ADD COMMENT*/
 .add-comment-section {
     text-align: center;
-    margin-top: 20%;
+    margin-top: 2%;
 }
 
 /* ADD QUESTION */
 .add-question-section {
     text-align: center;
-    margin-top: 20%;
 }
 
 /* LOGIN PAGE */
@@ -358,7 +357,6 @@
 
 .login-page-head-one {
     text-align: center;
-
 }
 
 /* ADD PROJECT*/
@@ -366,10 +364,15 @@
     text-align: center;
 }
 
-.add-project-head-one {
+.standard-rubric {
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-align: center;
-    margin-top: 20%;
+}
+.answer-question-section{
+    text-align: center;
+}
+.update-answer-section{
+    text-align: center;
 }
 
 /* MANAGE COMMENTS */
@@ -387,20 +390,26 @@
 /*UPDATE PROJECT*/
 .update-project-section {
     text-align: center;
-    margin-top: 20%;
 }
 
 /*UPDATE COMMENT*/
 .update-comment-section {
     text-align: center;
-    margin-top: 20%;
+}
+.update-question-section {
+    text-align: center;
 }
 
-/* ERRORMESSAGE LIST */
-.errormessage-list {
-    list-style: none;
+.error-messages-section {
+    text-align: center;
+    margin-top: 16%;
 }
 
+.error-message-title {
+    font-family: "Superior title", "Times New Roman", sans-serif;
+    font-size: 150%;
+    text-decoration: underline;
+}
 
 /* LAYOUT BACKGROUND 'ANIMATED'*/
 .animatedwrapper {
