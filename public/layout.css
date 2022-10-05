@@ -167,7 +167,7 @@
 /* CONTACT PAGE CONTENT CONTACT PAGE CONTENT CONTACT PAGE CONTENT*/
 .contact-page-section {
     text-align: center;
-    margin-top: 20%;
+    margin-top: -5%;
     font-family: 'Courier New', Courier, monospace;
     font-size: 130%;
 }
@@ -197,6 +197,7 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    
 }
 
 

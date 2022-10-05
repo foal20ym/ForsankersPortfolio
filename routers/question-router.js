@@ -8,31 +8,45 @@ const MAX_ANSWER_LENGTH = 255
 const MIN_ANSWER_LENGTH = 5
 
 
-// uses and renders the Contact page
-router.get('/contact', function (request, response) {
+router.get('/contact/:pagesArray', function (request, response) {
 
-    const query = `SELECT * FROM questions`
+    const currentPageNumber = request.params.pagesArray
+    const constQuestionsPerPage = 2 
+    const relativeOffset = ((currentPageNumber - 1) * constQuestionsPerPage)
 
-    db.all(query, function (error, questions) { // this is asyncronius
+    const showSpecificQuestionsQuery =
+        `SELECT * FROM questions LIMIT "${constQuestionsPerPage}" OFFSET "${relativeOffset}"`
 
-        const errorMessages = []
+    const countQuestionsQuery =
+        `SELECT COUNT(*) AS queryCountResult FROM questions`
 
-        if (error) {
+    db.get(countQuestionsQuery, function (error, queryCountResult) {
+        db.all(showSpecificQuestionsQuery, function (error, questions) {
 
-            errorMessages.push('Internal server error')
+            const pagesArray = []
+            const numberOfPages = queryCountResult.queryCountResult / constQuestionsPerPage
 
-        }
+            for (let i = 1; i <= numberOfPages; i+=1) {
+                pagesArray.push(i)
+                // console.log("pagesArray[i]" + typeof pagesArray[i]);
+            }
+            console.log("currentPageNumber= " + numberOfPages)
 
-        const model = {
-            errorMessages,
-            questions
-        }
-
-        response.render('contact.hbs', model)
-
+            const model = {
+                questions,
+                currentPageNumber,
+                pagesArray
+            }
+            console.log("currentPageNumber = " + currentPageNumber)
+            console.log("pagesArray= " + pagesArray)
+            /* console.log(questions)
+            console.log("pagesArray.length =" + pagesArray.length)
+            console.log(currentPageNumber) */
+            response.render('contact.hbs', model)
+        })
     })
-
 })
+
 
 router.get('/add-question', function (request, response) {
 
@@ -93,7 +107,7 @@ router.post('/add-question', function (request, response) {
 
             else {
 
-                response.redirect('/contact')
+                response.redirect('/contact/1')
 
             }
 
@@ -205,14 +219,14 @@ router.post('/answer-question/:questionID', function (request, response) {
 
             } else {
 
-                response.redirect('/contact')
+                response.redirect('/contact/1')
 
             }
 
         })
 
     } else {
-        
+
         if (request.session.isLoggedIn) {
             const questionID = request.params.questionID
 
@@ -329,7 +343,7 @@ router.post('/update-question/:questionID', function (request, response) {
 
             } else {
 
-                response.redirect('/contact')
+                response.redirect('/contact/1')
 
             }
 
@@ -387,7 +401,7 @@ router.post('/delete-question/:questionID', function (request, response) {
             }
 
             else {
-                response.redirect('/contact')
+                response.redirect('/contact/1')
             }
 
         })
@@ -450,7 +464,7 @@ router.post('/update-answer/:questionID', function (request, response) {
         const query =
             `UPDATE questions SET (answer) = (?) WHERE questionID = ?`
 
-        const values = [answer,questionID]
+        const values = [answer, questionID]
 
         db.run(query, values, function (error) {
 
@@ -468,7 +482,7 @@ router.post('/update-answer/:questionID', function (request, response) {
 
             } else {
 
-                response.redirect('/contact')
+                response.redirect('/contact/1')
 
             }
 
@@ -478,25 +492,25 @@ router.post('/update-answer/:questionID', function (request, response) {
 
         if (request.session.isLoggedIn) {
             const questionID = request.params.questionID
-    
+
             const query = `SELECT answer FROM questions WHERE questionID = ?`
             const values = [questionID]
-    
+
             db.get(query, values, function (error, question) {
-    
+
                 const model = {
                     errorMessages,
                     question,
                 }
-    
+
                 response.render('update-answer.hbs', model)
-    
+
             })
-    
+
         } else {
-    
+
             response.redirect('/login')
-    
+
         }
 
     }
@@ -527,7 +541,7 @@ router.post('/delete-answer/:questionID', function (request, response) {
             }
 
             else {
-                response.redirect('/contact')
+                response.redirect('/contact/1')
             }
 
         })
