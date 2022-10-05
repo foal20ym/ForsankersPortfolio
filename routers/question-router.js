@@ -24,7 +24,7 @@ router.get('/contact/:pagesArray', function (request, response) {
         db.all(showSpecificQuestionsQuery, function (error, questions) {
 
             const pagesArray = []
-            const numberOfPages = queryCountResult.queryCountResult / constQuestionsPerPage
+            const numberOfPages = Math.ceil(queryCountResult.queryCountResult / constQuestionsPerPage)
 
             for (let i = 1; i <= numberOfPages; i+=1) {
                 pagesArray.push(i)
