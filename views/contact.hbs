@@ -21,14 +21,14 @@
             <li class="contact-page-questions-li">
                 <a href="/manage-question/{{questionID}}">Q:{{this.question}}</a>
                 <p><a href="/manage-question/{{questionID}}">From: {{this.name}}, {{this.email}}, {{this.date}}</a></p>
-                <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
+                <p class="contact-page-answer">{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
             </li>
             {{/each}}
             {{else}}
             {{#each questions}}
             <li class="contact-page-questions-li">Q: {{this.question}}</li>
             <p>From: {{this.name}}, {{this.email}}, {{this.date}}</p>
-            <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
+            <p class="contact-page-answer">{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
             {{/each}}
             {{/if}}
         </ul>
