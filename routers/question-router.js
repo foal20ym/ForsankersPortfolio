@@ -11,40 +11,75 @@ const MIN_ANSWER_LENGTH = 5
 router.get('/contact/:pagesArray', function (request, response) {
 
     const currentPageNumber = request.params.pagesArray
-    const constQuestionsPerPage = 2 
+    const constQuestionsPerPage = 2
     const relativeOffset = ((currentPageNumber - 1) * constQuestionsPerPage)
+    const errorMessages = []
 
     const showSpecificQuestionsQuery =
-        `SELECT * FROM questions LIMIT "${constQuestionsPerPage}" OFFSET "${relativeOffset}"`
+        `SELECT * FROM questions ORDER BY (date) ASC LIMIT "${constQuestionsPerPage}" OFFSET "${relativeOffset}"`
 
     const countQuestionsQuery =
         `SELECT COUNT(*) AS queryCountResult FROM questions`
 
-    db.get(countQuestionsQuery, function (error, queryCountResult) {
-        db.all(showSpecificQuestionsQuery, function (error, questions) {
+    db.get(countQuestionsQuery, function (countQueryError, queryCountResult) {
 
-            const pagesArray = []
-            const numberOfPages = Math.ceil(queryCountResult.queryCountResult / constQuestionsPerPage)
+        if (countQueryError) {
 
-            for (let i = 1; i <= numberOfPages; i+=1) {
-                pagesArray.push(i)
-                // console.log("pagesArray[i]" + typeof pagesArray[i]);
-            }
-            console.log("currentPageNumber= " + numberOfPages)
+            errorMessages.push('countQueryError')
 
             const model = {
-                questions,
-                currentPageNumber,
-                pagesArray
+                errorMessages,
             }
-            console.log("currentPageNumber = " + currentPageNumber)
-            console.log("pagesArray= " + pagesArray)
-            /* console.log(questions)
-            console.log("pagesArray.length =" + pagesArray.length)
-            console.log(currentPageNumber) */
+
             response.render('contact.hbs', model)
-        })
+        }
+
+        else {
+            db.all(showSpecificQuestionsQuery, function (showQuestionsError, questions) {
+
+                if (showQuestionsError) {
+
+                    errorMessages.push("showQuestionsError")
+
+                    const model = {
+                        errorMessages,
+                    }
+
+                    response.render('contact.hbs', model)
+
+                }
+
+                else {
+
+                    const pagesArray = []
+                    const numberOfPages = Math.ceil(queryCountResult.queryCountResult / constQuestionsPerPage)
+
+                    for (let i = 1; i <= numberOfPages; i += 1) {
+                        pagesArray.push(i)
+                        // console.log("pagesArray[i]" + typeof pagesArray[i]);
+                    }
+                    console.log("currentPageNumber= " + numberOfPages)
+
+                    const model = {
+                        questions,
+                        currentPageNumber,
+                        pagesArray
+                    }
+                    console.log("currentPageNumber = " + currentPageNumber)
+                    console.log("pagesArray= " + pagesArray)
+                    /* console.log(questions)
+                    console.log("pagesArray.length =" + pagesArray.length)
+                    console.log(currentPageNumber) */
+                    response.render('contact.hbs', model)
+
+                }
+
+            })
+
+        }
+
     })
+
 })
 
 

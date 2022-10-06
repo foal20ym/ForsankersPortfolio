@@ -45,7 +45,7 @@
     width: 394px;
 }
 
-.shome-page-standard-container {
+.home-page-standard-container {
     -webkit-font-smoothing: antialiased;
     align-self: flex-start;
     box-sizing: border-box;
@@ -197,11 +197,70 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
 .contact-page-answer {
     margin-top: -2%;
+}
+
+.contactpage-question-paragraph {
+    margin-top: -1%;
+    margin-bottom: -1%;
+}
+
+summary {
+    font-size: 1.25rem;
+    font-weight: 600;
+    background-color: #fff;
+    color: #333;
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+    outline: none;
+    border-radius: 0.25rem;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+}
+
+.faq-content {
+    text-align: center;
+}
+
+details>summary::after {
+    position: absolute;
+    content: "+";
+    right: 20px;
+    top: 30px;
+}
+
+details[open]>summary::after {
+    position: absolute;
+    content: "-";
+    right: 20px;
+}
+
+details>summary::-webkit-details-marker {
+    display: none;
+}
+
+details[open] summary~* {
+    animation: sweep .5s ease-in-out;
+}
+
+@keyframes sweep {
+    0% {
+        opacity: 0;
+        margin-top: -10px
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 0px
+    }
 }
 
 /* ABOUT PAGE CONTENT ABOUT PAGE CONTENT ABOUT PAGE CONTENT*/
@@ -372,10 +431,12 @@
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-align: center;
 }
-.answer-question-section{
+
+.answer-question-section {
     text-align: center;
 }
-.update-answer-section{
+
+.update-answer-section {
     text-align: center;
 }
 
@@ -400,6 +461,7 @@
 .update-comment-section {
     text-align: center;
 }
+
 .update-question-section {
     text-align: center;
 }

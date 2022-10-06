@@ -14,7 +14,7 @@
     <div class="contact-page-questions">
         <h1 class="contact-page-questions-title"> Questions</h1>
 
-
+        <!--
         <ul class="contact-page-questions-ul">
             {{#if isLoggedIn}}
             {{#each questions}}
@@ -31,20 +31,41 @@
             <p class="contact-page-answer">{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
             {{/each}}
             {{/if}}
-        </ul>
+        </ul> 
+        -->
+
+        {{#if isLoggedIn}}
+        {{#each questions}}
+        <details>
+            <summary>
+                <p class="contactpage-question-paragraph"><a href="/manage-question/{{questionID}}">Q: {{this.question}}</a></p>
+                <p class="contactpage-question-paragraph"><a href="/manage-question/{{questionID}}">From: {{this.name}}, {{this.email}}, {{this.date}}</a></p>
+            </summary>
+            <div class="faq-content">
+                <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
+            </div>
+        </details>
+        {{/each}}
+        {{else}}
+        {{#each questions}}
+        <details>
+            <summary>
+                <p class="contactpage-question-paragraph">Q: {{this.question}}</p>
+                <p class="contactpage-question-paragraph">From: {{this.name}}, {{this.date}}</p>
+            </summary>
+            <div class="faq-content">
+                <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
+            </div>
+        </details>
+        {{/each}}
+        {{/if}}
 
         <ul class="pagination">
-            <li class="page-item">
-                <a href="#" tabindex="-1">Previous</a>
-            </li>
             {{#each pagesArray}}
             <li class="page-item">
                 <a href="/contact/{{this}}">{{this}}</a>
             </li>
             {{/each}}
-            <li class="page-item">
-                <a href="#">Next</a>
-            </li>
         </ul>
 
 
