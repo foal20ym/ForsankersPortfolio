@@ -37,6 +37,14 @@ db.run(`
     )
 `)
 
+db.run(`
+    CREATE TABLE IF NOT EXISTS searches (
+        searchID INTEGER PRIMARY KEY AUTOINCREMENT,
+        search TEXT
+    )
+`)
+
+
 const storage = multer.diskStorage({
 
     destination: (request, file, cb) => {

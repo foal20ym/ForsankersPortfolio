@@ -1,0 +1,25 @@
+<ul>
+    {{#each projectResults}}
+    <li>
+        <img src="{{image}}" alt="" class="projects-page-project-image" />
+        <a href="/projects/{{projectID}}">{{title}}</a>
+        <p class="projects-page-project-description"> {{description}}</p>
+    </li>
+    {{/each}}
+
+    {{#each questionResults}}
+    <li>
+        <p class="contactpage-question-paragraph">Q: {{this.question}}</p>
+        <p class="contactpage-question-paragraph">From: {{question.name}}, {{date}}</p>
+        <p>{{#if answer}} A: {{answer}} {{/if}}</p>
+    </li>
+    {{/each}}
+
+    {{#each commentResults}}
+    <li>
+        <p>{{this.comment}}</p>
+    </li>
+    {{/each}}
+
+</ul>
+
