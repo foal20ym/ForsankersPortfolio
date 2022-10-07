@@ -36,13 +36,14 @@ db.run(`
         FOREIGN KEY(projectID) REFERENCES projects (projectID)
     )
 `)
-
+/*
 db.run(`
     CREATE TABLE IF NOT EXISTS searches (
         searchID INTEGER PRIMARY KEY AUTOINCREMENT,
         search TEXT
     )
 `)
+*/
 
 
 const storage = multer.diskStorage({

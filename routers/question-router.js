@@ -607,6 +607,18 @@ router.post('/search', function (request, response) {
     const questionsQuery = `SELECT * FROM questions WHERE question LIKE '%' || ? || '%'`
     const commentsQuery = `SELECT * FROM comments WHERE comment LIKE '%' || ? || '%'`
 
+    /*
+    Test: 
+    const projectsQuery = 
+    `SELECT (title, description, image) AS 'projectsResults' FROM projects WHERE title LIKE '%' || ? || '%'`
+
+    const questionsQuery = 
+    `SELECT (name, (??email??), question, answer, date) AS 'questionsResults' FROM questions WHERE question LIKE '%' || ? || '%'`
+
+    const commentsQuery = 
+    `SELECT comment AS 'commentsResults' FROM comments WHERE comment LIKE '%' || ? || '%'`
+    */
+
     db.all(projectsQuery, value, function (projectsError, projectResults) {
         results.push(projectResults)
 

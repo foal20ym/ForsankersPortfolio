@@ -1,18 +1,13 @@
 {{#if failedToLogin}}
-<p>Wrong credentials!</p>
+  <p>Wrong credentials!</p>
 {{/if}}
 <section class="login-page-section">
-    <h1 class="login-page-head-one">Login</h1>
-    <form action="/login" method="POST">
-
-        <div>
-            Username: <input type="text" name="username">
-        </div>
-
-        <div>
-            Password: <input type="password" name="password">
-        </div>
-        <input type="submit" value="Login">
-
-    </form>
+  <h1 class="login-page-head-one">Login</h1>
+  <form action="/login" method="POST">
+    <div> Username: <input type="text" name="username">
+    </div>
+    <div> Password: <input type="password" name="password">
+    </div>
+    <input type="submit" value="Login">
+  </form>
 </section>
