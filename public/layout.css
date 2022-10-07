@@ -13,14 +13,14 @@
     text-decoration-thickness: 3px;
 }
 
-.logout-button {
+.logoutButton {
     background-color: transparent;
     padding: 0;
     border: none;
     background: none;
 }
 
-.logout-button:hover {
+.logoutButton:hover {
     text-decoration: underline;
     color: black;
     text-decoration-line: underline;
@@ -28,7 +28,7 @@
 }
 
 /* HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT */
-.home-page-section {
+.homePageSection {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -45,7 +45,7 @@
     width: 394px;
 }
 
-.home-page-standard-container {
+.homePageStandardContainer {
     -webkit-font-smoothing: antialiased;
     align-self: flex-start;
     box-sizing: border-box;
@@ -69,7 +69,7 @@
     width: 394px;
 }
 
-.home-page-intro-wrap {
+.homePageIntroWrap {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -88,7 +88,7 @@
     width: 394px;
 }
 
-.home-page-rubric-row-one {
+.homePageRubricRowOne {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -110,7 +110,7 @@
     width: 700px;
 }
 
-.home-page-rubric-row-two {
+.homePageRubricRowTwo {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -129,7 +129,7 @@
     width: 700px;
 }
 
-.home-page-paragraph-one {
+.homePageParagraphOne {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -148,7 +148,7 @@
     width: 394px;
 }
 
-.home-page-paragraph-two {
+.homePageParagraphTwo {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     color: rgb(34, 34, 34);
@@ -466,12 +466,12 @@ details[open] summary~* {
     text-align: center;
 }
 
-.error-messages-section {
+.errorMessagesSection {
     text-align: center;
     margin-top: 16%;
 }
 
-.error-message-title {
+.errorMessageTitle {
     font-family: "Superior title", "Times New Roman", sans-serif;
     font-size: 150%;
     text-decoration: underline;
