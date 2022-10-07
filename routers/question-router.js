@@ -590,23 +590,26 @@ router.post('/delete-answer/:questionID', function (request, response) {
 })
 
 router.get('/search', function (request, response) {
-    response.render('/search')
+    response.render('search.hbs')
 })
 
 router.post('/search', function (request, response) {
 
     const search = request.body.search
-    console.log("search = " + search)
     const errorMessages = []
-    const results = []
-
     const value = [search]
+    let resultsExist = false
+
+    console.log("search = " + search)
     console.log("value = " + value)
 
     const projectsQuery = `SELECT * FROM projects WHERE title LIKE '%' || ? || '%'`
     const questionsQuery = `SELECT * FROM questions WHERE question LIKE '%' || ? || '%'`
     const commentsQuery = `SELECT * FROM comments WHERE comment LIKE '%' || ? || '%'`
 
+    if (search.length == 0) {
+        errorMessages.push("Your search cannot be null or empty")
+    }
     /*
     Test: 
     const projectsQuery = 
@@ -619,103 +622,97 @@ router.post('/search', function (request, response) {
     `SELECT comment AS 'commentsResults' FROM comments WHERE comment LIKE '%' || ? || '%'`
     */
 
-    db.all(projectsQuery, value, function (projectsError, projectResults) {
-        results.push(projectResults)
+    if (errorMessages.length == 0) {
 
-        if (projectsError) {
+        db.all(projectsQuery, value, function (projectsError, projectsResults) {
 
-            console.log("MEGA BUG")
-            console.log("error1")
-            errorMessages.push("Projects Error")
+            if (projectsError) {
 
-            const model = {
-                errorMessages,
-                projectResults
+                errorMessages.push("Projects Error")
+
+                const model = {
+                    errorMessages,
+                }
+
+                response.render('search.hbs', model)
+
             }
 
-            console.log("result 1 = " + projectResults)
-            console.log("model 1 = " + model)
 
-            response.render('search.hbs', model)
-        }
+            else {
 
-        else {
+                db.all(questionsQuery, value, function (questionsError, questionsResults) {
 
+                    if (questionsError) {
 
-            db.all(questionsQuery, value, function (questionsError, questionsResults) {
-                results.push(questionsResults)
-                if (questionsError) {
+                        errorMessages.push("Questions Error")
 
-                    console.log("error2")
-                    errorMessages.push("Questions Error")
+                        const model = {
+                            errorMessages,
+                        }
 
-                    const model = {
-                        errorMessages,
-                        projectResults,
-                        questionsResults,
+                        response.render('search.hbs', model)
+
                     }
 
-                    response.render('search.hbs', model)
+                    else {
 
-                }
+                        db.all(commentsQuery, value, function (commentsError, commentsResults) {
+                            if (commentsError) {
 
-                else {
-                    db.all(commentsQuery, value, function (commentsError, commentsResults) {
-                        results.push(commentsResults)
-                        if (commentsError) {
-                            console.log("error3")
+                                errorMessages.push("Comments Error")
 
-                            errorMessages.push("Comments Error")
+                                const model = {
+                                    errorMessages,
+                                }
+                                response.render('search.hbs', model)
 
-                            const model = {
-                                errorMessages,
-                                projectResults,
-                                questionsResults,
-                                commentsResults,
-                                results,
                             }
-                            response.render('search.hbs', model)
 
-                        }
+                            else {
 
-                        else {
-                            console.log("SISTA RADEN :)")
+                                if (projectsResults.length || questionsResults.length || commentsResults.length) {
+                                    resultsExist = true
+                                }
 
-                            const model = {
-                                errorMessages,
-                                projectResults,
-                                questionsResults,
-                                commentsResults,
-                                results
+                                const model = {
+                                    errorMessages,
+                                    projectsResults,
+                                    questionsResults,
+                                    commentsResults,
+                                    resultsExist
+                                }
+
+                                console.log(projectsResults)
+                                console.log(questionsResults)
+                                console.log(commentsResults)
+                                console.log(model)
+                                response.render('search.hbs', model)
+
                             }
-                            console.log(projectResults)
-                            console.log(questionsResults)
-                            console.log(commentsResults)
-                            console.log(results)
-                            console.log(model)
-                            response.render('search.hbs', model)
 
-                        }
+                        })
 
-                    })
+                    }
 
-                }
+                })
 
+            }
 
-            })
+        })
+
+    }
+
+    else {
+
+        const model = {
+            errorMessages,
         }
-    })
+
+        response.render('search.hbs', model)
+
+    }
 
 })
-/*
-const model = {
-    errorMessages,
-    projectResults,
-    questionsResults,
-}
-console.log("result 2 = " + projectResults)
-                console.log("model 2 = " + model)
-
-                response.render('search.hbs', model) */
 
 module.exports = router

@@ -313,7 +313,7 @@ router.post('/update-project/:projectID', function (request, response) {
     }
 
 })
-// KOLLA HÄR O GÖR LIKADANT PÅ ALLT ANNAT
+
 
 router.post('/delete-project/:projectID', function (request, response) {
 
