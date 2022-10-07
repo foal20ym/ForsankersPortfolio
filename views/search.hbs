@@ -7,9 +7,9 @@
     <h1>Projects that might match your search</h1>
     {{#each projectsResults}}
     <li>
-        <img src="{{image}}" alt="" class="projects-page-project-image" />
+        <img src="{{image}}" alt="" class="projectsPageProjectImage" />
         <a href="/projects/{{projectID}}">{{title}}</a>
-        <p class="projects-page-project-description"> {{description}}</p>
+        <p class="projectsPageProjectDescription"> {{description}}</p>
     </li>
     {{/each}}
     {{/if}}
@@ -17,8 +17,8 @@
     <h1>Questions that might match your search</h1>
     {{#each questionsResults}}
     <li>
-        <p class="contactpage-question-paragraph">Q: {{this.question}}</p>
-        <p class="contactpage-question-paragraph">From: {{name}}, {{date}}</p>
+        <p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
+        <p class="contactPageQuestionParagraph">From: {{name}}, {{date}}</p>
         <p>{{#if answer}} A: {{answer}} {{/if}}</p>
     </li>
     {{/each}}

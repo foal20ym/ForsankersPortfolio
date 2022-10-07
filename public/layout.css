@@ -165,46 +165,46 @@
 }
 
 /* CONTACT PAGE CONTENT CONTACT PAGE CONTENT CONTACT PAGE CONTENT*/
-.contact-page-section {
+.contactPageSection {
     text-align: center;
     margin-top: -5%;
     font-family: 'Courier New', Courier, monospace;
     font-size: 130%;
 }
 
-.contact-page-form-title {
+.contactPageFormTitle {
     margin-top: 2%;
     font-size: 140%;
     font-family: "Superior title", "Times New Roman", sans-serif;
 }
 
-.contact-page-question {
+.contactPageQuestion {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.contact-page-questions-title {
+.contactPageQuestionsTitle {
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-decoration: underline;
     color: black;
     font-size: 170%;
 }
 
-.contact-page-questions-ul {
+.contactPageQuestionsUL {
     list-style: none;
 }
 
-.contact-page-questions-li {
+.contactPageQuestionsLI {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 
 }
 
-.contact-page-answer {
+.contactPageAnswer {
     margin-top: -2%;
 }
 
-.contactpage-question-paragraph {
+.contactPageQuestionParagraph {
     margin-top: -1%;
     margin-bottom: -1%;
 }
@@ -226,7 +226,7 @@ summary {
     max-width: 800px;
 }
 
-.faq-content {
+.faqContent {
     text-align: center;
 }
 
@@ -264,14 +264,14 @@ details[open] summary~* {
 }
 
 /* ABOUT PAGE CONTENT ABOUT PAGE CONTENT ABOUT PAGE CONTENT*/
-.about-page-section {
+.aboutPageSection {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 12%;
 }
 
-.about-page-head-one {
+.aboutPageHeadOne {
     font-family: "Superior title", "Times New Roman", sans-serif;
     margin-left: auto;
     margin-right: auto;
@@ -279,7 +279,7 @@ details[open] summary~* {
     font-size: 40px;
 }
 
-.about-page-div-one {
+.aboutPageDivOne {
     margin-left: auto;
     margin-right: auto;
     max-width: 600px;
@@ -287,7 +287,7 @@ details[open] summary~* {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.about-page-div-two {
+.aboutPageDivTwo {
     margin-left: auto;
     margin-right: auto;
     max-width: 600px;
@@ -296,7 +296,7 @@ details[open] summary~* {
     margin-top: 20px;
 }
 
-.about-page-div-three {
+.aboutPageDivThree {
     margin-left: auto;
     margin-right: auto;
     max-width: 600px;
@@ -306,15 +306,15 @@ details[open] summary~* {
 }
 
 /*PROJECTS LIST PROJECTS LIST PROJECTS LIST PROJECTS LIST*/
-.projects-page-section {
+.projectsPageSection {
     background-color: transparent;
 }
 
-.projects-page-row {
+.projectsPageRow {
     height: 20%;
 }
 
-.projects-page-title {
+.projectsPageTitle {
     text-align: center;
     color: black;
     font-family: monospace;
@@ -322,29 +322,29 @@ details[open] summary~* {
     margin-top: 8%;
 }
 
-.projects-page-list {
+.projectsPageList {
     list-style: none;
     align-items: center;
     text-align: center;
     margin-top: 7%;
 }
 
-.projects-page-project {
+.projectsPageProject {
     height: 400px;
 }
 
-.projects-page-project-image {
+.projectsPageProjectImage {
     width: 300px;
     height: auto;
 }
 
-.projects-page-project-title {
+.projectsPageProjectTitle {
     font-family: "Superior title", "Times New Roman", sans-serif;
     color: black;
     font-size: 170%;
 }
 
-.projects-page-project-description {
+.projectsPageProjectDescription {
     font-size: 110%;
     color: black;
     font-family: 'Courier New', Courier, monospace;
@@ -355,14 +355,14 @@ details[open] summary~* {
 
 
 /* PROJECT PAGE PROJECT PAGE PROJECT PAGE PROJECT PAGE*/
-.project-page-section {
+.projectPageSection {
     display: grid;
     place-items: center;
     align-content: center;
     min-height: 100vh;
 }
 
-.project-page-description {
+.projectPageDescription {
     font-size: 110%;
     color: black;
     font-family: 'Courier New', Courier, monospace;
@@ -371,99 +371,75 @@ details[open] summary~* {
     max-width: 600px;
 }
 
-.project-page-title {
+.projectPageTitle {
     font-family: "Superior title", "Times New Roman", sans-serif;
     color: black;
     font-size: 170%;
 }
 
-.project-page-image {
+.projectPageImage {
     width: 300px;
     height: auto;
 }
 
-.project-page-comments {
+.projectPageComments {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.project-page-comments-ul {
+.projectPageCommentsUL {
     list-style: none;
 }
 
-.project-page-comments-title {
+.projectPageCommentsTitle {
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-decoration: overline;
     color: black;
     font-size: 170%;
 }
 
-.project-page-update-link {
+.projectPageUpdateLink {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-/* ADD COMMENT*/
-.add-comment-section {
+/* ADD COMMENT */
+/* ADD QUESTION */
+/* ADD PROJECT */
+/* ANSWER QUESTION */
+/* UPDATE ANSWER */
+/* UPDATE COMMENT */
+/* UPDATE PROJECT */
+/* UPDATE QUESTION */
+.standardCenteredSection {
     text-align: center;
     margin-top: 2%;
 }
 
-/* ADD QUESTION */
-.add-question-section {
-    text-align: center;
-}
-
 /* LOGIN PAGE */
-.login-page-section {
+.loginPageSection {
     text-align: center;
     margin-top: 20%;
 }
 
-.login-page-head-one {
+.loginPageHeadOne {
     text-align: center;
 }
 
-/* ADD PROJECT*/
-.add-project-section {
-    text-align: center;
-}
-
-.standard-rubric {
+/* STANDARD RUBRIC*/
+.standardRubric {
     font-family: "Superior title", "Times New Roman", sans-serif;
     text-align: center;
 }
 
-.answer-question-section {
-    text-align: center;
-}
-
-.update-answer-section {
-    text-align: center;
-}
-
 /* MANAGE COMMENTS */
-.manage-comments-section {
+.manageCommentsSection {
     text-align: center;
     margin-top: 20%;
 }
 
 /* MANAGE MESSAGES */
-.manage-question-section {
+.manageQuestionSection {
     text-align: center;
     margin-top: 20%;
-}
-
-/*UPDATE PROJECT*/
-.update-project-section {
-    text-align: center;
-}
-
-/*UPDATE COMMENT*/
-.update-comment-section {
-    text-align: center;
-}
-
-.update-question-section {
-    text-align: center;
 }
 
 .errorMessagesSection {

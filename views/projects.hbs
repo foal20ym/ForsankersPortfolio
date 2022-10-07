@@ -1,18 +1,18 @@
 {{> errors }}
 {{#if projects.length}}
-<section class="projects-page-section">
-    <div class="projects-page-row">
-        <h1 class="projects-page-title">
+<section class="projectsPageSection">
+    <div class="projectsPageRow">
+        <h1 class="projectsPageTitle">
             Here are some of my projects
         </h1>
-        <ul class="projects-page-list">
+        <ul class="projectsPageList">
             {{#each projects}}
-            <li class="projects-page-project">
-                <img src="{{image}}" alt="" class="projects-page-project-image" />
-                <h3 class="projects-page-project-title">
+            <li class="projectsPageProject">
+                <img src="{{image}}" alt="" class="projectsPageProjectImage" />
+                <h3 class="projectsPageProjectTitle">
                     <a href="/projects/{{projectID}}">{{title}}</a>
                 </h3>
-                <p class="projects-page-project-description"> {{description}}</p>
+                <p class="projectsPageProjectDescription"> {{description}}</p>
             </li>
             {{/each}}
         </ul>

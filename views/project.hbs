@@ -1,35 +1,35 @@
 {{#if project}}
-<section class="project-page-section">
-    <p> <img src="/{{project.image}}" alt="" class="project-page-image"></p>
-    <p class="project-page-title">{{project.title}}</p>
-    <p class="project-page-description">{{project.description}}</p>
+<section class="projectPageSection">
+    <p> <img src="/{{project.image}}" alt="" class="projectPageImage"></p>
+    <p class="projectPageTitle">{{project.title}}</p>
+    <p class="projectPageDescription">{{project.description}}</p>
 
-    <div class="project-page-comments">
-        <h1 class="project-page-comments-title"> Comments and feedback </h1>
-        <ul class="project-page-comments-ul">
+    <div class="projectPageComments">
+        <h1 class="projectPageCommentsTitle"> Comments and feedback </h1>
+        <ul class="projectPageCommentsUL">
             {{#if isLoggedIn}}
                 {{#each comments}}
-                <li class="project-page-comments-li">
+                <li class="projectPageCommentsLI">
                     <a href="/manage-comment/{{commentID}}">{{this.comment}}</a>
                 </li>
                 {{/each}}
                 {{else}}
                 {{#each comments}}
-                    <li class="project-page-comments-li">{{this.comment}}</li>
+                    <li class="projectPageCommentsLI">{{this.comment}}</li>
                 {{/each}}
             {{/if}}
          </ul>
     </div>
 
     {{#if isLoggedIn}}
-    <button> <a class="project-page-update-link" href="/update-project/{{project.projectID}}">Update</a> </button>
+    <button> <a class="projectPageUpdateLink" href="/update-project/{{project.projectID}}">Update</a> </button>
     
     <form action="/delete-project/{{project.projectID}}" method="POST">
         <input type="submit" value="Delete Project">
     </form>
     {{/if}}
 
-    <button> <a class="project-page-update-link" href="/add-comment/{{project.projectID}}">Add comment</a> </button>
+    <button> <a class="projectPageUpdateLink" href="/add-comment/{{project.projectID}}">Add comment</a> </button>
 
     {{else}}
     <p>This project don't exist</p>

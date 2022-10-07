@@ -1,5 +1,5 @@
 {{> errors }}
-<section class="contact-page-section">
+<section class="contactPageSection">
     <div>
         Phone: 070 123 45 67
     </div>
@@ -9,10 +9,10 @@
     <div>
         Address: skolgatan 39B, 555 43, Jönköping
     </div>
-    <h1 class="contact-page-form-title"> Ask questions right here with <a href="/add-question">this</a> form!</h1>
+    <h1 class="contactPageFormTitle"> Ask questions right here with <a href="/add-question">this</a> form!</h1>
 
-    <div class="contact-page-questions">
-        <h1 class="contact-page-questions-title"> Questions</h1>
+    <div class="contactPageQuestions">
+        <h1 class="contactPageQuestionsTitle"> Questions</h1>
 
         <!--
         <ul class="contact-page-questions-ul">
@@ -38,10 +38,10 @@
         {{#each questions}}
         <details>
             <summary>
-                <p class="contactpage-question-paragraph"><a href="/manage-question/{{questionID}}">Q: {{this.question}}</a></p>
-                <p class="contactpage-question-paragraph"><a href="/manage-question/{{questionID}}">From: {{this.name}}, {{this.email}}, {{this.date}}</a></p>
+                <p class="contactPageQuestionParagraph"><a href="/manage-question/{{questionID}}">Q: {{this.question}}</a></p>
+                <p class="contactPageQuestionParagraph"><a href="/manage-question/{{questionID}}">From: {{this.name}}, {{this.email}}, {{this.date}}</a></p>
             </summary>
-            <div class="faq-content">
+            <div class="faqContent">
                 <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
             </div>
         </details>
@@ -50,10 +50,10 @@
         {{#each questions}}
         <details>
             <summary>
-                <p class="contactpage-question-paragraph">Q: {{this.question}}</p>
-                <p class="contactpage-question-paragraph">From: {{this.name}}, {{this.date}}</p>
+                <p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
+                <p class="contactPageQuestionParagraph">From: {{this.name}}, {{this.date}}</p>
             </summary>
-            <div class="faq-content">
+            <div class="faqContent">
                 <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
             </div>
         </details>
