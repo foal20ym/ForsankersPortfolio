@@ -46,20 +46,14 @@ router.get("/contact/:pagesArray", function (request, response) {
 
 						for (let i = 1; i <= numberOfPages; i += 1) {
 							pagesArray.push(i);
-							// console.log("pagesArray[i]" + typeof pagesArray[i]);
 						}
-						console.log("currentPageNumber= " + numberOfPages);
 
 						const model = {
 							questions,
 							currentPageNumber,
 							pagesArray,
 						};
-						console.log("currentPageNumber = " + currentPageNumber);
-						console.log("pagesArray= " + pagesArray);
-						/* console.log(questions)
-														console.log("pagesArray.length =" + pagesArray.length)
-														console.log(currentPageNumber) */
+
 						response.render("contact.hbs", model);
 					}
 				}
@@ -466,9 +460,6 @@ router.get("/search", function (request, response) {
 	const errorMessages = [];
 	const value = [search];
 	let resultsExist = false;
-
-	console.log("search = " + search);
-	console.log("value = " + value);
 
 	const projectsQuery = `SELECT * FROM projects WHERE title LIKE '%' || ? || '%'`;
 	const questionsQuery = `SELECT * FROM questions WHERE question LIKE '%' || ? || '%'`;

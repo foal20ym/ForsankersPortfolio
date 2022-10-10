@@ -4,7 +4,7 @@
 	font-family: "Courier New", Courier, monospace;
 	font-size: 140%;
 	color: black;
-	padding: 10px;
+	padding: 5px;
 }
 
 .btn.btn-link:hover {
@@ -18,7 +18,7 @@
 	background-color: transparent;
 	border: none;
 	background: none;
-	padding: 10px;
+	padding: 11px;
 }
 
 .logoutButton:hover {
