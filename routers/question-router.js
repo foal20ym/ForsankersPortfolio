@@ -58,8 +58,8 @@ router.get("/contact/:pagesArray", function (request, response) {
 						console.log("currentPageNumber = " + currentPageNumber);
 						console.log("pagesArray= " + pagesArray);
 						/* console.log(questions)
-											console.log("pagesArray.length =" + pagesArray.length)
-											console.log(currentPageNumber) */
+														console.log("pagesArray.length =" + pagesArray.length)
+														console.log(currentPageNumber) */
 						response.render("contact.hbs", model);
 					}
 				}
@@ -529,11 +529,6 @@ router.get("/search", function (request, response) {
 											commentsResults,
 											resultsExist,
 										};
-
-										console.log(projectsResults);
-										console.log(questionsResults);
-										console.log(commentsResults);
-										console.log(model);
 										response.render("search.hbs", model);
 									}
 								}

@@ -1,404 +1,331 @@
 /* NAVIGATION BAR | NAVIGATION BAR | NAVIGATION BAR */
 .btn.btn-link {
-    padding: 2%;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 140%;
-    color: black;
+	padding: 2%;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 140%;
+	color: black;
+	padding: 10px;
 }
 
 .btn.btn-link:hover {
-    text-decoration: underline;
-    color: black;
-    text-decoration-line: underline;
-    text-decoration-thickness: 3px;
+	text-decoration: underline;
+	color: black;
+	text-decoration-line: underline;
+	text-decoration-thickness: 3px;
 }
 
 .logoutButton {
-    background-color: transparent;
-    padding: 0;
-    border: none;
-    background: none;
+	background-color: transparent;
+	border: none;
+	background: none;
+	padding: 10px;
 }
 
 .logoutButton:hover {
-    text-decoration: underline;
-    color: black;
-    text-decoration-line: underline;
-    text-decoration-thickness: 3px;
+	text-decoration: underline;
+	color: black;
+	text-decoration-line: underline;
+	text-decoration-thickness: 3px;
 }
 
 /* HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT | HOME PAGE MAIN CONTENT */
 .homePageSection {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    color: rgb(34, 34, 34);
-    display: block;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    font-weight: 400;
-    height: 345px;
-    letter-spacing: normal;
-    line-height: 24px;
-    margin-left: 32px;
-    margin-right: 32px;
-    margin-top: 0px;
-    width: 394px;
-}
-
-.homePageStandardContainer {
-    -webkit-font-smoothing: antialiased;
-    align-self: flex-start;
-    box-sizing: border-box;
-    color: rgb(34, 34, 34);
-    display: block;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    font-weight: 400;
-    height: 345px;
-    letter-spacing: normal;
-    line-height: 24px;
-    margin-left: 0px;
-    margin-right: 0px;
-    max-width: 960px;
-    object-fit: fill;
-    opacity: 1;
-    position: relative;
-    text-align: left;
-    transform: matrix(1, 0, 0, 1, 0, 0);
-    transform-style: preserve-3d;
-    width: 394px;
-}
-
-.homePageIntroWrap {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    color: rgb(34, 34, 34);
-    display: block;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    font-weight: 400;
-    height: 280px;
-    letter-spacing: normal;
-    line-height: 24px;
-    margin-bottom: 64px;
-    margin-top: 48px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    text-align: left;
-    width: 394px;
+	color: rgb(34, 34, 34);
+	font-family: "Courier New", Courier, monospace;
+	height: 345px;
+	margin-left: 32px;
+	margin-right: 32px;
+	margin-top: 0px;
 }
 
 .homePageRubricRowOne {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    color: rgb(34, 34, 34);
-    display: block;
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    font-size: 40px;
-    font-weight: 400;
-    letter-spacing: normal;
-    line-height: 15px;
-    margin-block-end: 16px;
-    margin-block-start: 0px;
-    margin-bottom: 16px;
-    margin-inline-end: 0px;
-    margin-inline-start: 0px;
-    margin-left: 50px;
-    margin-right: 0px;
-    margin-top: 100px;
-    text-align: left;
-    width: 700px;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	line-height: 15px;
+	margin-bottom: 16px;
+	margin-left: 50px;
+	margin-right: 0px;
+	margin-top: 100px;
+	text-align: left;
 }
 
 .homePageRubricRowTwo {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    color: rgb(34, 34, 34);
-    display: block;
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    font-size: 40px;
-    font-weight: 400;
-    letter-spacing: normal;
-    margin-block-end: 16px;
-    margin-block-start: 0px;
-    margin-inline-end: 0px;
-    margin-inline-start: 0px;
-    margin-left: 50px;
-    margin-right: 0px;
-    text-align: left;
-    width: 700px;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	font-size: 40px;
+	margin-block-end: 16px;
+	margin-left: 50px;
+	margin-right: 0px;
+	text-align: left;
 }
 
 .homePageParagraphOne {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    color: rgb(34, 34, 34);
-    display: block;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    font-weight: 400;
-    height: 70px;
-    letter-spacing: -0.23999999463558197px;
-    line-height: 24px;
-    margin-top: 16px;
-    max-width: 740px;
-    margin-left: 50px;
-    opacity: 1;
-    text-align: left;
-    width: 394px;
+	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
+	color: rgb(34, 34, 34);
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 16px;
+	font-weight: 400;
+	height: 70px;
+	letter-spacing: -0.23999999463558197px;
+	line-height: 24px;
+	margin-top: 16px;
+	max-width: 740px;
+	margin-left: 50px;
+	opacity: 1;
+	text-align: left;
+	width: 394px;
 }
 
 .homePageParagraphTwo {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    color: rgb(34, 34, 34);
-    display: block;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: -0.23999999463558197px;
-    max-width: 740px;
-    margin-left: 50px;
-    opacity: 1;
-    text-align: left;
-    width: 394px;
+	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
+	color: rgb(34, 34, 34);
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: -0.23999999463558197px;
+	max-width: 740px;
+	margin-left: 50px;
+	opacity: 1;
+	text-align: left;
+	width: 394px;
 }
 
 /* CONTACT PAGE CONTENT CONTACT PAGE CONTENT CONTACT PAGE CONTENT*/
 .contactPageSection {
-    text-align: center;
-    margin-top: -5%;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 130%;
+	text-align: center;
+	margin-top: -5%;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 130%;
 }
 
 .contactPageFormTitle {
-    margin-top: 2%;
-    font-size: 140%;
-    font-family: "Superior title", "Times New Roman", sans-serif;
+	margin-top: 2%;
+	font-size: 140%;
+	font-family: "Superior title", "Times New Roman", sans-serif;
 }
 
 .contactPageQuestion {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .contactPageQuestionsTitle {
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    text-decoration: underline;
-    color: black;
-    font-size: 170%;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	text-decoration: underline;
+	color: black;
+	font-size: 170%;
 }
 
 .contactPageQuestionsUL {
-    list-style: none;
+	list-style: none;
 }
 
 .contactPageQuestionsLI {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .contactPageAnswer {
-    margin-top: -2%;
+	margin-top: -2%;
 }
 
 .contactPageQuestionParagraph {
-    margin-top: -1%;
-    margin-bottom: -1%;
+	margin-top: -1%;
+	margin-bottom: -1%;
 }
 
 summary {
-    font-size: 1.25rem;
-    font-weight: 600;
-    background-color: #fff;
-    color: #333;
-    padding: 0.8rem;
-    margin-bottom: 0.8rem;
-    outline: none;
-    border-radius: 0.25rem;
-    text-align: left;
-    cursor: pointer;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 800px;
+	font-size: 1.25rem;
+	font-weight: 600;
+	background-color: #fff;
+	color: #333;
+	padding: 0.8rem;
+	margin-bottom: 0.8rem;
+	outline: none;
+	border-radius: 0.25rem;
+	text-align: left;
+	cursor: pointer;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 800px;
 }
 
 .faqContent {
-    text-align: center;
+	text-align: center;
 }
 
 details>summary::after {
-    position: absolute;
-    content: "+";
-    right: 20px;
-    top: 30px;
+	position: absolute;
+	content: "+";
+	right: 20px;
+	top: 30px;
 }
 
 details[open]>summary::after {
-    position: absolute;
-    content: "-";
-    right: 20px;
+	position: absolute;
+	content: "-";
+	right: 20px;
 }
 
 details>summary::-webkit-details-marker {
-    display: none;
+	display: none;
 }
 
 details[open] summary~* {
-    animation: sweep .5s ease-in-out;
+	animation: sweep 0.5s ease-in-out;
 }
 
 @keyframes sweep {
-    0% {
-        opacity: 0;
-        margin-top: -10px
-    }
+	0% {
+		opacity: 0;
+		margin-top: -10px;
+	}
 
-    100% {
-        opacity: 1;
-        margin-top: 0px
-    }
+	100% {
+		opacity: 1;
+		margin-top: 0px;
+	}
 }
 
 /* ABOUT PAGE CONTENT ABOUT PAGE CONTENT ABOUT PAGE CONTENT*/
 .aboutPageSection {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 12%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 12%;
 }
 
 .aboutPageHeadOne {
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    margin-left: auto;
-    margin-right: auto;
-    color: rgb(0, 0, 0);
-    font-size: 40px;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	margin-left: auto;
+	margin-right: auto;
+	color: rgb(0, 0, 0);
+	font-size: 40px;
 }
 
 .aboutPageDivOne {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
+	color: black;
+	font-family: "Courier New", Courier, monospace;
 }
 
 .aboutPageDivTwo {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
+	color: black;
+	font-family: "Courier New", Courier, monospace;
+	margin-top: 20px;
 }
 
 .aboutPageDivThree {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
+	color: black;
+	font-family: "Courier New", Courier, monospace;
+	margin-top: 20px;
 }
 
 /*PROJECTS LIST PROJECTS LIST PROJECTS LIST PROJECTS LIST*/
 .projectsPageSection {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 .projectsPageRow {
-    height: 20%;
+	height: 20%;
 }
 
 .projectsPageTitle {
-    text-align: center;
-    color: black;
-    font-family: monospace;
-    text-decoration: overline;
-    margin-top: 8%;
+	text-align: center;
+	color: black;
+	font-family: monospace;
+	text-decoration: overline;
+	margin-top: 8%;
 }
 
 .projectsPageList {
-    list-style: none;
-    align-items: center;
-    text-align: center;
-    margin-top: 7%;
+	list-style: none;
+	align-items: center;
+	text-align: center;
+	margin-top: 7%;
 }
 
 .projectsPageProject {
-    height: 400px;
+	height: 400px;
 }
 
 .projectsPageProjectImage {
-    width: 300px;
-    height: auto;
+	width: 300px;
+	height: auto;
 }
 
 .projectsPageProjectTitle {
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    color: black;
-    font-size: 170%;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	color: black;
+	font-size: 170%;
 }
 
 .projectsPageProjectDescription {
-    font-size: 110%;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
+	font-size: 110%;
+	color: black;
+	font-family: "Courier New", Courier, monospace;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
 }
-
 
 /* PROJECT PAGE PROJECT PAGE PROJECT PAGE PROJECT PAGE*/
 .projectPageSection {
-    display: grid;
-    place-items: center;
-    align-content: center;
-    min-height: 100vh;
+	display: grid;
+	place-items: center;
+	align-content: center;
+	min-height: 100vh;
 }
 
 .projectPageDescription {
-    font-size: 110%;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
+	font-size: 110%;
+	color: black;
+	font-family: "Courier New", Courier, monospace;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
 }
 
 .projectPageTitle {
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    color: black;
-    font-size: 170%;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	color: black;
+	font-size: 170%;
 }
 
 .projectPageImage {
-    width: 300px;
-    height: auto;
+	width: 300px;
+	height: auto;
 }
 
 .projectPageComments {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .projectPageCommentsUL {
-    list-style: none;
+	list-style: none;
 }
 
 .projectPageCommentsTitle {
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    text-decoration: overline;
-    color: black;
-    font-size: 170%;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	text-decoration: overline;
+	color: black;
+	font-size: 170%;
 }
 
 .projectPageUpdateLink {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 /* ADD COMMENT */
@@ -410,133 +337,145 @@ details[open] summary~* {
 /* UPDATE PROJECT */
 /* UPDATE QUESTION */
 .standardCenteredSection {
-    text-align: center;
-    margin-top: 2%;
+	text-align: center;
+	margin-top: 2%;
 }
 
 /* LOGIN PAGE */
 .loginPageSection {
-    text-align: center;
-    margin-top: 2%;
+	text-align: center;
+	margin-top: 2%;
 }
 
 .loginPageHeadOne {
-    text-align: center;
+	text-align: center;
+}
+
+.loggedInStatus {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 30px;
 }
 
 /* STANDARD RUBRIC*/
 .standardRubric {
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    text-align: center;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	text-align: center;
 }
 
 /* MANAGE COMMENTS */
 .manageCommentsSection {
-    text-align: center;
-    margin-top: 20%;
+	text-align: center;
+	margin-top: 20%;
 }
 
 /* MANAGE MESSAGES */
 .manageQuestionSection {
-    text-align: center;
-    margin-top: 20%;
+	text-align: center;
+	margin-top: 20%;
 }
 
 .errorMessagesSection {
-    text-align: center;
-    margin-top: 16%;
+	text-align: center;
+	margin-top: 16%;
 }
 
 .errorMessageTitle {
-    font-family: "Superior title", "Times New Roman", sans-serif;
-    font-size: 150%;
-    text-decoration: underline;
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	font-size: 150%;
+	text-decoration: underline;
 }
 
 /* LAYOUT BACKGROUND 'ANIMATED'*/
 .animatedwrapper {
-    overflow: hidden;
-    position: absolute;
-    left: 0px;
-    top: -100px;
-    z-index: -1;
-    width: 100%;
-    height: 2000px;
-    isolation: isolate;
-    /* 
+	overflow: hidden;
+	position: absolute;
+	left: 0px;
+	top: -100px;
+	z-index: -1;
+	width: 100%;
+	height: 2000px;
+	isolation: isolate;
+	/* 
     Add fallback background here
     background: url();
     */
 }
 
-@media only screen and (max-width: 600px) {
-    .animatedwrapper {
-        top: -500px;
-    }
-
-    .dot {
-        --size: 100px;
-    }
+#footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 30px;
 }
 
+@media only screen and (max-width: 600px) {
+	.animatedwrapper {
+		top: -500px;
+	}
+
+	.dot {
+		--size: 100px;
+	}
+}
 
 .dot {
-    --size: 700px;
-    /* Only show the animated dots for browsers that support the required features */
-    display: none;
-    position: absolute;
-    left: calc(var(--size) / 3 * -1);
-    top: calc(var(--size) / 3 * -1);
-    width: var(--size);
-    height: var(--size);
-    mix-blend-mode: soft-light;
-    border-radius: var(--size);
-    filter: blur(calc(var(--size) / 6));
-    animation: dot-animation ease-in-out 20s infinite;
-    will-change: transform;
+	--size: 700px;
+	/* Only show the animated dots for browsers that support the required features */
+	display: none;
+	position: absolute;
+	left: calc(var(--size) / 3 * -1);
+	top: calc(var(--size) / 3 * -1);
+	width: var(--size);
+	height: var(--size);
+	mix-blend-mode: soft-light;
+	border-radius: var(--size);
+	filter: blur(calc(var(--size) / 6));
+	animation: dot-animation ease-in-out 20s infinite;
+	will-change: transform;
 }
 
 @supports (mix-blend-mode: soft-light) and (filter: blur(1px)) {
-    .animatedwrapper {
-        /* Remove the fallback background image when the features are supported */
-        background: none;
-    }
+	.animatedwrapper {
+		/* Remove the fallback background image when the features are supported */
+		background: none;
+	}
 
-    .dot {
-        /* Only show the animated dots for browsers that support the required features */
-        display: block;
-    }
+	.dot {
+		/* Only show the animated dots for browsers that support the required features */
+		display: block;
+	}
 }
 
 .dot--one {
-    background: #ed2a24;
+	background: #ed2a24;
 }
 
 .dot--two {
-    background: #f48937;
-    animation-delay: -7s;
+	background: #f48937;
+	animation-delay: -7s;
 }
 
 .dot--three {
-    background: #bd3690;
-    animation-delay: -14s;
+	background: #bd3690;
+	animation-delay: -14s;
 }
 
-
 @keyframes dot-animation {
-    0% {
-        transform: translate(0, 0);
-    }
+	0% {
+		transform: translate(0, 0);
+	}
 
-    33% {
-        transform: translate(calc(var(--size) / 1.5), 0);
-    }
+	33% {
+		transform: translate(calc(var(--size) / 1.5), 0);
+	}
 
-    66% {
-        transform: translate(0, calc(var(--size) / 1.5));
-    }
+	66% {
+		transform: translate(0, calc(var(--size) / 1.5));
+	}
 
-    100% {
-        transform: translate(0, 0);
-    }
+	100% {
+		transform: translate(0, 0);
+	}
 }

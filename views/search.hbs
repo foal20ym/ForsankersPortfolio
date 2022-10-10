@@ -1,10 +1,10 @@
 {{#if errorMessages}}
-{{> errors}}
+	{{> errors}}
 {{else}}
 {{#if resultsExist}}
-<ul>
+<ul class="searchResultsList">
 	{{#if projectsResults}}
-	<h1>Projects that might match your search</h1>
+		<h1>Projects that might match your search</h1>
 	{{#each projectsResults}}
 	<li>
 		<img src="{{image}}" alt="" class="projectsPageProjectImage" />
@@ -14,7 +14,7 @@
 	{{/each}}
 	{{/if}}
 	{{#if questionsResults}}
-	<h1>Questions that might match your search</h1>
+		<h1>Questions that might match your search</h1>
 	{{#each questionsResults}}
 	<li>
 		<p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
@@ -24,7 +24,7 @@
 	{{/each}}
 	{{/if}}
 	{{#if commentsResults}}
-	<h1>Comments that might match your search</h1>
+		<h1>Comments that might match your search</h1>
 	{{#each commentsResults}}
 	<li>
 		<p>{{this.comment}}</p>
@@ -33,6 +33,6 @@
 	{{/if}}
 </ul>
 {{else}}
-<h1>No results for your search</h1>
+	<h1>No results for your search</h1>
 {{/if}}
 {{/if}}

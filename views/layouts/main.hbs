@@ -27,7 +27,6 @@
 			<form action="/logout" method="POST" class="btn btn-link">
 				<input type="submit" value="Logout" class="logoutButton" />
 			</form>
-			<!-- <a href="/logout" class="btn btn-link"> Logout</a> -->
 			{{/if}}
 			<form action="/search" method="GET" class="btn btn-link">
 				<input type="text" name="query" placeholder="search" />
@@ -46,7 +45,6 @@
 			<a href="/about" class="btn btn-link">About</a>
 		</section>
 	</header>
-
 	<main>
 		<div class="animated-background w-embed">
 			<div class="animatedwrapper">
@@ -57,12 +55,9 @@
 		</div>
 		{{{body}}}
 	</main>
-
-	<!--
-    <footer>
-        Copyright Alex 2022
-    </footer>
-    -->
+	<footer id="footer">
+		Copyright Alex 2022
+	</footer>
 </body>
 
 </html>
