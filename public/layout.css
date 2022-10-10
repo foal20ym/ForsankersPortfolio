@@ -237,16 +237,12 @@ details[open] summary~* {
 	background-color: transparent;
 }
 
-.projectsPageRow {
-	height: 20%;
-}
-
 .projectsPageTitle {
 	text-align: center;
 	color: black;
 	font-family: monospace;
 	text-decoration: overline;
-	margin-top: 8%;
+	margin-top: -8%;
 }
 
 .projectsPageList {
@@ -336,6 +332,7 @@ details[open] summary~* {
 /* UPDATE COMMENT */
 /* UPDATE PROJECT */
 /* UPDATE QUESTION */
+/* projects sextion */
 .standardCenteredSection {
 	text-align: center;
 	margin-top: 2%;
