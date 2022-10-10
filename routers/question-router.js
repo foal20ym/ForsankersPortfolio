@@ -33,7 +33,6 @@ router.get('/contact/:pagesArray', function (request, response) {
 
             response.render('contact.hbs', model)
         }
-
         else {
             db.all(showSpecificQuestionsQuery, function (showQuestionsError, questions) {
 
@@ -48,7 +47,6 @@ router.get('/contact/:pagesArray', function (request, response) {
                     response.render('contact.hbs', model)
 
                 }
-
                 else {
 
                     const pagesArray = []
@@ -139,7 +137,6 @@ router.post('/add-question', function (request, response) {
 
                 response.render('add-question.hbs', model)
             }
-
             else {
 
                 response.redirect('/contact/1')
@@ -148,7 +145,8 @@ router.post('/add-question', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         const model = {
             errorMessages,
@@ -178,12 +176,12 @@ router.get('/manage-question/:questionID', function (request, response) {
 
         response.render('manage-question.hbs', model)
 
-    } else {
+    }
+    else {
 
         response.redirect('/login')
 
     }
-
 
 })
 
@@ -205,7 +203,8 @@ router.get('/answer-question/:questionID', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         response.redirect('/login')
 
@@ -252,7 +251,8 @@ router.post('/answer-question/:questionID', function (request, response) {
 
                 response.render('answer-question.hbs', model)
 
-            } else {
+            }
+            else {
 
                 response.redirect('/contact/1')
 
@@ -260,7 +260,8 @@ router.post('/answer-question/:questionID', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         if (request.session.isLoggedIn) {
             const questionID = request.params.questionID
@@ -279,7 +280,8 @@ router.post('/answer-question/:questionID', function (request, response) {
 
             })
 
-        } else {
+        }
+        else {
 
             response.redirect('/login')
 
@@ -307,7 +309,8 @@ router.get('/update-question/:questionID', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         response.redirect('/login')
 
@@ -342,15 +345,6 @@ router.post('/update-question/:questionID', function (request, response) {
     else if (MAX_QUESTION_LENGTH < question.length) {
         errorMessages.push("Question can't be more than " + MAX_QUESTION_LENGTH + " characters long.")
     }
-    /*    if (answer.length == 0) {
-            errorMessages.push("Answer can't be null")
-        }
-        else if (answer.length < MIN_ANSWER_LENGTH) {
-            errorMessages.push("Answer can't be less than " + MIN_ANSWER_LENGTH + " characters long.")
-        }
-        else if (MAX_ANSWER_LENGTH < answer.length) {
-            errorMessages.push("Answer can't be more than " + MAX_ANSWER_LENGTH + " characters long.")
-        } */
 
     if (errorMessages.length == 0) {
 
@@ -376,7 +370,8 @@ router.post('/update-question/:questionID', function (request, response) {
 
                 response.render('update-question.hbs', model)
 
-            } else {
+            }
+            else {
 
                 response.redirect('/contact/1')
 
@@ -384,7 +379,8 @@ router.post('/update-question/:questionID', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         if (request.session.isLoggedIn) {
             const questionID = request.params.questionID
@@ -403,7 +399,8 @@ router.post('/update-question/:questionID', function (request, response) {
 
             })
 
-        } else {
+        }
+        else {
 
             response.redirect('/login')
 
@@ -434,7 +431,6 @@ router.post('/delete-question/:questionID', function (request, response) {
                 errorMessages.push('Internal Server Error')
                 response.redirect('/login')
             }
-
             else {
                 response.redirect('/contact/1')
             }
@@ -442,7 +438,6 @@ router.post('/delete-question/:questionID', function (request, response) {
         })
 
     }
-
     else {
         response.redirect('/')
     }
@@ -467,7 +462,8 @@ router.get('/update-answer/:questionID', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         response.redirect('/login')
 
@@ -515,7 +511,8 @@ router.post('/update-answer/:questionID', function (request, response) {
 
                 response.render('update-answer.hbs', model)
 
-            } else {
+            }
+            else {
 
                 response.redirect('/contact/1')
 
@@ -523,7 +520,8 @@ router.post('/update-answer/:questionID', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         if (request.session.isLoggedIn) {
             const questionID = request.params.questionID
@@ -542,7 +540,8 @@ router.post('/update-answer/:questionID', function (request, response) {
 
             })
 
-        } else {
+        }
+        else {
 
             response.redirect('/login')
 
@@ -574,7 +573,6 @@ router.post('/delete-answer/:questionID', function (request, response) {
                 errorMessages.push('Internal Server Error')
                 response.redirect('/login')
             }
-
             else {
                 response.redirect('/contact/1')
             }
@@ -582,20 +580,19 @@ router.post('/delete-answer/:questionID', function (request, response) {
         })
 
     }
-
     else {
         response.redirect('/')
     }
 
 })
 
+
 router.get('/search', function (request, response) {
-    response.render('search.hbs')
-})
-
-router.post('/search', function (request, response) {
-
-    const search = request.body.search
+    // http://localhost:8080/search?query=test
+    //          request . query string . input name
+    const search = request.query.query
+    
+    // const search = request.body.search
     const errorMessages = []
     const value = [search]
     let resultsExist = false
@@ -610,17 +607,6 @@ router.post('/search', function (request, response) {
     if (search.length == 0) {
         errorMessages.push("Your search cannot be null or empty")
     }
-    /*
-    Test: 
-    const projectsQuery = 
-    `SELECT (title, description, image) AS 'projectsResults' FROM projects WHERE title LIKE '%' || ? || '%'`
-
-    const questionsQuery = 
-    `SELECT (name, (??email??), question, answer, date) AS 'questionsResults' FROM questions WHERE question LIKE '%' || ? || '%'`
-
-    const commentsQuery = 
-    `SELECT comment AS 'commentsResults' FROM comments WHERE comment LIKE '%' || ? || '%'`
-    */
 
     if (errorMessages.length == 0) {
 
@@ -637,8 +623,6 @@ router.post('/search', function (request, response) {
                 response.render('search.hbs', model)
 
             }
-
-
             else {
 
                 db.all(questionsQuery, value, function (questionsError, questionsResults) {
@@ -654,7 +638,6 @@ router.post('/search', function (request, response) {
                         response.render('search.hbs', model)
 
                     }
-
                     else {
 
                         db.all(commentsQuery, value, function (commentsError, commentsResults) {
@@ -668,7 +651,6 @@ router.post('/search', function (request, response) {
                                 response.render('search.hbs', model)
 
                             }
-
                             else {
 
                                 if (projectsResults.length || questionsResults.length || commentsResults.length) {
@@ -702,7 +684,6 @@ router.post('/search', function (request, response) {
         })
 
     }
-
     else {
 
         const model = {
