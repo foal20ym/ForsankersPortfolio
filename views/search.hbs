@@ -3,34 +3,34 @@
 {{else}}
 {{#if resultsExist}}
 <ul>
-    {{#if projectsResults}}
-    <h1>Projects that might match your search</h1>
-    {{#each projectsResults}}
-    <li>
-        <img src="{{image}}" alt="" class="projectsPageProjectImage" />
-        <a href="/projects/{{projectID}}">{{title}}</a>
-        <p class="projectsPageProjectDescription"> {{description}}</p>
-    </li>
-    {{/each}}
-    {{/if}}
-    {{#if questionsResults}}
-    <h1>Questions that might match your search</h1>
-    {{#each questionsResults}}
-    <li>
-        <p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
-        <p class="contactPageQuestionParagraph">From: {{name}}, {{date}}</p>
-        <p>{{#if answer}} A: {{answer}} {{/if}}</p>
-    </li>
-    {{/each}}
-    {{/if}}
-    {{#if commentsResults}}
-    <h1>Comments that might match your search</h1>
-    {{#each commentsResults}}
-    <li>
-        <p>{{this.comment}}</p>
-    </li>
-    {{/each}}
-    {{/if}}
+	{{#if projectsResults}}
+	<h1>Projects that might match your search</h1>
+	{{#each projectsResults}}
+	<li>
+		<img src="{{image}}" alt="" class="projectsPageProjectImage" />
+		<a href="/projects/{{projectID}}">{{title}}</a>
+		<p class="projectsPageProjectDescription"> {{description}}</p>
+	</li>
+	{{/each}}
+	{{/if}}
+	{{#if questionsResults}}
+	<h1>Questions that might match your search</h1>
+	{{#each questionsResults}}
+	<li>
+		<p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
+		<p class="contactPageQuestionParagraph">From: {{name}}, {{date}}</p>
+		<p>{{#if answer}} A: {{answer}} {{/if}}</p>
+	</li>
+	{{/each}}
+	{{/if}}
+	{{#if commentsResults}}
+	<h1>Comments that might match your search</h1>
+	{{#each commentsResults}}
+	<li>
+		<p>{{this.comment}}</p>
+	</li>
+	{{/each}}
+	{{/if}}
 </ul>
 {{else}}
 <h1>No results for your search</h1>

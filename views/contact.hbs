@@ -1,48 +1,52 @@
 {{> errors }}
 <section class="contactPageSection">
-    <div>
-        Phone: 070 123 45 67
-    </div>
-    <div>
-        Email: alibabaExpress@gmail.com
-    </div>
-    <div>
-        Address: skolgatan 39B, 555 43, Jönköping
-    </div>
-    <h1 class="contactPageFormTitle"> Ask questions right here with <a href="/add-question">this</a> form!</h1>
-    <div class="contactPageQuestions">
-        <h1 class="contactPageQuestionsTitle"> Questions</h1>
-        {{#if isLoggedIn}}
-        {{#each questions}}
-        <details>
-            <summary>
-                <p class="contactPageQuestionParagraph"><a href="/manage-question/{{questionID}}">Q: {{this.question}}</a></p>
-                <p class="contactPageQuestionParagraph"><a href="/manage-question/{{questionID}}">From: {{this.name}}, {{this.email}}, {{this.date}}</a></p>
-            </summary>
-            <div class="faqContent">
-                <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
-            </div>
-        </details>
-        {{/each}}
-        {{else}}
-        {{#each questions}}
-        <details>
-            <summary>
-                <p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
-                <p class="contactPageQuestionParagraph">From: {{this.name}}, {{this.date}}</p>
-            </summary>
-            <div class="faqContent">
-                <p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
-            </div>
-        </details>
-        {{/each}}
-        {{/if}}
-        <ul class="pagination">
-            {{#each pagesArray}}
-            <li class="page-item">
-                <a href="/contact/{{this}}">{{this}}</a>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
+	<div>
+		Phone: 070 123 45 67
+	</div>
+	<div>
+		Email: alibabaExpress@gmail.com
+	</div>
+	<div>
+		Address: skolgatan 39B, 555 43, Jönköping
+	</div>
+	<h1 class="contactPageFormTitle"> Ask questions right here with <a href="/add-question">this</a> form!</h1>
+	<div class="contactPageQuestions">
+		<h1 class="contactPageQuestionsTitle"> Questions</h1>
+		{{#if isLoggedIn}}
+		{{#each questions}}
+		<details>
+			<summary>
+				<p class="contactPageQuestionParagraph">
+					<a href="/manage-question/{{questionID}}">Q:{{this.question}}</a>
+				</p>
+				<p class="contactPageQuestionParagraph">
+					<a href="/manage-question/{{questionID}}">From: {{this.name}},{{this.email}}, {{this.date}}</a>
+				</p>
+			</summary>
+			<div class="faqContent">
+				<p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
+			</div>
+		</details>
+		{{/each}}
+		{{else}}
+		{{#each questions}}
+		<details>
+			<summary>
+				<p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
+				<p class="contactPageQuestionParagraph">From: {{this.name}}, {{this.date}}</p>
+			</summary>
+			<div class="faqContent">
+				<p>{{#if this.answer}} A: {{this.answer}} {{/if}}</p>
+			</div>
+		</details>
+		{{/each}}
+		{{/if}}
+		<ul class="pagination">
+			{{#each pagesArray}}
+			<li class="page-item">
+				<a href="/contact/{{this}}">{{this}}</a>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
 </section>

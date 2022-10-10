@@ -1,55 +1,43 @@
-const express = require('express')
-const router = express.Router()
-const bcrypt = require('bcrypt')
-const saltRounds = 10
-const ADMIN_USERNAME = 'Alice'
-const ADMIN_PASSOWRD = '$2b$10$VasTmOYbHU9agU4.0XwS8uRnxnNqo/R8Z5OZy2UxSsYEUxEQ848Ga'
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const ADMIN_USERNAME = "Alice";
+const ADMIN_PASSOWRD =
+	"$2b$10$VasTmOYbHU9agU4.0XwS8uRnxnNqo/R8Z5OZy2UxSsYEUxEQ848Ga";
 
-router.get('/login', function (request, response) {
-    response.render('login.hbs')
-})
+router.get("/login", function (request, response) {
+	response.render("login.hbs");
+});
 
-router.post('/login', function (request, response) {
+router.post("/login", function (request, response) {
+	const username = request.body.username;
+	const errorMessages = [];
 
-    const username = request.body.username
-    const errorMessages = []
+	bcrypt.genSalt(saltRounds, function (err, salt) {
+		bcrypt.hash(ADMIN_PASSOWRD, salt, function (err, hash) {
+			bcrypt.compare(ADMIN_PASSOWRD, hash, function (err, result) {
+				if (username == ADMIN_USERNAME && result) {
+					request.session.isLoggedIn = true;
 
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(ADMIN_PASSOWRD, salt, function (err, hash) {
-            bcrypt.compare(ADMIN_PASSOWRD, hash, function (err, result) {
+					response.redirect("/");
+				} else {
+					errorMessages.push("Wrong login credentials!");
 
-                if (username == ADMIN_USERNAME && (result)) {
+					const model = {
+						errorMessages,
+					};
 
-                    request.session.isLoggedIn = true
+					response.render("login.hbs", model);
+				}
+			});
+		});
+	});
+});
 
-                    response.redirect('/')
+router.post("/logout", function (request, response) {
+  request.session.isLoggedIn = false;
+  response.redirect("/");
+});
 
-                }
-                else {
-
-                    errorMessages.push("Wrong login credentials!")
-
-                    const model = {
-                        errorMessages
-                    }
-
-                    response.render('login.hbs', model)
-
-                }
-
-            })
-
-        })
-
-    })
-
-})
-
-router.post('/logout', function (request, response) {
-
-    request.session.isLoggedIn = false
-    response.redirect('/')
-
-})
-
-module.exports = router
+module.exports = router;

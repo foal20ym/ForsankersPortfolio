@@ -1,22 +1,22 @@
 {{> errors }}
 {{#if projects.length}}
 <section class="projectsPageSection">
-    <div class="projectsPageRow">
-        <h1 class="projectsPageTitle">
-            Here are some of my projects
-        </h1>
-        <ul class="projectsPageList">
-            {{#each projects}}
-            <li class="projectsPageProject">
-                <img src="{{image}}" alt="" class="projectsPageProjectImage" />
-                <h3 class="projectsPageProjectTitle">
-                    <a href="/projects/{{projectID}}">{{title}}</a>
-                </h3>
-                <p class="projectsPageProjectDescription"> {{description}}</p>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
+	<div class="projectsPageRow">
+		<h1 class="projectsPageTitle">
+			Here are some of my projects
+		</h1>
+		<ul class="projectsPageList">
+			{{#each projects}}
+			<li class="projectsPageProject">
+				<img src="{{image}}" alt="" class="projectsPageProjectImage" />
+				<h3 class="projectsPageProjectTitle">
+					<a href="/projects/{{projectID}}">{{title}}</a>
+				</h3>
+				<p class="projectsPageProjectDescription"> {{description}}</p>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
 </section>
 {{else}}
 <p> There is currently no projects to display. </p>

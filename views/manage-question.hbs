@@ -1,19 +1,19 @@
 {{#if isLoggedIn}}
 <section class="manageQuestionSection">
-    <button>
-        <a class="projectPageUpdateLink" href="/update-question/{{question.questionID}}">Update question</a>
-    </button>
-    <button>
-        <a class="projectPageUpdateLink" href="/answer-question/{{question.questionID}}">Answer question</a>
-    </button>
-    <button>
-        <a class="projectPageUpdateLink" href="/update-answer/{{question.questionID}}">Update answer</a>
-    </button>
-    <form action="/delete-question/{{question.questionID}}" method="POST">
-        <input type="submit" value="Delete Question">
-    </form>
-    <form action="/delete-answer/{{question.questionID}}" method="POST">
-        <input type="submit" value="Delete answer">
-    </form>
+	<button>
+		<a class="projectPageUpdateLink" href="/update-question/{{question.questionID}}">Update question</a>
+	</button>
+	<button>
+		<a class="projectPageUpdateLink" href="/answer-question/{{question.questionID}}">Answer question</a>
+	</button>
+	<button>
+		<a class="projectPageUpdateLink" href="/update-answer/{{question.questionID}}">Update answer</a>
+	</button>
+	<form action="/delete-question/{{question.questionID}}" method="POST">
+		<input type="submit" value="Delete Question" />
+	</form>
+	<form action="/delete-answer/{{question.questionID}}" method="POST">
+		<input type="submit" value="Delete answer" />
+	</form>
 </section>
 {{/if}}
