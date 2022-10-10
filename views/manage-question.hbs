@@ -1,12 +1,12 @@
 {{#if isLoggedIn}}
 <section class="manageQuestionSection">
-    <button> 
+    <button>
         <a class="projectPageUpdateLink" href="/update-question/{{question.questionID}}">Update question</a>
     </button>
-    <button> 
+    <button>
         <a class="projectPageUpdateLink" href="/answer-question/{{question.questionID}}">Answer question</a>
     </button>
-    <button> 
+    <button>
         <a class="projectPageUpdateLink" href="/update-answer/{{question.questionID}}">Update answer</a>
     </button>
     <form action="/delete-question/{{question.questionID}}" method="POST">

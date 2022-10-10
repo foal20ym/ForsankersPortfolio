@@ -8,25 +8,41 @@ const MIN_DESCRIPTION_LENGTH = 10
 const MAX_TITLE_LENGTH = 30
 const MIN_TITLE_LENGTH = 4
 
+const allowedFileTypes = [
+    'image/png',
+    'image/jpeg',
+    'image/jpg'
+]
+
 const multer = require('multer')
 const storage = multer.diskStorage({
-
     destination: (request, file, cb) => {
         cb(null, 'public')
     },
     filename: (request, file, cb) => {
         const fileName = Date.now() + path.extname(file.originalname)
-        request.filePath = fileName // create a new key in request object
+        request.filePath = fileName
         cb(null, fileName)
     }
 })
-const upload = multer({ storage: storage })
+const upload = multer({ 
+    storage: storage,
+    
+    fileFilter: (req, file, cb) => {
+        if (allowedFileTypes.includes(file.mimetype)) {
+            cb(null, true)
+        } else {
+            req.isUploadError =  true
+            cb(null, false)
+        }    
+      }
+ })
 
 router.get('/projects', function (request, response) {
 
     const query = `SELECT * FROM projects`
 
-    db.all(query, function (error, projects) { // this is asyncronius
+    db.all(query, function (error, projects) {
 
         const errorMessages = []
 
@@ -75,6 +91,7 @@ router.get('/projects/:projectID', function (request, response) {
         }
         else {
             db.all(commentQuery, commentValues, function (commentError, comments) {
+
                 if (commentError) {
 
                     errorMessages.push('commentError')
@@ -86,7 +103,6 @@ router.get('/projects/:projectID', function (request, response) {
 
                     response.render('project.hbs', model)
                 }
-
                 else {
                     const model = {
                         errorMessages,
@@ -110,7 +126,8 @@ router.get('/add-project', function (request, response) {
 
         response.render('add-project.hbs')
 
-    } else {
+    }
+    else {
 
         response.redirect('/login')
 
@@ -146,8 +163,12 @@ router.post('/add-project', upload.single('image'), function (request, response)
         errorMessages.push("Description can't be less than " + MIN_DESCRIPTION_LENGTH + " characters long.")
     }
 
+
     if (!request.session.isLoggedIn) {
         errorMessages.push('Not logged in.')
+    }
+    if(request.isUploadError){
+        errorMessages.push("Invalid Filetype")
     }
 
     if (errorMessages.length == 0) {
@@ -172,7 +193,6 @@ router.post('/add-project', upload.single('image'), function (request, response)
 
                 response.render('add-project.hbs', model)
             }
-
             else {
 
                 response.redirect('/projects')
@@ -181,7 +201,8 @@ router.post('/add-project', upload.single('image'), function (request, response)
 
         })
 
-    } else {
+    }
+    else {
 
         const model = {
             errorMessages,
@@ -216,7 +237,8 @@ router.get('/update-project/:projectID', function (request, response) {
 
         })
 
-    } else {
+    }
+    else {
 
         response.redirect('/login')
 
@@ -224,11 +246,13 @@ router.get('/update-project/:projectID', function (request, response) {
 
 })
 
-router.post('/update-project/:projectID', function (request, response) {
+router.post('/update-project/:projectID', upload.single('image'), function (request, response) {
 
     const projectID = request.params.projectID
     const title = request.body.title
     const description = request.body.description
+    const image = request.filePath
+    console.log(image)
     const errorMessages = []
 
     if (!request.session.isLoggedIn) {
@@ -258,9 +282,9 @@ router.post('/update-project/:projectID', function (request, response) {
     if (errorMessages.length == 0) {
 
         const query =
-            `UPDATE projects SET (title, description) = (?, ?) WHERE projectID = ?`
+            `UPDATE projects SET (title, description, image) = (?, ?, ?) WHERE projectID = ?`
 
-        const values = [title, description, projectID]
+        const values = [title, description, image, projectID]
 
         db.run(query, values, function (error) {
 
@@ -271,12 +295,14 @@ router.post('/update-project/:projectID', function (request, response) {
                 const model = {
                     errorMessages,
                     title,
+                    image,
                     description
                 }
 
                 response.render('update-project.hbs', model)
 
-            } else {
+            }
+            else {
 
                 response.redirect('/projects')
 
@@ -284,7 +310,8 @@ router.post('/update-project/:projectID', function (request, response) {
 
         })
 
-    } else {
+    } 
+    else {
 
         if (request.session.isLoggedIn) {
             const projectID = request.params.projectID
@@ -304,7 +331,8 @@ router.post('/update-project/:projectID', function (request, response) {
 
             })
 
-        } else {
+        } 
+        else {
 
             response.redirect('/login')
 
@@ -336,7 +364,6 @@ router.post('/delete-project/:projectID', function (request, response) {
                 errorMessages.push('Internal Server Error')
                 response.redirect('/login')
             }
-
             else {
                 response.redirect('/projects')
             }
@@ -344,7 +371,6 @@ router.post('/delete-project/:projectID', function (request, response) {
         })
 
     }
-
     else {
         response.redirect('/login')
     }

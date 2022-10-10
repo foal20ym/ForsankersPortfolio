@@ -1,6 +1,4 @@
-{{#if failedToLogin}}
-  <p>Wrong credentials!</p>
-{{/if}}
+{{> errors}}
 <section class="loginPageSection">
   <h1 class="loginPageHeadOne">Login</h1>
   <form action="/login" method="POST">

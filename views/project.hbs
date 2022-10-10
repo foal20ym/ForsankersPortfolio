@@ -8,28 +8,32 @@
         <h1 class="projectPageCommentsTitle"> Comments and feedback </h1>
         <ul class="projectPageCommentsUL">
             {{#if isLoggedIn}}
-                {{#each comments}}
-                <li class="projectPageCommentsLI">
-                    <a href="/manage-comment/{{commentID}}">{{this.comment}}</a>
-                </li>
-                {{/each}}
-                {{else}}
-                {{#each comments}}
-                    <li class="projectPageCommentsLI">{{this.comment}}</li>
-                {{/each}}
+            {{#each comments}}
+            <li class="projectPageCommentsLI">
+                <a href="/manage-comment/{{commentID}}">{{this.comment}}</a>
+            </li>
+            {{/each}}
+            {{else}}
+            {{#each comments}}
+            <li class="projectPageCommentsLI">{{this.comment}}</li>
+            {{/each}}
             {{/if}}
-         </ul>
+        </ul>
     </div>
 
     {{#if isLoggedIn}}
-    <button> <a class="projectPageUpdateLink" href="/update-project/{{project.projectID}}">Update</a> </button>
-    
+    <button>
+        <a class="projectPageUpdateLink" href="/update-project/{{project.projectID}}">Update</a>
+    </button>
+
     <form action="/delete-project/{{project.projectID}}" method="POST">
         <input type="submit" value="Delete Project">
     </form>
     {{/if}}
 
-    <button> <a class="projectPageUpdateLink" href="/add-comment/{{project.projectID}}">Add comment</a> </button>
+    <button>
+        <a class="projectPageUpdateLink" href="/add-comment/{{project.projectID}}">Add comment</a>
+    </button>
 
     {{else}}
     <p>This project don't exist</p>

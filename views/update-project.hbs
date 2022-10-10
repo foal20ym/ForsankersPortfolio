@@ -1,16 +1,16 @@
 {{> errors }}
 <section class="standardCenteredSection">
     <h1>Update Project</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <div>
             <input type="text" name="title" value="{{project.title}}">
         </div>
         <div>
             <input type="text" name="description" value="{{project.description}}">
         </div>
-        <!--    <div>
-        <input type="file" name="image" value="{{project.image}}">
-    </div> -->
+        <div>
+            <input type="file" name="image" value="{{projects.image}}">
+        </div>
         <input type="submit" value="Update Project">
     </form>
 </section>

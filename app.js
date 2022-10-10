@@ -36,29 +36,7 @@ db.run(`
         FOREIGN KEY(projectID) REFERENCES projects (projectID)
     )
 `)
-/*
-db.run(`
-    CREATE TABLE IF NOT EXISTS searches (
-        searchID INTEGER PRIMARY KEY AUTOINCREMENT,
-        search TEXT
-    )
-`)
-*/
 
-
-const storage = multer.diskStorage({
-
-    destination: (request, file, cb) => {
-        cb(null, 'public')
-    },
-    filename: (request, file, cb) => {
-        const fileName = Date.now() + path.extname(file.originalname)
-        request.filePath = fileName // create a new key in request object
-        cb(null, fileName)
-    }
-})
-
-const upload = multer({ storage: storage })
 
 const app = express()
 

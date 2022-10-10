@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const sqlite3 = require('sqlite3')
 const db = new sqlite3.Database('portfolio-database.db')
-
 const MAX_COMMENT_LENGTH = 255
 const MIN_COMMENT_LENGTH = 5
 
@@ -54,7 +53,6 @@ router.post('/add-comment/:projectID', function (request, response) {
 
                 response.render('add-comment.hbs', model)
             }
-
             else {
 
                 response.redirect('/projects')
@@ -63,7 +61,8 @@ router.post('/add-comment/:projectID', function (request, response) {
 
         })
 
-    } else {
+    } 
+    else {
 
         const model = {
             errorMessages,
@@ -90,7 +89,8 @@ router.get('/manage-comment/:commentID', function (request, response) {
 
         response.render('manage-comment.hbs', model)
 
-    } else {
+    } 
+    else {
 
         response.redirect('/login')
 
@@ -117,7 +117,8 @@ router.get('/update-comment/:commentID', function (request, response) {
 
         })
 
-    } else {
+    } 
+    else {
 
         response.redirect('/login')
 
@@ -164,7 +165,8 @@ router.post('/update-comment/:commentID', function (request, response) {
 
                 response.render('update-comment.hbs', model)
 
-            } else {
+            } 
+            else {
 
                 response.redirect('/projects')
 
@@ -172,7 +174,8 @@ router.post('/update-comment/:commentID', function (request, response) {
 
         })
 
-    } else {
+    } 
+    else {
 
         if (request.session.isLoggedIn) {
             const commentID = request.params.commentID
@@ -192,7 +195,8 @@ router.post('/update-comment/:commentID', function (request, response) {
 
             })
 
-        } else {
+        } 
+        else {
 
             response.redirect('/login')
 
@@ -223,7 +227,6 @@ router.post('/delete-comment/:commentID', function (request, response) {
                 errorMessages.push('Internal Server Error')
                 response.redirect('/login')
             }
-
             else {
                 response.redirect('/projects')
             }
@@ -231,7 +234,6 @@ router.post('/delete-comment/:commentID', function (request, response) {
         })
 
     }
-
     else {
         response.redirect('/')
     }
