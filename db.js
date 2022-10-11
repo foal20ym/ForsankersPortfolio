@@ -255,5 +255,3 @@ exports.commentsSearchQuery = function (value, callback) {
 		callback(commentsError, commentsResults);
 	});
 };
-
-

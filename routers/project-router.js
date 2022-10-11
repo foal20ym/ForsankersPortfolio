@@ -14,7 +14,7 @@ const allowedFileTypes = ["image/png", "image/jpeg", "image/jpg"];
 const multer = require("multer");
 const storage = multer.diskStorage({
 	destination: (request, file, cb) => {
-		cb(null, "public");
+		cb(null, "public/uploads");
 	},
 
 	filename: (request, file, cb) => {
