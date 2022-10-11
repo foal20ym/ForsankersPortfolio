@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const sqlite3 = require("sqlite3");
-const db = new sqlite3.Database("portfolio-database.db");
+// const db = new sqlite3.Database("portfolio-database.db");
+const db = require("../db.js");
+
 const MAX_COMMENT_LENGTH = 255;
 const MIN_COMMENT_LENGTH = 5;
 
@@ -33,11 +35,7 @@ router.post("/add-comment/:projectID", function (request, response) {
 	}
 
 	if (errorMessages.length == 0) {
-		const query = `INSERT INTO comments (comment,projectID) VALUES (?,?)`;
-
-		const values = [comment, projectID];
-
-		db.run(query, values, function (error) {
+		db.addCommentToProject(comment, projectID, function (error) {
 			if (error) {
 				errorMessages.push("Internal server error");
 
@@ -81,15 +79,12 @@ router.get("/manage-comment/:commentID", function (request, response) {
 router.get("/update-comment/:commentID", function (request, response) {
 	if (request.session.isLoggedIn) {
 		const commentID = request.params.commentID;
-
-		const query = `SELECT * FROM comments WHERE commentID = ?`;
-		const values = [commentID];
-
-		db.get(query, values, function (error, comment) {
+		
+		db.getCommentByID(commentID, function(error, comment){
 			const model = {
 				comment,
 			};
-
+	
 			response.render("update-comment.hbs", model);
 		});
 	} else {
@@ -118,11 +113,7 @@ router.post("/update-comment/:commentID", function (request, response) {
 	}
 
 	if (errorMessages.length == 0) {
-		const query = `UPDATE comments SET (comment) = (?) WHERE commentID = ?`;
-
-		const values = [comment, commentID];
-
-		db.run(query, values, function (error) {
+		db.updateCommentByID(comment, commentID, function(error){
 			if (error) {
 				errorMessages.push("Internal Server Error");
 
@@ -140,10 +131,7 @@ router.post("/update-comment/:commentID", function (request, response) {
 		if (request.session.isLoggedIn) {
 			const commentID = request.params.commentID;
 
-			const query = `SELECT * FROM comments WHERE commentID = ?`;
-			const values = [commentID];
-
-			db.get(query, values, function (error, comment) {
+			db.getCommentByID(commentID, function (error, comment) {
 				const model = {
 					errorMessages,
 					comment,
@@ -166,10 +154,7 @@ router.post("/delete-comment/:commentID", function (request, response) {
 	}
 
 	if (errorMessages == 0) {
-		const query = `DELETE FROM comments WHERE commentID = ?`;
-		const values = [commentID];
-
-		db.run(query, values, function (error) {
+		db.deleteCommentByID(commentID, function(error){
 			if (error) {
 				errorMessages.push("Internal Server Error");
 				response.redirect("/login");

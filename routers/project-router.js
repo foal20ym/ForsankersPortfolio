@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const sqlite3 = require("sqlite3");
-const db = new sqlite3.Database("portfolio-database.db");
+//const db = new sqlite3.Database("portfolio-database.db");
+const db = require("../db.js");
 const MAX_DESCRIPTION_LENGTH = 255;
 const MIN_DESCRIPTION_LENGTH = 10;
 const MAX_TITLE_LENGTH = 30;
@@ -39,9 +40,8 @@ const upload = multer({
 });
 
 router.get("/projects", function (request, response) {
-	const query = `SELECT * FROM projects`;
 
-	db.all(query, function (error, projects) {
+	db.getAllProjects(function (error, projects) {
 		const errorMessages = [];
 
 		if (error) {
@@ -62,13 +62,7 @@ router.get("/projects/:projectID", function (request, response) {
 	const projectID = request.params.projectID;
 	const errorMessages = [];
 
-	const projectQuery = `SELECT * FROM projects WHERE projectID = ?`;
-	const projectValues = [projectID];
-
-	const commentQuery = `SELECT * FROM comments WHERE projectID = ?`;
-	const commentValues = [projectID];
-
-	db.get(projectQuery, projectValues, function (projectError, project) {
+	db.getProjectByID(projectID,function (projectError, project) {
 		if (projectError) {
 			errorMessages.push("projectError");
 
@@ -80,7 +74,7 @@ router.get("/projects/:projectID", function (request, response) {
 
 			response.render("project.hbs", model);
 		} else {
-			db.all(commentQuery, commentValues, function (commentError, comments) {
+			db.getAllCommentsForProjectByID(projectID,function (commentError, comments) {
 				if (commentError) {
 					errorMessages.push("commentError");
 					const model = {
@@ -160,11 +154,8 @@ router.post(
 		}
 
 		if (errorMessages.length == 0) {
-			const query = `INSERT INTO  projects (title, description, image) VALUES (?, ?, ?)`;
 
-			const values = [title, description, image];
-
-			db.run(query, values, function (error) {
+			db.addProject(title, description,image, function (error) {
 				if (error) {
 					errorMessages.push("Internal server error");
 
@@ -200,7 +191,7 @@ router.get("/update-project/:projectID", function (request, response) {
 		const query = `SELECT * FROM projects WHERE projectID = ?`;
 		const values = [projectID];
 
-		db.get(query, values, function (error, project) {
+		db.getProjectByID(projectID, function (error, project) {
 			const model = {
 				project,
 			};
@@ -255,11 +246,7 @@ router.post(
 		}
 
 		if (errorMessages.length == 0) {
-			const query = `UPDATE projects SET (title, description, image) = (?, ?, ?) WHERE projectID = ?`;
-
-			const values = [title, description, image, projectID];
-
-			db.run(query, values, function (error) {
+			db.updateProjectByID(title, description, image, projectID,function(error){
 				if (error) {
 					errorMessages.push("Internal Server Error");
 
@@ -279,10 +266,7 @@ router.post(
 			if (request.session.isLoggedIn) {
 				const projectID = request.params.projectID;
 
-				const query = `SELECT * FROM projects WHERE projectID = ?`;
-				const values = [projectID];
-
-				db.get(query, values, function (error, project) {
+				db.getProjectByID(projectID, function (error, project) {
 					const model = {
 						errorMessages,
 						project,
@@ -306,10 +290,8 @@ router.post("/delete-project/:projectID", function (request, response) {
 	}
 
 	if (errorMessages == 0) {
-		const query = `DELETE FROM projects WHERE projectID = ?`;
-		const values = [projectID];
 
-		db.run(query, values, function (error) {
+		db.deleteProjectByID(projectID, function (error) {
 			if (error) {
 				errorMessages.push("Internal Server Error");
 				response.redirect("/login");
