@@ -379,7 +379,7 @@ details[open] summary~* {
 	text-decoration: underline;
 }
 
-.searchResultsForFAQ{
+.searchResultsForFAQ {
 	margin-top: 4%;
 }
 
@@ -391,10 +391,12 @@ details[open] summary~* {
 	margin-top: -1.5%;
 	margin-bottom: 4%;
 }
-.searchResultsList{
-list-style: none;
+
+.searchResultsList {
+	list-style: none;
 }
-.searchResultsPageProjectTitle{
+
+.searchResultsPageProjectTitle {
 	font-family: "Superior title", "Times New Roman", sans-serif;
 	color: black;
 	font-size: 170%;
@@ -415,15 +417,14 @@ list-style: none;
 }
 
 @media screen and (max-width: 800px) {
-
-	.searchResultsForFAQ{
+	.searchResultsForFAQ {
 		margin-top: 8%;
 	}
-	
+
 	.searchResultsPageQuestion {
 		margin-top: -4%;
 	}
-	
+
 	.searchResultsPageAnswer {
 		margin-top: -4%;
 		margin-bottom: 4%;
@@ -502,14 +503,14 @@ list-style: none;
 		font-size: 80%;
 	}
 
-	.searchResultsForFAQ{
+	.searchResultsForFAQ {
 		margin-top: 5%;
 	}
-	
+
 	.searchResultsPageQuestion {
 		margin-top: -2%;
 	}
-	
+
 	.searchResultsPageAnswer {
 		margin-top: -2%;
 		margin-bottom: 4%;
@@ -542,14 +543,14 @@ list-style: none;
 		font-size: 90%;
 	}
 
-	.searchResultsForFAQ{
+	.searchResultsForFAQ {
 		margin-top: 15%;
 	}
-	
+
 	.searchResultsPageQuestion {
 		margin-top: -8%;
 	}
-	
+
 	.searchResultsPageAnswer {
 		margin-top: -8%;
 		margin-bottom: 4%;

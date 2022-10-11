@@ -4,7 +4,7 @@
 {{#if resultsExist}}
 <ul class="searchResultsList">
 	{{#if projectsResults}}
-		<h1>Projects that might match your search</h1>
+		<h1>Projects that match your search</h1>
 	{{#each projectsResults}}
 	<li>
 		<img src="/uploads/{{image}}" alt="" class="projectsPageProjectImage" />
@@ -14,21 +14,17 @@
 	{{/each}}
 	{{/if}}
 	{{#if questionsResults}}
-		<h1>Questions that might match your search</h1>
+		<h1>Questions that match your search</h1>
 	{{#each questionsResults}}
 	<li class="searchResultsForFAQ">
 		<p class="searchResultsPageQuestion">Q: {{this.question}}</p>
 		<p class="searchResultsPageQuestion">From: {{name}}, {{date}}</p>
 		<p class="searchResultsPageAnswer" >{{#if answer}} A: {{answer}} {{/if}}</p>
 	</li>
-	<!-- 
-	class="SearchResultsPageAnswer" 
-	class="SearchResultsPageQuestion"
-	-->
 	{{/each}}
 	{{/if}}
 	{{#if commentsResults}}
-		<h1>Comments that might match your search</h1>
+		<h1>Comments that match your search</h1>
 	{{#each commentsResults}}
 	<li>
 		<p>{{this.comment}}</p>
