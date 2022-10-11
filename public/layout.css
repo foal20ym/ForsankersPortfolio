@@ -276,7 +276,6 @@ details[open] summary~* {
 	max-width: 600px;
 }
 
-/* PROJECT PAGE PROJECT PAGE PROJECT PAGE PROJECT PAGE*/
 .projectPageSection {
 	display: grid;
 	place-items: center;
@@ -338,7 +337,6 @@ details[open] summary~* {
 	margin-top: 2%;
 }
 
-/* LOGIN PAGE */
 .loginPageSection {
 	text-align: center;
 	margin-top: 2%;
@@ -355,19 +353,16 @@ details[open] summary~* {
 	height: 30px;
 }
 
-/* STANDARD RUBRIC*/
 .standardRubric {
 	font-family: "Superior title", "Times New Roman", sans-serif;
 	text-align: center;
 }
 
-/* MANAGE COMMENTS */
 .manageCommentsSection {
 	text-align: center;
 	margin-top: 20%;
 }
 
-/* MANAGE MESSAGES */
 .manageQuestionSection {
 	text-align: center;
 	margin-top: 20%;
@@ -384,6 +379,146 @@ details[open] summary~* {
 	text-decoration: underline;
 }
 
+.SearchResultsPageQuestion {
+	margin-top: -1.5%;
+}
+.SearchResultsPageAnswer {
+	margin-top: -1.5%;
+	margin-bottom: 3%;
+}
+
+#footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 30px;
+}
+@media screen and (max-width: 1000px) {
+	.SearchResultsPageQuestion {
+		margin-top: -3%;
+	}
+
+	.SearchResultsPageAnswer {
+		margin-top: -3%;
+		margin-bottom: 6%;
+	}
+}
+@media screen and (max-width: 590px) {
+	.homePageSection {
+		font-family: "Courier New", Courier, monospace;
+		height: 345px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.homePageRubricRowOne {
+		color: #333;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 200px;
+		margin-top: 20px;
+		line-height: 30px;
+	}
+
+	.homePageRubricRowTwo {
+		color: #333;
+		max-width: 200px;
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.homePageParagraphOne {
+		color: #333;
+		max-width: 200px;
+		margin-top: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+		
+	.homePageParagraphTwo {
+		color: #333;
+		max-width: 200px;
+		margin-top: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+		
+	.btn.btn-link {
+		padding: 2%;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 100%;
+		color: black;
+		padding: 5px;
+		text-size-adjust: auto;
+	}
+	.searchbar{
+		width: 100px;
+	}
+	.contactPageQuestionsLI {
+		max-width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		font-size: 100%;
+	}
+	
+	.contactPageAnswer {
+		margin-top: -2%;
+	}
+	
+	.contactPageQuestionParagraph {
+		margin-top: -1%;
+		margin-bottom: -1%;
+		max-width: 400px;
+		font-size: 80%;
+	}
+
+	.SearchResultsPageQuestion {
+		margin-top: -4%;
+	}
+
+	.SearchResultsPageAnswer {
+		margin-top: -4%;
+		margin-bottom: 6%;
+	}
+
+	#footer{
+		font-size: 80%;
+	}
+}
+
+@media screen and (max-width: 414px) {
+	
+	.contactPageQuestionParagraph {
+		margin-top: -1%;
+		margin-bottom: -1%;
+		max-width: 320px;
+		font-size: 60%;
+	}
+
+	.projectsPageTitle {
+		text-align: center;
+		color: black;
+		font-family: monospace;
+		text-decoration: overline;
+		margin-top: -8%;
+		font-size: 110%;
+	}
+
+	.projectsPageSection {
+		background-color: transparent;
+		font-size: 90%;
+	}
+
+	.SearchResultsPageQuestion {
+		margin-top: -8%;
+	}
+	.SearchResultsPageAnswer {
+		margin-top: -8%;
+		margin-bottom: 12%;
+	}
+}
+
 /* LAYOUT BACKGROUND 'ANIMATED'*/
 .animatedwrapper {
 	overflow: hidden;
@@ -398,13 +533,6 @@ details[open] summary~* {
     Add fallback background here
     background: url();
     */
-}
-
-#footer {
-	position: fixed;
-	left: 0px;
-	bottom: 0px;
-	height: 30px;
 }
 
 @media only screen and (max-width: 600px) {

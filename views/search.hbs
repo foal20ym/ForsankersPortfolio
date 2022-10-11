@@ -17,9 +17,9 @@
 		<h1>Questions that might match your search</h1>
 	{{#each questionsResults}}
 	<li>
-		<p class="contactPageQuestionParagraph">Q: {{this.question}}</p>
-		<p class="contactPageQuestionParagraph">From: {{name}}, {{date}}</p>
-		<p>{{#if answer}} A: {{answer}} {{/if}}</p>
+		<p class="SearchResultsPageQuestion">Q: {{this.question}}</p>
+		<p class="SearchResultsPageQuestion">From: {{name}}, {{date}}</p>
+		<p class="SearchResultsPageAnswer">{{#if answer}} A: {{answer}} {{/if}}</p>
 	</li>
 	{{/each}}
 	{{/if}}
