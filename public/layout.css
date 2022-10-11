@@ -584,7 +584,7 @@ details[open] summary~* {
 }
 
 .dot {
-	--size: 700px;
+	--size: 850px;
 	/* Only show the animated dots for browsers that support the required features */
 	display: none;
 	position: absolute;
