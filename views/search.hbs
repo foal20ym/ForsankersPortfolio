@@ -16,11 +16,15 @@
 	{{#if questionsResults}}
 		<h1>Questions that might match your search</h1>
 	{{#each questionsResults}}
-	<li>
-		<p class="SearchResultsPageQuestion">Q: {{this.question}}</p>
-		<p class="SearchResultsPageQuestion">From: {{name}}, {{date}}</p>
-		<p class="SearchResultsPageAnswer">{{#if answer}} A: {{answer}} {{/if}}</p>
+	<li class="searchResultsForFAQ">
+		<p class="searchResultsPageQuestion">Q: {{this.question}}</p>
+		<p class="searchResultsPageQuestion">From: {{name}}, {{date}}</p>
+		<p class="searchResultsPageAnswer" >{{#if answer}} A: {{answer}} {{/if}}</p>
 	</li>
+	<!-- 
+	class="SearchResultsPageAnswer" 
+	class="SearchResultsPageQuestion"
+	-->
 	{{/each}}
 	{{/if}}
 	{{#if commentsResults}}

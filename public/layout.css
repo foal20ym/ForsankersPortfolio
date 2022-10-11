@@ -379,13 +379,17 @@ details[open] summary~* {
 	text-decoration: underline;
 }
 
-.SearchResultsPageQuestion {
+.searchResultsForFAQ{
+	margin-top: 4%;
+}
+
+.searchResultsPageQuestion {
 	margin-top: -1.5%;
 }
 
-.SearchResultsPageAnswer {
+.searchResultsPageAnswer {
 	margin-top: -1.5%;
-	margin-bottom: 3%;
+	margin-bottom: 4%;
 }
 
 #footer {
@@ -395,14 +399,19 @@ details[open] summary~* {
 	height: 30px;
 }
 
-@media screen and (max-width: 1000px) {
-	.SearchResultsPageQuestion {
-		margin-top: -3%;
-	}
+@media screen and (max-width: 800px) {
 
-	.SearchResultsPageAnswer {
-		margin-top: -3%;
-		margin-bottom: 6%;
+	.searchResultsForFAQ{
+		margin-top: 8%;
+	}
+	
+	.searchResultsPageQuestion {
+		margin-top: -4%;
+	}
+	
+	.searchResultsPageAnswer {
+		margin-top: -4%;
+		margin-bottom: 4%;
 	}
 }
 
@@ -478,13 +487,17 @@ details[open] summary~* {
 		font-size: 80%;
 	}
 
-	.SearchResultsPageQuestion {
-		margin-top: -4%;
+	.searchResultsForFAQ{
+		margin-top: 5%;
 	}
-
-	.SearchResultsPageAnswer {
-		margin-top: -4%;
-		margin-bottom: 6%;
+	
+	.searchResultsPageQuestion {
+		margin-top: -2%;
+	}
+	
+	.searchResultsPageAnswer {
+		margin-top: -2%;
+		margin-bottom: 4%;
 	}
 
 	#footer {
@@ -514,13 +527,17 @@ details[open] summary~* {
 		font-size: 90%;
 	}
 
-	.SearchResultsPageQuestion {
+	.searchResultsForFAQ{
+		margin-top: 15%;
+	}
+	
+	.searchResultsPageQuestion {
 		margin-top: -8%;
 	}
-
-	.SearchResultsPageAnswer {
+	
+	.searchResultsPageAnswer {
 		margin-top: -8%;
-		margin-bottom: 12%;
+		margin-bottom: 4%;
 	}
 }
 
