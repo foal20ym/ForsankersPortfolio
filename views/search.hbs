@@ -7,9 +7,9 @@
 		<h1>Projects that might match your search</h1>
 	{{#each projectsResults}}
 	<li>
-		<img src="{{image}}" alt="" class="projectsPageProjectImage" />
-		<a href="/projects/{{projectID}}">{{title}}</a>
-		<p class="projectsPageProjectDescription"> {{description}}</p>
+		<img src="/uploads/{{image}}" alt="" class="projectsPageProjectImage" />
+		<p class="searchResultsPageProjectTitle"><a href="/projects/{{projectID}}">{{title}}</a></p>
+		<p class="searchResultsPageProjectDescription"> {{description}}</p>
 	</li>
 	{{/each}}
 	{{/if}}

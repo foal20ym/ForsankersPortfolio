@@ -391,6 +391,21 @@ details[open] summary~* {
 	margin-top: -1.5%;
 	margin-bottom: 4%;
 }
+.searchResultsList{
+list-style: none;
+}
+.searchResultsPageProjectTitle{
+	font-family: "Superior title", "Times New Roman", sans-serif;
+	color: black;
+	font-size: 170%;
+}
+
+.searchResultsPageProjectDescription {
+	font-size: 110%;
+	color: black;
+	font-family: "Courier New", Courier, monospace;
+	max-width: 600px;
+}
 
 #footer {
 	position: fixed;
