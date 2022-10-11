@@ -382,6 +382,7 @@ details[open] summary~* {
 .SearchResultsPageQuestion {
 	margin-top: -1.5%;
 }
+
 .SearchResultsPageAnswer {
 	margin-top: -1.5%;
 	margin-bottom: 3%;
@@ -393,6 +394,7 @@ details[open] summary~* {
 	bottom: 0px;
 	height: 30px;
 }
+
 @media screen and (max-width: 1000px) {
 	.SearchResultsPageQuestion {
 		margin-top: -3%;
@@ -403,6 +405,7 @@ details[open] summary~* {
 		margin-bottom: 6%;
 	}
 }
+
 @media screen and (max-width: 590px) {
 	.homePageSection {
 		font-family: "Courier New", Courier, monospace;
@@ -435,7 +438,7 @@ details[open] summary~* {
 		margin-left: auto;
 		margin-right: auto;
 	}
-		
+
 	.homePageParagraphTwo {
 		color: #333;
 		max-width: 200px;
@@ -443,7 +446,7 @@ details[open] summary~* {
 		margin-left: auto;
 		margin-right: auto;
 	}
-		
+
 	.btn.btn-link {
 		padding: 2%;
 		font-family: "Courier New", Courier, monospace;
@@ -452,20 +455,22 @@ details[open] summary~* {
 		padding: 5px;
 		text-size-adjust: auto;
 	}
-	.searchbar{
+
+	.searchbar {
 		width: 100px;
 	}
+
 	.contactPageQuestionsLI {
 		max-width: 400px;
 		margin-left: auto;
 		margin-right: auto;
 		font-size: 100%;
 	}
-	
+
 	.contactPageAnswer {
 		margin-top: -2%;
 	}
-	
+
 	.contactPageQuestionParagraph {
 		margin-top: -1%;
 		margin-bottom: -1%;
@@ -482,13 +487,12 @@ details[open] summary~* {
 		margin-bottom: 6%;
 	}
 
-	#footer{
+	#footer {
 		font-size: 80%;
 	}
 }
 
 @media screen and (max-width: 414px) {
-	
 	.contactPageQuestionParagraph {
 		margin-top: -1%;
 		margin-bottom: -1%;
@@ -513,6 +517,7 @@ details[open] summary~* {
 	.SearchResultsPageQuestion {
 		margin-top: -8%;
 	}
+
 	.SearchResultsPageAnswer {
 		margin-top: -8%;
 		margin-bottom: 12%;
