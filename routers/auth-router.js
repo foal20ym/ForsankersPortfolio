@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const ADMIN_USERNAME = "Alice";
-const ADMIN_PASSOWRD =
-	"$2b$10$VasTmOYbHU9agU4.0XwS8uRnxnNqo/R8Z5OZy2UxSsYEUxEQ848Ga";
+const ADMIN_USERNAME = "Admin";
+const ADMIN_PASSOWRD = "$2b$10$/IeXPX4k5RycJVc99LyHbeWxILuihI4QjpPgzNg8foobgydYWJd82";
+// Forsankerportfoliopassword77
 
 router.get("/login", function (request, response) {
 	response.render("login.hbs");
