@@ -572,7 +572,7 @@ details[open] summary~* {
     background: url();
     */
 }
-
+/*
 @media only screen and (max-width: 600px) {
 	.animatedwrapper {
 		top: -500px;
@@ -582,6 +582,7 @@ details[open] summary~* {
 		--size: 100px;
 	}
 }
+*/
 
 .dot {
 	--size: 850px;
