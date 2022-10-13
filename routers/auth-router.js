@@ -3,7 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const ADMIN_USERNAME = "Admin";
-const ADMIN_PASSOWRD = "$2b$10$/IeXPX4k5RycJVc99LyHbeWxILuihI4QjpPgzNg8foobgydYWJd82"; // Forsankerportfoliopassword77
+const ADMIN_PASSOWRD =
+	"$2b$10$/IeXPX4k5RycJVc99LyHbeWxILuihI4QjpPgzNg8foobgydYWJd82";
 
 router.get("/login", function (request, response) {
 	response.render("login.hbs");
@@ -35,8 +36,8 @@ router.post("/login", function (request, response) {
 });
 
 router.post("/logout", function (request, response) {
-  request.session.isLoggedIn = false;
-  response.redirect("/");
+	request.session.isLoggedIn = false;
+	response.redirect("/");
 });
 
 module.exports = router;

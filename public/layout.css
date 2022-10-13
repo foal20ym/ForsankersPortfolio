@@ -572,21 +572,20 @@ details[open] summary~* {
     background: url();
     */
 }
-/*
+
 @media only screen and (max-width: 600px) {
 	.animatedwrapper {
-		top: -500px;
+		top: -800px;
 	}
 
 	.dot {
 		--size: 100px;
 	}
 }
-*/
+
 
 .dot {
 	--size: 850px;
-	/* Only show the animated dots for browsers that support the required features */
 	display: none;
 	position: absolute;
 	left: calc(var(--size) / 3 * -1);
@@ -602,12 +601,10 @@ details[open] summary~* {
 
 @supports (mix-blend-mode: soft-light) and (filter: blur(1px)) {
 	.animatedwrapper {
-		/* Remove the fallback background image when the features are supported */
 		background: none;
 	}
 
 	.dot {
-		/* Only show the animated dots for browsers that support the required features */
 		display: block;
 	}
 }

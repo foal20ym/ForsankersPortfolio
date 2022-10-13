@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const sqlite3 = require("sqlite3");
-//const db = new sqlite3.Database("portfolio-database.db");
 const db = require("../db.js");
 const MAX_DESCRIPTION_LENGTH = 255;
 const MIN_DESCRIPTION_LENGTH = 10;
@@ -40,7 +39,6 @@ const upload = multer({
 });
 
 router.get("/projects", function (request, response) {
-
 	db.getAllProjects(function (error, projects) {
 		const errorMessages = [];
 
@@ -57,12 +55,11 @@ router.get("/projects", function (request, response) {
 	});
 });
 
-// renders the specific project the user clicks on
 router.get("/projects/:projectID", function (request, response) {
 	const projectID = request.params.projectID;
 	const errorMessages = [];
 
-	db.getProjectByID(projectID,function (projectError, project) {
+	db.getProjectByID(projectID, function (projectError, project) {
 		if (projectError) {
 			errorMessages.push("projectError");
 
@@ -74,32 +71,34 @@ router.get("/projects/:projectID", function (request, response) {
 
 			response.render("project.hbs", model);
 		} else {
-			db.getAllCommentsForProjectByID(projectID,function (commentError, comments) {
-				if (commentError) {
-					errorMessages.push("commentError");
-					const model = {
-						errorMessages,
-						comments,
-						projectID,
-					};
+			db.getAllCommentsForProjectByID(
+				projectID,
+				function (commentError, comments) {
+					if (commentError) {
+						errorMessages.push("commentError");
+						const model = {
+							errorMessages,
+							comments,
+							projectID,
+						};
 
-					response.render("project.hbs", model);
-				} else {
-					const model = {
-						errorMessages,
-						project,
-						comments,
-						projectID,
-					};
+						response.render("project.hbs", model);
+					} else {
+						const model = {
+							errorMessages,
+							project,
+							comments,
+							projectID,
+						};
 
-					response.render("project.hbs", model);
+						response.render("project.hbs", model);
+					}
 				}
-			});
+			);
 		}
 	});
 });
 
-// renders the Add Project page
 router.get("/add-project", function (request, response) {
 	if (request.session.isLoggedIn) {
 		response.render("add-project.hbs");
@@ -108,7 +107,6 @@ router.get("/add-project", function (request, response) {
 	}
 });
 
-// posts projects to the Add Projects page.
 router.post(
 	"/add-project",
 	upload.single("image"),
@@ -154,8 +152,7 @@ router.post(
 		}
 
 		if (errorMessages.length == 0) {
-
-			db.addProject(title, description,image, function (error) {
+			db.addProject(title, description, image, function (error) {
 				if (error) {
 					errorMessages.push("Internal server error");
 
@@ -246,22 +243,28 @@ router.post(
 		}
 
 		if (errorMessages.length == 0) {
-			db.updateProjectByID(title, description, image, projectID,function(error){
-				if (error) {
-					errorMessages.push("Internal Server Error");
+			db.updateProjectByID(
+				title,
+				description,
+				image,
+				projectID,
+				function (error) {
+					if (error) {
+						errorMessages.push("Internal Server Error");
 
-					const model = {
-						errorMessages,
-						title,
-						image,
-						description,
-					};
+						const model = {
+							errorMessages,
+							title,
+							image,
+							description,
+						};
 
-					response.render("update-project.hbs", model);
-				} else {
-					response.redirect("/projects");
+						response.render("update-project.hbs", model);
+					} else {
+						response.redirect("/projects");
+					}
 				}
-			});
+			);
 		} else {
 			if (request.session.isLoggedIn) {
 				const projectID = request.params.projectID;
@@ -290,7 +293,6 @@ router.post("/delete-project/:projectID", function (request, response) {
 	}
 
 	if (errorMessages == 0) {
-
 		db.deleteProjectByID(projectID, function (error) {
 			if (error) {
 				errorMessages.push("Internal Server Error");

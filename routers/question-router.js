@@ -403,8 +403,6 @@ router.post("/delete-answer/:questionID", function (request, response) {
 });
 
 router.get("/search", function (request, response) {
-	// http://localhost:8080/search?query=test
-	//          request . query string . input name
 	const search = request.query.query;
 
 	const errorMessages = [];
