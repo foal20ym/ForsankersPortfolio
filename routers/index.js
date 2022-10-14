@@ -18,8 +18,8 @@ mainRouter.use(require("./comment-router"));
 mainRouter.use(require("./question-router"));
 mainRouter.use(require("./auth-router"));
 
-mainRouter.use(function (req, res, next) {
-	res.send("404");
+mainRouter.use(function (request, response, next) {
+	response.send("404");
 });
 
 module.exports = mainRouter;
