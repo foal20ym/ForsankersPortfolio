@@ -130,7 +130,6 @@ router.get("/manage-question/:questionID", function (request, response) {
 				questionID: request.params.questionID,
 			},
 		};
-
 		response.render("manage-question.hbs", model);
 	} else {
 		response.redirect("/login");
@@ -138,15 +137,27 @@ router.get("/manage-question/:questionID", function (request, response) {
 });
 
 router.get("/answer-question/:questionID", function (request, response) {
+	const errorMessages = [];
 	if (request.session.isLoggedIn) {
 		const questionID = request.params.questionID;
 
 		db.getUpdateQuestionPage(questionID, function (error, question) {
-			const model = {
-				question,
-			};
+			if (error) {
+				errorMessages.push("Internal Server Error");
 
-			response.render("answer-question.hbs", model);
+				const model = {
+					errorMessages,
+					question,
+				};
+
+				response.render("answer-question.hbs", model);
+			} else {
+				const model = {
+					question,
+				};
+
+				response.render("answer-question.hbs", model);
+			}
 		});
 	} else {
 		response.redirect("/login");
@@ -207,15 +218,26 @@ router.post("/answer-question/:questionID", function (request, response) {
 });
 
 router.get("/update-question/:questionID", function (request, response) {
+	const errorMessages = [];
 	if (request.session.isLoggedIn) {
 		const questionID = request.params.questionID;
 
 		db.getUpdateQuestionPage(questionID, function (error, question) {
-			const model = {
-				question,
-			};
+			if (error) {
+				errorMessages.push("Internal Server Error");
+				const model = {
+					errorMessages,
+					question,
+				};
 
-			response.render("update-question.hbs", model);
+				response.render("update-question.hbs", model);
+			} else {
+				const model = {
+					question,
+				};
+
+				response.render("update-question.hbs", model);
+			}
 		});
 	} else {
 		response.redirect("/login");
@@ -311,15 +333,26 @@ router.post("/delete-question/:questionID", function (request, response) {
 });
 
 router.get("/update-answer/:questionID", function (request, response) {
+	const errorMessages = [];
 	if (request.session.isLoggedIn) {
 		const questionID = request.params.questionID;
 
 		db.getUpdateAnswerPage(questionID, function (error, question) {
-			const model = {
-				question,
-			};
+			if (error) {
+				errorMessages.push("Internal Server Error");
+				const model = {
+					errorMessages,
+					question,
+				};
 
-			response.render("update-answer.hbs", model);
+				response.render("update-answer.hbs", model);
+			} else {
+				const model = {
+					question,
+				};
+
+				response.render("update-answer.hbs", model);
+			}
 		});
 	} else {
 		response.redirect("/login");
@@ -416,7 +449,7 @@ router.get("/search", function (request, response) {
 	if (errorMessages.length == 0) {
 		db.projectsSearchQuery(value, function (projectsError, projectsResults) {
 			if (projectsError) {
-				errorMessages.push("Projects Error");
+				errorMessages.push("Projects Query Error");
 
 				const model = {
 					errorMessages,
@@ -428,7 +461,7 @@ router.get("/search", function (request, response) {
 					value,
 					function (questionsError, questionsResults) {
 						if (questionsError) {
-							errorMessages.push("Questions Error");
+							errorMessages.push("Questions Query Error");
 
 							const model = {
 								errorMessages,
@@ -440,7 +473,7 @@ router.get("/search", function (request, response) {
 								value,
 								function (commentsError, commentsResults) {
 									if (commentsError) {
-										errorMessages.push("Comments Error");
+										errorMessages.push("Comments Query Error");
 
 										const model = {
 											errorMessages,

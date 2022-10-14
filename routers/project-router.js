@@ -44,14 +44,20 @@ router.get("/projects", function (request, response) {
 
 		if (error) {
 			errorMessages.push("Internal server error");
+
+			const model = {
+				errorMessages,
+				projects,
+			};
+
+			response.render("projects.hbs", model);
+		} else {
+			const model = {
+				projects,
+			};
+
+			response.render("projects.hbs", model);
 		}
-
-		const model = {
-			errorMessages,
-			projects,
-		};
-
-		response.render("projects.hbs", model);
 	});
 });
 
@@ -213,7 +219,6 @@ router.post(
 		if (!request.session.isLoggedIn) {
 			errorMessages.push("Not logged in.");
 		}
-
 		if (title.length == 0) {
 			errorMessages.push("Title can't be null");
 		} else if (MAX_TITLE_LENGTH < title.length) {
@@ -240,6 +245,9 @@ router.post(
 				MIN_DESCRIPTION_LENGTH +
 				" characters long."
 			);
+		}
+		if (image.length == 0) {
+			errorMessages.push("You need to select an image.");
 		}
 
 		if (errorMessages.length == 0) {

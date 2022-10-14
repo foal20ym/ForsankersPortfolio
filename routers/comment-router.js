@@ -76,15 +76,26 @@ router.get("/manage-comment/:commentID", function (request, response) {
 });
 
 router.get("/update-comment/:commentID", function (request, response) {
+	const errorMessages = [];
 	if (request.session.isLoggedIn) {
 		const commentID = request.params.commentID;
 
 		db.getCommentByID(commentID, function (error, comment) {
-			const model = {
-				comment,
-			};
+			if (error) {
+				errorMessages.push("Internal Server Error");
+				const model = {
+					errorMessages,
+					comment,
+				};
 
-			response.render("update-comment.hbs", model);
+				response.render("update-comment.hbs", model);
+			} else {
+				const model = {
+					comment,
+				};
+
+				response.render("update-comment.hbs", model);
+			}
 		});
 	} else {
 		response.redirect("/login");
