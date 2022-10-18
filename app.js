@@ -8,35 +8,6 @@ const expressSession = require("express-session");
 const SQLiteStore = require("connect-sqlite3")(expressSession);
 const db = new sqlite3.Database("portfolio-database.db");
 
-db.run(`
-    CREATE TABLE IF NOT EXISTS projects (
-        projectID INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        description TEXT,
-        image TEXT
-    )
-`);
-
-db.run(`
-    CREATE TABLE IF NOT EXISTS questions (
-        questionID INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT,
-        question TEXT,
-        answer TEXT,
-        date TEXT
-    )
-`);
-
-db.run(`
-    CREATE TABLE IF NOT EXISTS comments (
-        commentID INTEGER PRIMARY KEY AUTOINCREMENT,
-        comment TEXT,
-        projectID INTEGER,
-        FOREIGN KEY(projectID) REFERENCES projects (projectID)
-    )
-`);
-
 const app = express();
 
 app.use(express.static("public"));
