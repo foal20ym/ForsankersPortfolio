@@ -95,9 +95,10 @@
 /* CONTACT PAGE CONTENT CONTACT PAGE CONTENT CONTACT PAGE CONTENT*/
 .contactPageSection {
 	text-align: center;
-	margin-top: -5%;
+	/*margin-top: -5%; */
+	margin-top: 5%;
 	font-family: "Courier New", Courier, monospace;
-	font-size: 130%;
+	font-size: 145%;
 }
 
 .contactPageFormTitle {
